@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cognitive Learning - Tuition Center</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+
+:root {
+  --nav-height: 70px;
+  --container-width: 1100px;
+}
+
+/* Global container */
+.container {
+  max-width: var(--container-width);
+  margin: auto;
+  padding: 0 20px;
+}
+ 
+
+
+html {
+  scroll-padding-top: 70px;
+  scroll-behavior: smooth;
+}
+
+section {
+  padding: 80px 0;
+}
+
+
+body {
+  overflow-x: hidden;
+  color: #212529;
+   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+
+
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* NAV LINKS */
+nav a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* HOVER EFFECT */
+nav a:hover {
+  background: rgba(0, 123, 255, 0.12);
+  color: #007bff;
+  transform: translateY(-1px);
+}
+
+/* ACTIVE LOOK (optional) */
+nav a:active {
+  transform: scale(0.97);
+}
+.hero{
+    position: relative;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.hero-overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: -1;
+}
+
+.hero-content{
+    color: white;
+    padding: 20px;
+    max-width: 850px;
+}
+
+.hero h1{
+    font-size: clamp(1.8rem,4vw,3.2rem);
+}
+
+.hero p{
+    font-size: clamp(1rem,1.5vw,1.3rem);
+    margin: 20px 0;
+}
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-buttons button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Join Now Button */
+.hero-buttons button:first-child {
+  background: linear-gradient(135deg, #facc15, #eab308);
+  color: #000;
+}
+
+.hero-buttons button:first-child:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(250,204,21,0.4);
+}
+
+/* Teacher Button */
+.teacher-btn {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+}
+
+.teacher-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(37,99,235,0.4);
+}
+
+
+/* =========================
+   TUITION SECTION
+========================= */
+
+.tuition-section {
+  background: #ffffff;
+  padding: 90px 20px;
+  text-align: center;
+}
+
+.tuition-section h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.tuition-section p.section-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+/* Cards Container */
+.tuition-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
+}
+
+/* Individual Card */
+.tuition-card {
+  background: #fff;
+  width: 340px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+/* Hover Effect */
+.tuition-card:hover {
+  transform: translateY(-12px);
+  border-color: #06184b;
+  box-shadow: 0 18px 40px rgba(6,24,75,0.18);
+}
+
+/* Course Images */
+.tuition-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.tuition-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Content Area */
+.tuition-card .content {
+  padding: 25px;
+}
+
+/* Course Title */
+.tuition-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 12px;
+}
+
+/* Description */
+.tuition-card p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* Optional Button */
+.tuition-card .course-btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background: #06184b;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tuition-card .course-btn:hover {
+  background: #007bff;
+  transform: translateY(-2px);
+}
+
+
+/* =========================
+   PRICING SECTION
+========================= */
+
+.pricing-section {
+  background: #f7f9fc;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.pricing-section h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.pricing-section .subtitle {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+/* Cards Container */
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
+}
+
+
+/* Individual Card */
+.card {
+  background: #fff;
+  width: 300px;
+  padding: 35px 25px;
+  border-radius: 18px;
+  border: 2px solid transparent;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  opacity: 0;
+  color: #111;
+  cursor: pointer;
+
+  /* NEW */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Features List */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 25px 0;
+
+  /* NEW */
+  flex-grow: 1;
+}
+
+.card ul li {
+  margin: 12px 0;
+  color: #555;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Button */
+.card button {
+  width: 100%;
+  padding: 14px;
+  background: #06184b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  /* NEW */
+  margin-top: auto;
+}
+
+.card button:hover {
+  background: #007bff;
+  transform: scale(1.03);
+}
+
+/* Hover Effect */
+.card:hover {
+  transform: translateY(-12px);
+  border-color:#ff7f50;
+  box-shadow: 0 18px 35px rgba(6,24,75,0.20);
+}
+
+/* Standard (Middle) Card */
+.card.best {
+  border: 2px solid transparent;
+}
+
+/* Middle Card Hover */
+.card.best:hover {
+  border-color: #ff7f50;
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(6,24,75,0.25);
+}
+
+/* Plan Name */
+.card h3 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 15px;
+}
+
+/* Price */
+.card .price {
+  font-size: 25px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.card .price span {
+  font-size: 16px;
+  color: #777;
+  font-weight: normal;
+}
+
+
+
+
+
+
+    /* Slide + Fade Animations */
+    @keyframes slideFadeLeft { 0% { opacity:0; transform: translateX(-50px);} 100% { opacity:1; transform: translateX(0); } }
+    @keyframes slideFadeRight { 0% { opacity:0; transform: translateX(50px);} 100% { opacity:1; transform: translateX(0); } }
+    @keyframes slideFadeUp { 0% { opacity:0; transform: translateY(50px);} 100% { opacity:1; transform: translateY(0); } }
+
+    .show-left { animation: slideFadeLeft 0.8s forwards; }
+    .show-right { animation: slideFadeRight 0.8s forwards; }
+    .show-fade-up { animation: slideFadeUp 0.8s forwards; }
+
+    /* General fade-up placeholder */
+    .fade-up { opacity:0; }
+
+    @media (max-width: 900px) { .pricing-cards { flex-direction: column; align-items: center; } }
+    @media (max-width: 768px) {
+
+    }
+.contact-box {
+  background:#06184b;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin: auto;
+  text-align: left;
+  justify-content: space-between;
+}
+
+.contact-box h3 {
+  color:#fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.contact-box p {
+  margin: 8px 0;
+  color:#fff;
+}
+
+/* Footer */
+footer { background: #003366; color: #fff; text-align: center; padding: 20px; margin-top: 20px;
+  
+} 
+
+/* Responsive */
+
+
+ .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.logo-img {
+  height:80px;
+  width: auto;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size:14px;
+  line-height: 1.2;
+  color:#000;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+}
+  .contact-section {
+  background: #06184b;
+  color: #fff;
+  padding: 80px 20px;
+}
+@media (max-width: 768px) {
+  .grid {
+    text-align: center;
+  }
+}
+#pricing {
+  padding-bottom: 100px;
+}
+
+#contact {
+  margin-top: 200px;
+}
+.social-icons a{
+ margin-right:12px;
+ font-size:24px;
+ transition:transform .3s;
+}
+.social-icons a:hover{transform:scale(1.2);}
+/* =========================
+   ABOUT SECTION
+========================= */
+
+.article-section {
+  padding: 80px 20px;
+  background: #fff;
+}
+
+.article-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(320px, 450px) 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.article-image {
+  width: 100%;
+}
+
+.article-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+.article-image img:hover {
+  transform: scale(1.02);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.article-content {
+  width: 100%;
+}
+
+.article-content h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.article-content p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #555;
+  margin-bottom: 18px;
+  text-align: justify;
+}
+
+/* =========================
+   FEATURE BUTTONS
+========================= */
+
+.about-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 25px;
+  justify-content: flex-start;
+}
+
+.about-features a {
+  text-decoration: none;
+  background: #e8f2ff;
+  color: #06184b;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.about-features a:hover {
+  background: #007bff;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.delay {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+    /* ==========================
+   MISSION SECTION
+========================== */
+
+.mission-section{
+  padding:100px 20px;
+  background:#f7f9fc;
+}
+
+.mission-container{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+
+.mission-content h2,
+.vision-content h2,
+.methodology-container h2{
+  font-size:42px;
+  color:#06184b;
+  margin-bottom:20px;
+}
+
+.mission-content p,
+.vision-content p{
+  color:#555;
+  line-height:1.8;
+  font-size:17px;
+  margin-bottom:15px;
+}
+
+.mission-image img,
+.vision-image img{
+  width:70%;
+  border-radius:20px;
+  box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+/* ==========================
+   VISION SECTION
+========================== */
+
+.vision-section{
+  padding:100px 20px;
+  background:#fff;
+}
+
+.vision-container{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+
+
+/* =========================
+   WHY CHOOSE US
+========================= */
+
+.why-us-section{
+    padding:100px 20px;
+    background:#f8fbff;
+}
+
+.why-us-header{
+    text-align:center;
+    max-width:850px;
+    margin:0 auto 70px;
+}
+
+.why-us-header h2{
+    font-size:42px;
+    color:#007bff;
+    margin-bottom:20px;
+    font-weight:700;
+}
+
+.why-us-header p{
+    color:#666;
+    font-size:18px;
+    line-height:1.8;
+}
+
+.why-us-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+/* CARD */
+.why-us-card{
+    position:relative;
+    background:#fff;
+    padding:40px 30px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    overflow:hidden;
+
+    /* Start from right side */
+    opacity:0;
+    transform:translateX(80px);
+
+    transition:
+        box-shadow 0.3s ease;
+}
+
+/* Visible State */
+.why-us-card.in-view{
+    animation:slideRight 0.8s ease forwards;
+}
+
+.why-us-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:5px;
+    height:100%;
+    background:#007bff;
+}
+
+.why-us-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+.why-number{
+    font-size:48px;
+    font-weight:800;
+    color:#051022;
+    margin-bottom:15px;
+}
+
+.why-us-card h3{
+    color:#06184b;
+    font-size:22px;
+    margin-bottom:15px;
+    font-weight:700;
+}
+
+.why-us-card p{
+    color:#555;
+    line-height:1.8;
+    font-size:15px;
+}
+
+/* RIGHT → LEFT ANIMATION FOR ALL CARDS */
+@keyframes slideRight{
+    from{
+        opacity:0;
+        transform:translateX(80px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width:900px){
+    .why-us-grid{
+        grid-template-columns:1fr;
+    }
+
+    .why-us-header h2{
+        font-size:32px;
+    }
+
+    .why-us-card{
+        padding:30px 25px;
+    }
+}
+
+/* ==========================================
+   COMPLETE RESPONSIVE FIX
+========================================== */
+
+/* Large Tablets */
+@media (max-width: 992px) {
+
+  section{
+    padding:70px 20px;
+  }
+
+  /* About */
+  .article-container{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+
+  .article-image img{
+    max-width:500px;
+    width:100%;
+    margin:auto;
+  }
+
+  .article-content p{
+    text-align:center;
+  }
+
+  .about-features{
+    justify-content:center;
+  }
+
+  /* Mission & Vision */
+  .mission-container,
+  .vision-container{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+
+  .mission-image{
+    order:1;
+  }
+
+  .mission-content{
+    order:2;
+  }
+
+  .vision-image{
+    order:1;
+  }
+
+  .vision-content{
+    order:2;
+  }
+
+  .mission-image img,
+  .vision-image img{
+    width:100%;
+    max-width:450px;
+    display:block;
+    margin:auto;
+  }
+
+ 
+
+  /* Why Us */
+  .why-us-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  /* Pricing */
+  .pricing-cards{
+    justify-content:center;
+  }
+
+  /* Contact */
+  #contact{
+    margin-top:80px;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 768px){
+
+  /* Header */
+  .logo-img{
+    height:60px;
+  }
+
+  .logo-text{
+    font-size:12px;
+  }
+
+  /* Hero */
+  .hero{
+    padding:30px 15px;
+  }
+
+  .hero h1{
+    font-size:2rem;
+    line-height:1.3;
+  }
+
+  .hero p{
+    font-size:1rem;
+    max-width:90%;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+    width:100%;
+    align-items:center;
+  }
+
+  .hero-buttons button{
+    width:220px;
+  }
+
+  /* About */
+  .article-content h2{
+    font-size:32px;
+  }
+
+  .article-content p{
+    font-size:15px;
+  }
+
+  
+ 
+
+  /* Cards */
+  .tuition-card,
+  .card{
+    width:100%;
+    max-width:400px;
+  }
+
+  
+  /* Why Us */
+  .why-us-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* Contact Footer */
+  .grid{
+    text-align:center;
+  }
+
+  .social-icons{
+    justify-content:center;
+  }
+
+
+  
+
+  .article-content h2{
+    font-size:28px;
+  }
+
+  .about-features a{
+    width:100%;
+    text-align:center;
+  }
+
+  .logo-img{
+    height:80px;
+  }
+
+  .logo-text{
+    font-size:14px;
+  }
+
+
+
+  .hero-buttons button{
+    flex:1;
+    max-width:170px;
+    font-size:14px;
+    padding:12px 10px;
+  }
+
+
+    /* ==========================================
+   RESPONSIVE CSS ONLY
+========================================== */
+
+/* Large Screens */
+@media screen and (max-width:1200px){
+
+  .container,
+  .article-container,
+  .mission-container,
+  .vision-container,
+  .why-us-grid{
+    width:100%;
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  .tuition-card,
+  .card{
+    max-width:320px;
+  }
+
+}
+
+/* Tablets */
+@media screen and (max-width:992px){
+
+  section{
+    padding:70px 20px;
+  }
+
+  .article-container,
+  .mission-container,
+  .vision-container{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+
+  .article-content p{
+    text-align:center;
+  }
+
+  .article-image img,
+  .mission-image img,
+  .vision-image img{
+    max-width:500px;
+    width:100%;
+    margin:auto;
+  }
+
+  .about-features{
+    justify-content:center;
+  }
+
+  .why-us-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .pricing-cards{
+    justify-content:center;
+  }
+
+  #contact{
+    margin-top:80px;
+  }
+}
+
+/* Mobile Tablets */
+@media screen and (max-width:768px){
+
+  header{
+    padding:0 15px;
+  }
+
+  .logo-img{
+    height:80px;
+  }
+
+  .logo-text{
+    font-size:14px;
+  }
+
+  .hero{
+    padding:120px 20px 80px;
+  }
+
+  .hero h1{
+    font-size:2rem;
+    line-height:1.3;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  /* BUTTONS SIDE BY SIDE */
+  .hero-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    flex-wrap:nowrap;
+    width:100%;
+  }
+
+  .hero-buttons button{
+    flex:1;
+    max-width:220px;
+    min-width:140px;
+  }
+
+  .article-content h2,
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2{
+    font-size:32px;
+  }
+
+  .tuition-card,
+  .card{
+    width:100%;
+    max-width:450px;
+  }
+
+  .tuition-card img{
+    height:240px;
+  }
+
+  .why-us-grid{
+    grid-template-columns:1fr;
+  }
+
+  .grid{
+    text-align:center;
+  }
+
+  .social-icons{
+    display:flex;
+    justify-content:center;
+  }}
+
+/* Phones */
+@media screen and (max-width:576px){
+
+  .hero h1{
+    font-size:1.7rem;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  /* BUTTONS SIDE BY SIDE */
+  .hero-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:nowrap;
+  }
+
+  .hero-buttons button{
+    flex:1;
+    min-width:0;
+    max-width:170px;
+    font-size:13px;
+    padding:10px 8px;
+  }
+
+  .article-content h2,
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2{
+    font-size:28px;
+  }
+
+  .about-features{
+    flex-direction:column;
+  }
+
+  .about-features a{
+    width:100%;
+  }
+
+  .tuition-card img{
+    height:220px;
+  }
+
+  .contact-section{
+    padding:60px 15px;
+  }
+}
+
+/* Small Phones */
+@media screen and (max-width:400px){
+
+  .hero{
+    padding:110px 15px 60px;
+  }
+
+  .hero h1{
+    font-size:1.4rem;
+  }
+
+  .hero p{
+    font-size:13px;
+  }
+
+  .logo-img{
+    height:85px;
+  }
+
+  .logo-text{
+    font: size 14px;  }
+
+  /* BUTTONS STILL SIDE BY SIDE */
+  .hero-buttons{
+    gap:6px;
+  }
+
+  .hero-buttons button{
+    font-size:12px;
+    padding:10px 6px;
+    max-width:150px;
+  }
+
+  .tuition-card img{
+    height:200px;
+  }
+
+  .card h3{
+    font-size:20px;
+  }
+
+  .card .price{
+    font-size:18px;
+  }
+}
+
+/* Landscape Phones */
+@media screen and (max-height:500px) and (orientation:landscape){
+
+  .hero{
+    min-height:auto;
+    padding:100px 20px 60px;
+  }
+
+  .hero h1{
+    font-size:1.8rem;
+  }
+}
+
+/* Universal Fixes */
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+
+html,
+body{
+  overflow-x:hidden;
+  width:100%;
+}
+
+*{
+  box-sizing:border-box;
+}
+}
+/* =========================
+   WHATSAPP FLOAT BUTTON
+========================= */
+
+.whatsapp-float{
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 65px;
+    height: 65px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    z-index: 9999;
+    box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+    transition: all 0.3s ease;
+    animation: whatsappPulse 2s infinite;
+}
+
+.whatsapp-float:hover{
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 0 12px 30px rgba(37,211,102,0.55);
+}
+
+.whatsapp-float svg{
+    width: 34px;
+    height: 34px;
+    fill: #fff;
+}
+
+/* Tooltip */
+.whatsapp-float .tooltip{
+    position: absolute;
+    right: 80px;
+    background: #111;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover .tooltip{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Pulse Animation */
+@keyframes whatsappPulse{
+    0%{
+        box-shadow: 0 0 0 0 rgba(37,211,102,0.6);
+    }
+    70%{
+        box-shadow: 0 0 0 18px rgba(37,211,102,0);
+    }
+    100%{
+        box-shadow: 0 0 0 0 rgba(37,211,102,0);
+    }
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .whatsapp-float{
+        width: 58px;
+        height: 58px;
+        right: 18px;
+        bottom: 18px;
+    }
+
+    .whatsapp-float svg{
+        width: 30px;
+        height: 30px;
+    }
+
+    .whatsapp-float .tooltip{
+        display: none;
+    }
+}
+</style>
+
+</head>
+<body>
+
+
+
+
+<!-- HEADER -->
+<header class="fixed top-0 left-0 w-full bg-white z-50 flex items-center justify-between px-4 h-[70px]">
+  <div class="logo-container">
+  <img src="Image/logo_CLC-removebg-preview.png" class="logo-img">
+  <span class="logo-text">
+    Cognitive<br>Learning
+  </span>
+</div>
+
+  <!-- HAMBURGER -->
+  <button id="menuBtn" class="md:hidden text-2xl text-black">
+    ☰
+  </button>
+
+  <!-- NAV LINKS -->
+  <nav id="menu" class="hidden md:flex gap-6 font-semibold text-black">
+    <a href="#home">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#courses">Short Courses</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+     <a href="Faculty.html">Teacher Methodology</a>
+  </nav>
+
+</header>
+
+<div id="mobileMenu" class="hidden fixed top-[70px] left-0 w-full bg-white shadow flex flex-col items-center gap-4 py-5 z-40">
+  <a href="#home">Home</a>
+  <a href="#about">About Us</a>
+  <a href="#courses"> Short Courses</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#contact">Contact</a>
+  <a href="Faculty.html">Teaching Methodology</a>
+</div>
+
+<div class="main-content-area main-content" id="main">
+
+  <!-- HERO -->
+ <section class="hero" id="home">
+
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="Image\6.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>Shaping Brilliant Minds for a Smarter Tomorrow</h1>
+
+        <p>
+            Personalized classes in Physics, Chemistry, Maths, Computer Science,
+            Urdu and Online Classes for Other Subjects for every student.
+        </p>
+
+        <div class="hero-buttons">
+            <button onclick="window.location.href='Student Registration form.html'">
+                Sign-up as a Learner
+            </button>
+
+            <button class="teacher-btn"
+                onclick="window.location.href='Teacher Registration.html'">
+                Sign-up as a Teacher
+            </button>
+        </div>
+    </div>
+
+</section>
+       <!-- UPDATED ABOUT SECTION -->
+    <!-- ABOUT SECTION -->
+<section class="article-section" id="about">
+  <div class="article-container">
+
+    <!-- Image -->
+    <div class="article-image">
+      <img src="Image/QWa.png" alt="Cognitive Learning Institute">
+    </div>
+
+    <!-- Content -->
+    <div class="article-content">
+
+     
+      <h2>About Us</h2>
+
+      <p>
+        At <strong>Cognitive Learning</strong>, we believe that every student has
+        the potential to achieve excellence when guided with the right support,
+        encouragement, and learning environment.
+        Our mission is to provide high-quality, student-centered education that
+        empowers learners to build confidence, develop critical thinking skills,
+        and achieve their academic goals.
+        We are committed to creating a learning experience that goes beyond
+        traditional tutoring by combining expert instruction, personalized
+        attention, and modern teaching techniques.
+        Whether students need academic support, exam preparation, or skill
+        development, our dedicated educators work closely with them to unlock
+        their full potential.
+        Our focus is not only on improving grades but also on nurturing lifelong
+        learners who are prepared for future challenges and opportunities.
+      </p>
+
+      <div class="about-features">
+  <a href="#mission">✓ Our Mission</a>
+  <a href="#vision">✓ Our Vision</a>
+  <a href="#why-us">✓ Why Choose Us</a>
+ 
+</div>
+
+    </div>
+
+  </div>
+</section><br><br><br>
+<section class="mission-section" id="mission">
+  <div class="mission-container">
+
+    <div class="mission-content">
+      <h2>Our Mission</h2>
+      <p>
+      To inspire and empower students through exceptional education, innovative teaching methods, and personalized learning experiences that foster academic excellence, confidence, and lifelong success.
+      </p>
+
+    </div>
+
+    <div class="mission-image">
+      <img src="Image\2.jpg" alt="Our Mission">
+    </div>
+
+  </div>
+</section><br><br><br>
+<section class="vision-section" id="vision">
+  <div class="vision-container">
+
+    <div class="vision-image">
+      <img src="Image\3.jpeg" alt="Our Vision">
+    </div>
+
+    <div class="vision-content">
+      <h2>Our Vision</h2>
+      <p>
+       To become a trusted educational institution recognized for transforming learning experiences, developing future leaders, and helping students achieve their highest potential in an ever-changing world.
+      </p>
+
+    </div>
+
+  </div>
+<section class="why-us-section" id="why-us">
+
+  <div class="why-us-header">
+    <h2>Why Choose Us?</h2>
+    <p>
+      We combine expert instruction, personalized guidance, and modern
+      learning techniques to help every student achieve their full potential.
+    </p>
+  </div>
+
+  <div class="why-us-grid">
+
+    <div class="why-us-card" data-animate="left">
+      <div class="why-number">01</div>
+      <h3>Personalized Learning</h3>
+      <p>Every student learns differently. We tailor our teaching approach to match individual learning styles, strengths, and academic goals.</p>
+    </div>
+
+    <div class="why-us-card" data-animate="right">
+      <div class="why-number">02</div>
+      <h3>Experienced Educators</h3>
+      <p>Our qualified and passionate teachers bring subject expertise, dedication, and proven teaching strategies to every classroom.</p>
+    </div>
+
+    <div class="why-us-card" data-animate="left">
+      <div class="why-number">03</div>
+      <h3>Small Group Classes</h3>
+      <p>We maintain an interactive learning environment that encourages participation, collaboration, and individual attention.</p>
+    </div>
+
+    <div class="why-us-card" data-animate="right">
+      <div class="why-number">04</div>
+      <h3>Progress Monitoring</h3>
+      <p>Regular assessments and performance tracking help students stay on course and continuously improve.</p>
+    </div>
+
+    <div class="why-us-card" data-animate="left">
+      <div class="why-number">05</div>
+      <h3>Modern Learning Resources</h3>
+      <p>Students benefit from carefully designed study materials, digital resources, and engaging learning activities.</p>
+    </div>
+
+    <div class="why-us-card" data-animate="right">
+      <div class="why-number">06</div>
+      <h3>Parent Engagement</h3>
+      <p>We believe in strong partnerships with parents through regular communication, progress updates, and academic guidance.</p>
+    </div>
+
+  </div>
+
+</section>
+       <!-- Tuition Courses Section -->
+      <section class="tuition-section" id="courses">
+        <h2>Short Courses</h2>
+        <div class="tuition-cards">
+      <article class="tuition-card fade-up" data-animate="left">
+  <img src="Image/panda.jpg" alt="Chinese Language">
+  <div class="content">
+    <h3>Chinese Language</h3>
+    <p>Learn Mandarin from basics to fluent conversation. Focus on speaking, listening, and real-life communication.</p>
+
+    <!-- BUTTON ADDED -->
+   <button class="course-btn">
+          Free Demo
+    </button>
+  </div>
+</article>
+
+
+<article class="tuition-card fade-up" data-animate="right">
+  <img src="Image/arabic 1.png" alt="Arabic Language">
+  <div class="content">
+    <h3>Arabic Language</h3>
+    <p>Step-by-step Arabic reading, writing, and speaking. Perfect for Modern Standard Arabic learners.</p>
+
+    <!-- BUTTON ADDED -->
+     <button class="course-btn">
+    Free Demo
+    </button>
+  </div>
+</article>
+
+
+<article class="tuition-card fade-up" data-animate="left">
+  <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b" alt="English Language">
+  <div class="content">
+    <h3>English Language</h3>
+    <p>Grammar, vocabulary, and conversation practice for study, work, travel, and exams</p>
+
+    <!-- BUTTON ADDED -->
+    <button class="course-btn">
+      Free Demo
+    </button>
+  </div>
+</article>
+        </div>
+      </section>
+
+
+   <!-- Pricing Section -->
+      <section class="pricing-section" id="pricing">
+        <h2>Choose Your Plan</h2>
+        <p class="subtitle">Flexible plans for every student</p>
+        <div class="pricing-cards">
+          <div class="card"><h3>IGCSE/O Level</h3><p class="price"> 15000/-Rs <span>/month</span></p><ul><li>3 Classes per Week</li><li>Flexable Hybird Classes Available</li><li> Weekly Test with performance updates </li></ul><button onclick="subscribe('Basic')">Enroll Now</button></div>
+          <div class="card best"><h3>AS Level</h3><p class="price">18000/-Rs <span>/month</span></p><ul><li>3 Classes per Week</li><li>Flexable Hybird Classes Available</li><li>Live Doubt Sessions</li><li>Progress Tracking</li></ul><button onclick="subscribe('Standard')">Enroll Now</button></div>
+          <div class="card"><h3>A2 Level</h3><p class="price">18000/-Rs <span>/month</span></p><ul><li>3 Classes per Week</li><li> </li><li>Mock Tests & Feedback</li><li>Priority Support</li></ul><button onclick="subscribe('Premium')">Enroll Now</button></div>
+        </div>
+
+      </section>
+<!-- Floating WhatsApp Button -->
+ <a href="https://wa.me/923112080273" target="_blank"class="whatsapp-float" id="whatsappBtn">
+    <span class="tooltip">Chat with us</span>
+
+    <!-- WhatsApp SVG Icon -->
+    <svg viewBox="0 0 32 32">
+        <path d="M16.01 3C8.83 3 3 8.83 3 16c0 2.3.6 4.54 1.74 6.52L3 29l6.67-1.75A12.95 12.95 0 0 0 16.01 29C23.18 29 29 23.17 29 16S23.18 3 16.01 3zm0 23.71c-1.88 0-3.72-.5-5.34-1.45l-.38-.22-3.96 1.04 1.06-3.87-.24-.4A10.69 10.69 0 1 1 16.01 26.71zm5.86-8.01c-.32-.16-1.9-.94-2.2-1.05-.29-.11-.51-.16-.72.16-.21.32-.83 1.05-1.02 1.26-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.6-.95-.85-1.59-1.9-1.77-2.22-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.99-2.38-.26-.62-.53-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.08-1.11 2.63s1.14 3.05 1.3 3.26c.16.21 2.24 3.42 5.43 4.8.76.33 1.35.53 1.81.67.76.24 1.45.21 1.99.13.61-.09 1.9-.78 2.17-1.53.27-.75.27-1.39.19-1.53-.08-.14-.29-.22-.61-.38z"/>
+    </svg>
+</a>
+
+    </div>
+    <section id="contact" class="contact-section">
+  
+  <div class="container">
+
+    <div class="grid md:grid-cols-3 gap-8 text-white">
+
+      <!-- ABOUT -->
+      <div class="about-box">
+        <h3 class="text-xl font-bold mb-3">Cognitive Learning</h3>
+        <p class="text-sm leading-6">
+          We provide high-quality tuition with expert tutors, interactive lessons,
+          and personalized guidance to help students achieve academic success.
+        </p>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div>
+        <h3 class="text-xl font-bold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTACT INFO -->
+      <div>
+        <h3 class="text-xl font-bold mb-3">Contact Us</h3>
+        <p class="text-sm mb-2">
+          📍 C-63 Level 2nd, DHA Phase V, Karachi
+        </p>
+        <p class="text-sm mb-2">📞 +92 311 2080273</p>
+        <p class="text-sm mb-4">✉️ cognitivelearning.edu@gmail.com</p>
+
+         <div class="social-icons">
+                <a href="https://wa.me/923112080273" target="_blank" style="color:#25D366;"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com" target="_blank" style="color:#3b5998;"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com" target="_blank" style="color:#E1306C;"><i class="fab fa-instagram"></i></a>
+              
+            </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="text-center text-sm mt-8 border-t border-gray-400 pt-4 text-white">
+    © 2026 Cognitive Learning. All Rights Reserved.
+  </div>
+
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const cards = document.querySelectorAll(".why-us-card");
+
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach((entry) => {
+
+      const card = entry.target;
+
+      if (entry.isIntersecting) {
+
+        const index = [...cards].indexOf(card);
+
+        setTimeout(() => {
+          card.classList.add("in-view");
+        }, index * 120);
+
+      } else {
+
+        card.classList.remove("in-view");
+
+      }
+
+    });
+
+  }, {
+    threshold: 0.15
+  });
+
+  cards.forEach(card => observer.observe(card));
+
+});
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Mobile Menu
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (menuBtn && mobileMenu) {
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+  }
+
+  // Scroll Animations
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if (!entry.isIntersecting) return;
+
+      const element = entry.target;
+      const animation = element.dataset.animate;
+
+      if (animation === "left") {
+        element.classList.add("show-left");
+      } else if (animation === "right") {
+        element.classList.add("show-right");
+      } else {
+        element.classList.add("show-fade-up");
+      }
+
+      observer.unobserve(element);
+
+    });
+
+  }, {
+    threshold: 0.15
+  });
+
+  document.querySelectorAll(".fade-up").forEach(item => {
+    observer.observe(item);
+  });
+
+  document.querySelectorAll(".card").forEach(card => {
+    observer.observe(card);
+  });
+
+});
+ 
+// Pricing Buttons
+function subscribe(planName) {
+
+  localStorage.setItem("selectedPlan", planName);
+
+  window.location.href = "Student Registration form.html";
+}
+fetch("/api/test")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+    })
+    .catch(error => {
+        console.error("Connection Error:", error);
+    });
+</script>
+  
+
+</body>
+</html>
