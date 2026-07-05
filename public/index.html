@@ -1175,18 +1175,37 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
 /* Small Phones */
 @media screen and (max-width:400px){
 
-  .hero{
-    padding:110px 15px 60px;
-  }
+    .hero{
+        min-height:100vh;
+        padding:80px 20px;
+    }
 
-  .hero h1{
-    font-size:1.4rem;
-  }
+    .hero-content{
+        max-width:700px;
+        margin:auto;
+        text-align:center;
+    }
 
-  .hero p{
-    font-size:13px;
-  }
+    .hero-content h1{
+        font-size:clamp(2rem,7vw,3rem);
+        line-height:1.2;
+        margin-bottom:20px;
+    }
 
+    .hero-content p{
+        font-size:clamp(1rem,3vw,1.2rem);
+        line-height:1.7;
+        max-width:650px;
+        margin:0 auto 30px;
+    }
+
+    .hero-buttons{
+        display:flex;
+        justify-content:center;
+        gap:15px;
+        flex-wrap:wrap;
+    }
+}
   .logo-img{
     height:85px;
   }
@@ -1194,17 +1213,7 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
   .logo-text{
     font: size 14px;  }
 
-  /* BUTTONS STILL SIDE BY SIDE */
-  .hero-buttons{
-    gap:6px;
-  }
-
-  .hero-buttons button{
-    font-size:12px;
-    padding:10px 6px;
-    max-width:150px;
-  }
-
+ 
   .tuition-card img{
     height:200px;
   }
