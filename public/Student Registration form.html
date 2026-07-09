@@ -1392,20 +1392,20 @@ form.addEventListener("submit", async e => {
   document.querySelector('input[name="examSeries"]:checked')?.value || ""
 );
 
+
 formData.append(
   "candidateType",
-  document.querySelector('input[name="candidateType"]:checked')?.value || ""
+  document.querySelector('input[name="candidate"]:checked')?.value || ""
 );
-  formData.append("schoolName", document.getElementById("schoolName")?.value || "");
 
-  formData.append("studentName", document.getElementById("studentName").value);
-  formData.append("fatherName", document.getElementById("fatherName").value);
-  formData.append("email", document.getElementById("email").value);
-  formData.append("whatsapp", document.getElementById("whatsapp").value);
-  formData.append("occupation", document.getElementById("occupation").value);
-  formData.append("contactNumber", document.getElementById("contactNumber").value);
-  formData.append("address", document.getElementById("address").value);
-
+formData.append("schoolName", document.getElementById("schoolName").value);
+formData.append("studentName", document.getElementById("studentName").value);
+formData.append("fatherName", document.getElementById("fatherName").value);
+formData.append("email", document.getElementById("email").value);
+formData.append("whatsapp", document.getElementById("whatsapp").value);
+formData.append("occupation", document.getElementById("occupation").value);
+formData.append("contactNumber", document.getElementById("contactNumber").value);
+formData.append("address", document.getElementById("address").value);
   formData.append("grade", selectedGrade);
   formData.append("subjects", JSON.stringify(selectedSubjects));
   formData.append("teachers", JSON.stringify(selectedTeachers));
