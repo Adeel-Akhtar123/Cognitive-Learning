@@ -1621,39 +1621,7 @@ body{
 
 </section>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
 
-  const cards = document.querySelectorAll(".why-us-card");
-
-  const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach((entry) => {
-
-      const card = entry.target;
-
-      if (entry.isIntersecting) {
-
-        const index = [...cards].indexOf(card);
-
-        setTimeout(() => {
-          card.classList.add("in-view");
-        }, index * 120);
-
-      } else {
-
-        card.classList.remove("in-view");
-
-      }
-
-    });
-
-  }, {
-    threshold: 0.15
-  });
-
-  cards.forEach(card => observer.observe(card));
-
-});
 document.addEventListener("DOMContentLoaded", () => {
 
   // Mobile Menu
@@ -1716,16 +1684,15 @@ function subscribe(planName) {
 
   window.location.href = "Student Registration form.html";
 }
-const API = "https://cognitive-learning-backend.vercel.app";
+fetch("/api/test")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+    })
+    .catch(error => {
+        console.error("Connection Error:", error);
+    });
 
-fetch(`${API}/api/test`)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data.message);
-  })
-  .catch(error => {
-    console.error("Connection Error:", error);
-  });
   </script>
   
 
