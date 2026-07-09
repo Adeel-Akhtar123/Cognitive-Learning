@@ -71,58 +71,34 @@ nav a:hover {
 nav a:active {
   transform: scale(0.97);
 }
-.hero{
-    position: relative;
-    min-height: calc(100vh - 70px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow: hidden;
+/* ========================
+   HERO SECTION
+======================== */
+.hero {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+
+  background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("Image/6.gif") center/cover no-repeat;
 }
 
-.hero-video{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2;
+.hero h1 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
 }
 
-.hero-overlay{
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,.45);
-    z-index: -1;
+.hero p {
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  margin: 15px 0;
 }
 
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 100%;
-    color: white;
-}
-
-.hero-content h1,
-.hero-content p {
-    margin: 0;
-}
-
-.hero-content p {
-    margin-top: 10px;
-}
-  .hero-content h1 {
-    font-size:50px;   
-    font-weight: bold;
-    color: white;
-    margin-bottom: 15px;
-}
-  .hero-buttons {
+.hero-buttons {
   display: flex;
   gap: 15px;
   justify-content: center;
@@ -1381,35 +1357,19 @@ body{
 <div class="main-content-area main-content" id="main">
 
   <!-- HERO -->
- <section class="hero" id="home">
+  <section class="hero" id="home">
+    <h1>Shaping Brilliant Minds for a Smarter Tomorrow</h1>
+    <p>Personalized classes in Physics, Chemistry, Maths, Computer Science, Urdu and Online Classes for Other Subjects for every Students.</p>
+   <div class="hero-buttons">
+<button onclick="window.location.href='Student Registration form.html'">
+  Sign-up as a Learner
+</button>
+<button class="teacher-btn" onclick="window.location.href='Teacher Registration.html'">
+  Sign-up as a Teacher
+</button>
+</div>
 
-    <video class="hero-video" autoplay muted loop playsinline>
-        <source src="Image\6.mp4" type="video/mp4">
-    </video>
-
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-        <h1>Shaping Brilliant Minds for a Smarter Tomorrow</h1>
-
-        <p>
-            Personalized classes in Physics, Chemistry, Maths, Computer Science,
-            Urdu and Online Classes for Other Subjects for every student.
-        </p><br><Br>
-
-        <div class="hero-buttons">
-            <button onclick="window.location.href='Student Registration form.html'">
-                Sign-up as a Learner
-            </button>
-
-            <button class="teacher-btn"
-                onclick="window.location.href='Teacher Registration.html'">
-                Sign-up as a Teacher
-            </button>
-        </div>
-    </div>
-
-</section>
+  </section>
        <!-- UPDATED ABOUT SECTION -->
     <!-- ABOUT SECTION -->
 <section class="article-section" id="about">
@@ -1756,15 +1716,17 @@ function subscribe(planName) {
 
   window.location.href = "Student Registration form.html";
 }
-fetch("https://cognitive-learning-blond.vercel.app/api/test")
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.message);
-    })
-    .catch(error => {
-        console.error("Connection Error:", error);
-    });
-</script>
+const API = "https://cognitive-learning-backend.vercel.app";
+
+fetch(`${API}/api/test`)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.message);
+  })
+  .catch(error => {
+    console.error("Connection Error:", error);
+  });
+  </script>
   
 
 </body>
