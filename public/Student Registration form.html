@@ -59,35 +59,6 @@ header {
   font-size: 14px;
   font-weight: 600;
 }
-nav {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-/* NAV LINKS */
-nav a {
-  color: #111;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  padding: 8px 14px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-/* HOVER EFFECT */
-nav a:hover {
-  background: rgba(0, 123, 255, 0.12);
-  color: #007bff;
-  transform: translateY(-1px);
-}
-
-/* ACTIVE LOOK (optional) */
-nav a:active {
-  transform: scale(0.97);
-}
 
 /* =========================
    MAIN CONTAINER
@@ -796,11 +767,9 @@ textarea {
 
 </div>
 <script>
-/* =========================
-   API CONFIGURATION
+  /* =========================
+   STATE
 ========================= */
-
-const API_BASE_URL = "https://cognitive-learning-backend.vercel.app";
 let selectedGrade = "";
 let selectedSubjects = [];
 let selectedTeachers = {};
@@ -1353,333 +1322,101 @@ document.getElementById("teacherBtn").addEventListener("click", e => {
   showSchedule();
 });
 
-/* =========================
-   STUDENT FORM SUBMIT
-========================= */
-
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async e => {
   e.preventDefault();
 
-
-  // =========================
-  // VALIDATION
-  // =========================
-
-  const examSeries =
-    document.querySelector('input[name="examSeries"]:checked')?.value || "";
-
-  const candidateType =
-    document.querySelector('input[name="candidate"]:checked')?.value || "";
-
-
-  if (!examSeries) {
-    alert("Please select Examination Series.");
-    return;
-  }
-
-
-  if (!candidateType) {
-    alert("Please select Candidate Type.");
-    return;
-  }
-
-
+  // Basic validation
   if (!selectedGrade) {
-    alert("Please select Grade.");
+    alert("Please select a grade.");
     return;
   }
-
 
   if (selectedSubjects.length === 0) {
-    alert("Please select Subject.");
+    alert("Please select at least one subject.");
     return;
   }
-
 
   if (Object.keys(selectedTeachers).length !== selectedSubjects.length) {
-    alert("Please select teacher for every subject.");
+    alert("Please select a teacher for every subject.");
     return;
   }
 
-
-  const requiredFields = [
-    "studentName",
-    "fatherName",
-    "email",
-    "whatsapp",
-    "contactNumber",
-    "address"
-  ];
-
-
-  for (let field of requiredFields) {
-
-    if (!document.getElementById(field).value.trim()) {
-
-      alert(
-        "Please fill " +
-        field.replace(/([A-Z])/g, " $1")
-      );
-
-      return;
-    }
+  if (!document.getElementById("studentName").value.trim()) {
+    alert("Please enter Student Name.");
+    return;
   }
 
+  if (!document.getElementById("fatherName").value.trim()) {
+    alert("Please enter Father Name.");
+    return;
+  }
 
-
-  // =========================
-  // CREATE FORM DATA
-  // =========================
+  if (!document.getElementById("email").value.trim()) {
+    alert("Please enter Email.");
+    return;
+  }
 
   const formData = new FormData();
 
-
   formData.append(
-    "examSeries",
-    examSeries
-  );
+  "examSeries",
+  document.querySelector('input[name="examSeries"]:checked')?.value || ""
+);
 
+formData.append(
+  "candidateType",
+  document.querySelector('input[name="candidateType"]:checked')?.value || ""
+);
+  formData.append("schoolName", document.getElementById("schoolName")?.value || "");
 
-  formData.append(
-    "candidateType",
-    candidateType
-  );
+  formData.append("studentName", document.getElementById("studentName").value);
+  formData.append("fatherName", document.getElementById("fatherName").value);
+  formData.append("email", document.getElementById("email").value);
+  formData.append("whatsapp", document.getElementById("whatsapp").value);
+  formData.append("occupation", document.getElementById("occupation").value);
+  formData.append("contactNumber", document.getElementById("contactNumber").value);
+  formData.append("address", document.getElementById("address").value);
 
+  formData.append("grade", selectedGrade);
+  formData.append("subjects", JSON.stringify(selectedSubjects));
+  formData.append("teachers", JSON.stringify(selectedTeachers));
+  formData.append("teacherSummary", teacherName.value);
 
-  formData.append(
-    "grade",
-    selectedGrade
-  );
+  const profile = document.getElementById("profileInput").files[0];
+  const marksheet = document.getElementById("marksheetInput").files[0];
 
-
-  formData.append(
-    "schoolName",
-    document.getElementById("schoolName").value
-  );
-
-
-  formData.append(
-    "studentName",
-    document.getElementById("studentName").value
-  );
-
-
-  formData.append(
-    "fatherName",
-    document.getElementById("fatherName").value
-  );
-
-
-  formData.append(
-    "email",
-    document.getElementById("email").value
-  );
-
-
-  formData.append(
-    "whatsapp",
-    document.getElementById("whatsapp").value
-  );
-
-
-  formData.append(
-    "occupation",
-    document.getElementById("occupation").value
-  );
-
-
-  formData.append(
-    "contactNumber",
-    document.getElementById("contactNumber").value
-  );
-
-
-  formData.append(
-    "address",
-    document.getElementById("address").value
-  );
-
-
-
-  // SUBJECT DATA
-
-  formData.append(
-    "subjects",
-    JSON.stringify(selectedSubjects)
-  );
-
-
-
-  // TEACHER DATA
-
-  formData.append(
-    "teachers",
-    JSON.stringify(selectedTeachers)
-  );
-
-
-
-  formData.append(
-    "teacherSummary",
-    teacherName.value
-  );
-
-
-
-  // IMAGES
-
-  const profile =
-    document.getElementById("profileInput").files[0];
-
-
-  const marksheet =
-    document.getElementById("marksheetInput").files[0];
-
-
-
-  if(profile){
-
-    formData.append(
-      "profileImage",
-      profile
-    );
-
-  }
-
-
-
-  if(marksheet){
-
-    formData.append(
-      "marksheetImage",
-      marksheet
-    );
-
-  }
-
-
-
-  // =========================
-  // SEND TO SERVER
-  // =========================
-
+  if (profile) formData.append("profileImage", profile);
+  if (marksheet) formData.append("marksheetImage", marksheet);
 
   try {
+    const response = await fetch("https://cognitive-learning-backend.vercel.app", {
+      method: "POST",
+      body: formData
+    });
 
+    if (response.ok) {
+      alert(" Registration submitted successfully!");
 
-    const response = await fetch(
-
-      `${API_BASE_URL}/api/students`,
-
-      {
-
-        method:"POST",
-
-        body:formData
-
-      }
-
-    );
-
-
-
-    const result = await response.json();
-
-
-
-    console.log(
-      "SERVER:",
-      result
-    );
-
-
-
-    if(response.ok){
-
-
-      alert(
-        result.message ||
-        "Student Registration Successful"
-      );
-
-
-
-      // RESET FORM
-
+      // Optional: reset form
       form.reset();
-
-
       selectedGrade = "";
-
       selectedSubjects = [];
-
       selectedTeachers = {};
 
-
-      teacherName.value = "";
-
-
-      subjectBtn.innerText =
-        "Select Subjects";
-
-
       dropdown.innerHTML = "";
-
-
       scheduleBox.innerHTML = "";
-
-      scheduleBox.style.display="none";
-
-
-
-      document.getElementById(
-        "profilePreview"
-      ).removeAttribute("src");
-
-
-
-      document.getElementById(
-        "marksheetPreview"
-      ).removeAttribute("src");
-
-
-
+      teacherName.value = "";
+      subjectBtn.innerText = "Select Subjects";
+    } else {
+      alert("❌ Failed to submit registration.");
     }
 
-    else{
-
-
-      alert(
-        result.message ||
-        "Registration Failed"
-      );
-
-
-    }
-
-
-
+  } catch (err) {
+    console.error(err);
+    alert("❌ Server connection error.");
   }
-
-  catch(error){
-
-
-    console.error(
-      "SERVER ERROR:",
-      error
-    );
-
-
-    alert(
-      "Server connection failed."
-    );
-
-
-  }
-
-
 });
-
 </script>
 </body>
+
 </html>
