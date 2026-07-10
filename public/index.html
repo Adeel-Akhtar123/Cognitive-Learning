@@ -1623,111 +1623,155 @@ body{
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  const cards = document.querySelectorAll(".why-us-card");
+    /* ==========================
+       MOBILE MENU
+    ========================== */
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
 
-  const observer = new IntersectionObserver((entries) => {
+    if (menuBtn && mobileMenu) {
 
-    entries.forEach((entry) => {
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
 
-      const card = entry.target;
+        mobileMenu.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+            });
+        });
 
-      if (entry.isIntersecting) {
+    }
 
-        const index = [...cards].indexOf(card);
 
-        setTimeout(() => {
-          card.classList.add("in-view");
-        }, index * 120);
+    /* ==========================
+       WHY CHOOSE US ANIMATION
+    ========================== */
 
-      } else {
+    const whyCards = document.querySelectorAll(".why-us-card");
 
-        card.classList.remove("in-view");
+    const whyUsObserver = new IntersectionObserver((entries) => {
 
-      }
+        entries.forEach(entry => {
 
+            const card = entry.target;
+
+            if (entry.isIntersecting) {
+
+                const index = [...whyCards].indexOf(card);
+
+                setTimeout(() => {
+                    card.classList.add("in-view");
+                }, index * 120);
+
+            } else {
+
+                card.classList.remove("in-view");
+
+            }
+
+        });
+
+    }, {
+        threshold: 0.15
     });
 
-  }, {
-    threshold: 0.15
-  });
+    whyCards.forEach(card => {
+        whyUsObserver.observe(card);
+    });
 
-  cards.forEach(card => observer.observe(card));
+
+    /* ==========================
+       GENERAL SCROLL ANIMATIONS
+    ========================== */
+
+    const animationObserver = new IntersectionObserver((entries, observer) => {
+
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
+            const element = entry.target;
+            const animation = element.dataset.animate;
+
+            if (animation === "left") {
+
+                element.classList.add("show-left");
+
+            } else if (animation === "right") {
+
+                element.classList.add("show-right");
+
+            } else {
+
+                element.classList.add("show-fade-up");
+
+            }
+
+            observer.unobserve(element);
+
+        });
+
+    }, {
+        threshold: 0.15
+    });
+
+
+    // Tuition Cards
+    document.querySelectorAll(".fade-up").forEach(item => {
+        animationObserver.observe(item);
+    });
+
+    // Pricing Cards
+    document.querySelectorAll(".card").forEach(card => {
+        animationObserver.observe(card);
+    });
 
 });
-document.addEventListener("DOMContentLoaded", () => {
 
-  // Mobile Menu
-  const menuBtn = document.getElementById("menuBtn");
-  const mobileMenu = document.getElementById("mobileMenu");
 
-  if (menuBtn && mobileMenu) {
+/* ==========================
+   PRICING BUTTON
+========================== */
 
-    menuBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-
-    mobileMenu.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        mobileMenu.classList.add("hidden");
-      });
-    });
-  }
-
-  // Scroll Animations
-  const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-      if (!entry.isIntersecting) return;
-
-      const element = entry.target;
-      const animation = element.dataset.animate;
-
-      if (animation === "left") {
-        element.classList.add("show-left");
-      } else if (animation === "right") {
-        element.classList.add("show-right");
-      } else {
-        element.classList.add("show-fade-up");
-      }
-
-      observer.unobserve(element);
-
-    });
-
-  }, {
-    threshold: 0.15
-  });
-
-  document.querySelectorAll(".fade-up").forEach(item => {
-    observer.observe(item);
-  });
-
-  document.querySelectorAll(".card").forEach(card => {
-    observer.observe(card);
-  });
-
-});
- 
-// Pricing Buttons
 function subscribe(planName) {
 
-  localStorage.setItem("selectedPlan", planName);
+    localStorage.setItem("selectedPlan", planName);
 
-  window.location.href = "Student Registration form.html";
+    window.location.href = "Student Registration form.html";
+
 }
-const API = "https://cognitive-learning-backend.vercel.app";
 
-fetch(`${API}/api/test`)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data.message);
-  })
-  .catch(error => {
-    console.error("Connection Error:", error);
-  });
-  </script>
-  
+
+/* ==========================
+   BACKEND CONNECTION TEST
+========================== */
+
+fetch("https://cognitive-learning-backend.vercel.app/api/test")
+
+.then(response => {
+
+    if (!response.ok) {
+        throw new Error("Failed to connect to backend.");
+    }
+
+    return response.json();
+
+})
+
+.then(data => {
+
+    console.log("✅ Backend Connected:", data.message);
+
+})
+
+.catch(error => {
+
+    console.error("❌ Connection Error:", error);
+
+});
+</script>
+
 
 </body>
 </html>
