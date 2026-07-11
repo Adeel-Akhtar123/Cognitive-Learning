@@ -536,11 +536,12 @@ input[type="date"]{
 </div>
 
 <script>
-  /* ======================================
-   API URL
+/* ======================================
+   API CONNECTION
 ====================================== */
 
 const API_BASE = "https://cognitive-learning-backend.vercel.app";
+
 
 /* ======================================
    PHOTO UPLOAD
@@ -550,456 +551,1261 @@ const photo = document.getElementById("photo");
 const photoPreview = document.getElementById("photoPreview");
 const profileBtn = document.getElementById("profileBtn");
 
-profileBtn.addEventListener("click", () => {
-    photo.click();
-});
+if (profileBtn && photo) {
 
-photo.addEventListener("change", () => {
+    profileBtn.addEventListener("click", () => {
+        photo.click();
+    });
 
-    if (!photo.files.length) return;
+}
 
-    const reader = new FileReader();
 
-    reader.onload = function (e) {
+if (photo) {
 
-        photoPreview.src = e.target.result;
-        photoPreview.classList.remove("hidden");
+    photo.addEventListener("change", () => {
 
-    };
+        if (!photo.files.length) return;
 
-    reader.readAsDataURL(photo.files[0]);
+        const reader = new FileReader();
 
-});
+        reader.onload = (e) => {
+
+            photoPreview.src = e.target.result;
+            photoPreview.classList.remove("hidden");
+
+        };
+
+        reader.readAsDataURL(photo.files[0]);
+
+    });
+
+}
+
+
 
 /* ======================================
-   TABLE REFERENCES
+   HTML REFERENCES
 ====================================== */
 
 const scheduleBody = document.getElementById("schedule");
-const form = document.getElementById("teacherForm");
-const scheduleError = document.getElementById("scheduleError");
+
+const teacherForm = document.getElementById("teacherForm");
+
+const scheduleError =
+document.getElementById("scheduleError");
+
+
 
 /* ======================================
    DAYS
 ====================================== */
 
 const days = [
+
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday"
+
 ];
+
+
 
 /* ======================================
    TIME SLOTS
 ====================================== */
 
 const times = [
+
     "2:00pm–3:00pm",
     "3:00pm–4:00pm",
     "4:00pm–5:00pm",
     "5:00pm–6:00pm",
     "6:00pm–7:00pm",
     "7:00pm–8:00pm"
+
 ];
 
+
+
 /* ======================================
-   SUBJECTS
+   SUBJECTS AND GRADES
 ====================================== */
 
 const subjectGrades = {
 
-    Mathematics: ["IGCSE","O Level","AS Level","A2 Level"],
 
-    Physics: ["IGCSE","O Level","AS Level","A2 Level"],
+    Mathematics:[
+        "IGCSE",
+        "O Level",
+        "AS Level",
+        "A2 Level"
+    ],
 
-    Chemistry: ["IGCSE","O Level","AS Level","A2 Level"],
 
-    "Computer Science": ["IGCSE","O Level","AS Level","A2 Level"],
+    Physics:[
+        "IGCSE",
+        "O Level",
+        "AS Level",
+        "A2 Level"
+    ],
 
-    Urdu: ["IGCSE","O Level","AS Level","A2 Level"]
+
+    Chemistry:[
+        "IGCSE",
+        "O Level",
+        "AS Level",
+        "A2 Level"
+    ],
+
+
+    "Computer Science":[
+        "IGCSE",
+        "O Level",
+        "AS Level",
+        "A2 Level"
+    ],
+
+
+    Urdu:[
+        "IGCSE",
+        "O Level",
+        "AS Level",
+        "A2 Level"
+    ]
 
 };
 
+
+
 /* ======================================
-   STATES
+   VARIABLES
 ====================================== */
 
+
+// Slots already booked by teachers
 let reservedSlots = {};
 
+
+// Slots selected by current teacher
 let selectedSlots = {};
+
+
+
+
+
 /* ======================================
-   LOAD RESERVED SLOTS FROM DATABASE
+   LOAD RESERVED SLOTS
 ====================================== */
 
-async function loadReservedSlots() {
 
-    try {
+async function loadReservedSlots(){
 
-        const response = await fetch(`${API_BASE}/api/reserved-slots`);
 
-        if (!response.ok) {
-            throw new Error("Unable to load reserved slots.");
+    try{
+
+
+        const response =
+        await fetch(
+            `${API_BASE}/api/reserved-slots`
+        );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Cannot load reserved slots"
+            );
+
         }
 
-        reservedSlots = await response.json();
+
+        reservedSlots =
+        await response.json();
+
+
 
         buildTable();
 
-    } catch (error) {
 
-        console.error(error);
+
+    }
+    catch(error){
+
+
+        console.error(
+            "Reserved slot error:",
+            error
+        );
+
 
         reservedSlots = {};
 
         buildTable();
 
+
     }
+
 
 }
 
-/* Refresh every 5 minutes */
 
-setInterval(loadReservedSlots, 300000);
+
+
+
 
 /* ======================================
-   BUILD SCHEDULE TABLE
+   CREATE SCHEDULE TABLE
 ====================================== */
 
-function buildTable() {
 
-    scheduleBody.innerHTML = "";
+function buildTable(){
 
-    days.forEach(day => {
 
-        const row = document.createElement("tr");
+    if(!scheduleBody) return;
 
-        let html = `<td class="day">${day}</td>`;
 
-        times.forEach(time => {
+    scheduleBody.innerHTML="";
 
-            const slotKey = `${day}-${time}`;
 
-            const reserved = reservedSlots[slotKey];
+
+    days.forEach(day=>{
+
+
+        const row =
+        document.createElement("tr");
+
+
+
+        let html =
+        `<td class="day">${day}</td>`;
+
+
+
+        times.forEach(time=>{
+
+
+            const key =
+            `${day}-${time}`;
+
+
+            const reserved =
+            reservedSlots[key];
+
+
 
             html += `
 
             <td>
 
-                <button
-                    type="button"
-                    class="time-btn ${reserved ? "bg-green-600 opacity-70 cursor-not-allowed" : "bg-blue-300"}"
-                    data-day="${day}"
-                    data-time="${time}"
-                    ${reserved ? "disabled" : ""}
-                >
+
+            <button
+
+            type="button"
+
+            class="time-btn ${
+            reserved
+            ?
+            "bg-green-600"
+            :
+            "bg-blue-300"
+            }"
+
+            data-day="${day}"
+
+            data-time="${time}"
+
+            ${reserved ? "disabled":""}
+
+            >
+
+
+
+            ${
+            reserved
+
+            ?
+
+            `
+
+            <div>${time}</div>
+
+            <div>
+            ${reserved.teacher || "Reserved"}
+            </div>
+
+            <div>
+            ${reserved.subject || ""}
+            </div>
+
+            <div>
+            ${reserved.grade || ""}
+            </div>
+
+            <small>
+            RESERVED
+            </small>
+
+
+            `
+
+            :
+
+            time
+
+            }
+
+
+
+            </button>
+
+
+
+            <div class="selection hidden">
+
+
+                <div class="subject-buttons">
+
 
                 ${
-                    reserved
-                    ? `
-                        <div>${time}</div>
-                        <div>${reserved.subject}</div>
-                        <div>${reserved.grade}</div>
-                        <div style="font-size:10px;">
-                            Reserved
-                        </div>
-                    `
-                    : `
-                        ${time}
-                    `
+                Object.keys(subjectGrades)
+                .map(subject=>`
+
+                    <button
+                    type="button"
+                    class="subject-btn">
+
+                    ${subject}
+
+                    </button>
+
+
+                `).join("")
                 }
 
-                </button>
-
-                <div class="selection hidden">
-
-                    <div class="subject-buttons">
-
-                        ${Object.keys(subjectGrades).map(subject => `
-
-                            <button
-                                type="button"
-                                class="subject-btn"
-                            >
-                                ${subject}
-                            </button>
-
-                        `).join("")}
-
-                    </div>
-
-                    <div class="grade-buttons hidden"></div>
 
                 </div>
+
+
+
+                <div class="grade-buttons hidden">
+
+                </div>
+
+
+            </div>
+
 
             </td>
 
             `;
 
+
+
         });
 
-        row.innerHTML = html;
+
+
+        row.innerHTML=html;
+
 
         scheduleBody.appendChild(row);
 
+
+
     });
+
+
 
 }
 /* ======================================
-   CLICK HANDLER
+   RESET SLOT SELECTION BOX
 ====================================== */
 
-document.addEventListener("click", (e) => {
+function resetSelection(selection){
 
-  const timeBtn = e.target.closest(".time-btn");
-  const subjectBtn = e.target.closest(".subject-btn");
-  const gradeBtn = e.target.closest(".grade-btn");
 
-  // =========================
-  // TIME SLOT CLICK
-  // =========================
+    if(!selection) return;
 
-  if (timeBtn) {
 
-    const day = timeBtn.dataset.day;
-    const time = timeBtn.dataset.time;
-    const key = `${day}-${time}`;
+    delete selection.dataset.subject;
 
-    // Reserved slot cannot be selected
-    if (reservedSlots[key]) return;
 
-    const selection = timeBtn.nextElementSibling;
 
-    // Hide all other selection boxes
-    document.querySelectorAll(".selection").forEach(box => {
-      if (box !== selection) box.classList.add("hidden");
+    selection
+    .querySelectorAll(".subject-btn")
+    .forEach(btn=>{
+
+        btn.classList.remove("active");
+
     });
 
-    selection.classList.toggle("hidden");
-  }
 
-  // =========================
-  // SUBJECT CLICK
-  // =========================
 
-  if (subjectBtn) {
+    const gradeBox =
+    selection.querySelector(".grade-buttons");
 
-    const selection = subjectBtn.closest(".selection");
 
-    // Remove previous active subject
-    selection.querySelectorAll(".subject-btn").forEach(btn => {
-      btn.classList.remove("active");
-    });
 
-    subjectBtn.classList.add("active");
+    if(gradeBox){
 
-    const subject = subjectBtn.textContent.trim();
+        gradeBox.innerHTML="";
 
-    selection.dataset.subject = subject;
+        gradeBox.classList.add("hidden");
 
-    const gradeBox = selection.querySelector(".grade-buttons");
+    }
 
-    gradeBox.innerHTML = subjectGrades[subject]
-      .map(grade =>
-        `<button type="button" class="grade-btn">${grade}</button>`
-      )
-      .join("");
 
-    gradeBox.classList.remove("hidden");
-  }
+}
 
-  // =========================
-  // GRADE CLICK
-  // =========================
 
-  if (gradeBtn) {
 
-    const selection = gradeBtn.closest(".selection");
 
-    const subject = selection.dataset.subject;
-    const grade = gradeBtn.textContent.trim();
+/* ======================================
+   CLICK EVENTS
+====================================== */
 
-    const btn = selection.previousElementSibling;
 
-    const day = btn.dataset.day;
-    const time = btn.dataset.time;
+document.addEventListener(
+"click",
+function(e){
 
-    const key = `${day}-${time}`;
 
-    // Save selected slot
-    selectedSlots[key] = {
-      subject,
-      grade
-    };
 
-    // Change button appearance
-    btn.classList.remove("bg-blue-300");
-    btn.classList.add("bg-green-600");
+    const timeBtn =
+    e.target.closest(".time-btn");
 
-    btn.innerHTML = `
-      <div>${time}</div>
-      <div>${subject}</div>
-      <div>${grade}</div>
-      <div style="font-size:9px;">SELECTED</div>
-    `;
 
-    // Update selected slots bar
-    updateSelectedSlotsBar();
 
-    resetSelection(selection);
+    const subjectBtn =
+    e.target.closest(".subject-btn");
 
-    selection.classList.add("hidden");
-  }
+
+
+    const gradeBtn =
+    e.target.closest(".grade-btn");
+
+
+
+
+
+    /* ==========================
+       TIME SLOT CLICK
+    ========================== */
+
+
+    if(timeBtn){
+
+
+        const day =
+        timeBtn.dataset.day;
+
+
+        const time =
+        timeBtn.dataset.time;
+
+
+
+        const key =
+        `${day}-${time}`;
+
+
+
+
+
+        // Already reserved
+        if(reservedSlots[key]){
+
+            return;
+
+        }
+
+
+
+
+        const selection =
+        timeBtn.nextElementSibling;
+
+
+
+
+
+        // close other boxes
+
+        document
+        .querySelectorAll(".selection")
+        .forEach(box=>{
+
+
+            if(box !== selection){
+
+                box.classList.add("hidden");
+
+            }
+
+
+        });
+
+
+
+
+
+        selection.classList.toggle("hidden");
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ==========================
+       SUBJECT CLICK
+    ========================== */
+
+
+    if(subjectBtn){
+
+
+
+        const selection =
+        subjectBtn.closest(".selection");
+
+
+
+
+        selection
+        .querySelectorAll(".subject-btn")
+        .forEach(btn=>{
+
+            btn.classList.remove("active");
+
+        });
+
+
+
+
+        subjectBtn.classList.add("active");
+
+
+
+
+        const subject =
+        subjectBtn.textContent.trim();
+
+
+
+
+        selection.dataset.subject =
+        subject;
+
+
+
+
+        const gradeBox =
+        selection.querySelector(".grade-buttons");
+
+
+
+
+
+        gradeBox.innerHTML =
+
+        subjectGrades[subject]
+
+        .map(grade=>{
+
+
+            return `
+
+            <button
+
+            type="button"
+
+            class="grade-btn">
+
+            ${grade}
+
+            </button>
+
+            `;
+
+
+        }).join("");
+
+
+
+
+
+        gradeBox.classList.remove("hidden");
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================
+       GRADE CLICK
+    ========================== */
+
+
+    if(gradeBtn){
+
+
+
+        const selection =
+        gradeBtn.closest(".selection");
+
+
+
+
+        const subject =
+        selection.dataset.subject;
+
+
+
+        const grade =
+        gradeBtn.textContent.trim();
+
+
+
+
+        const timeButton =
+        selection.previousElementSibling;
+
+
+
+
+
+        const day =
+        timeButton.dataset.day;
+
+
+
+
+        const time =
+        timeButton.dataset.time;
+
+
+
+
+
+        const key =
+        `${day}-${time}`;
+
+
+
+
+
+
+
+        // SAVE SELECTED SLOT
+
+
+        selectedSlots[key]={
+
+
+            subject:subject,
+
+            grade:grade
+
+
+        };
+
+
+
+
+
+
+
+
+        // Change button colour
+
+
+        timeButton.classList.remove(
+            "bg-blue-300"
+        );
+
+
+        timeButton.classList.add(
+            "bg-green-600"
+        );
+
+
+
+
+
+
+
+        timeButton.innerHTML = `
+
+
+        <div>${time}</div>
+
+        <div>${subject}</div>
+
+        <div>${grade}</div>
+
+        <div style="font-size:10px">
+        SELECTED
+        </div>
+
+
+        `;
+
+
+
+
+
+        updateSelectedSlotsBar();
+
+
+
+
+        resetSelection(selection);
+
+
+
+        selection.classList.add("hidden");
+
+
+
+
+    }
+
+
 
 });
+
+
+
+
+
+
+
+
+
 /* ======================================
-   SELECTED SLOT BAR
+   SHOW SELECTED SLOTS
 ====================================== */
 
-function updateSelectedSlotsBar() {
 
-  const bar = document.getElementById("selectedSlots");
+function updateSelectedSlotsBar(){
 
-  if (!bar) return;
 
-  bar.innerHTML = "";
+    const bar =
+    document.getElementById(
+        "selectedSlots"
+    );
 
-  Object.entries(selectedSlots).forEach(([key, value]) => {
 
-    const tag = document.createElement("div");
 
-    tag.className = "slot-tag";
+    if(!bar) return;
 
-    tag.innerHTML = `
-      ${key}<br>
-      ${value.subject}<br>
-      ${value.grade}
-    `;
 
-    bar.appendChild(tag);
-  });
+
+    bar.innerHTML="";
+
+
+
+
+
+    Object.entries(selectedSlots)
+
+    .forEach(([slot,data])=>{
+
+
+
+        const div =
+        document.createElement("div");
+
+
+
+        div.className="slot-tag";
+
+
+
+        div.innerHTML=`
+
+        ${slot}<br>
+
+        ${data.subject}<br>
+
+        ${data.grade}
+
+        `;
+
+
+
+        bar.appendChild(div);
+
+
+
+    });
+
+
 
 }
 /* ======================================
-   FORM SUBMIT
+   TEACHER FORM SUBMISSION
 ====================================== */
 
-const form = document.getElementById("teacherForm");
-const scheduleError = document.getElementById("scheduleError");
 
-if (form) {
+if(teacherForm){
 
-  form.addEventListener("submit", async (e) => {
 
-    e.preventDefault();
+teacherForm.addEventListener(
+"submit",
+async function(e){
 
-    scheduleError.textContent = "";
 
-    // Check teaching mode
-    const mode = document.querySelector('input[name="mode"]:checked');
+e.preventDefault();
 
-    if (!mode) {
-      scheduleError.textContent = "Please select a teaching mode.";
-      return;
-    }
 
-    // Check schedule
-    if (Object.keys(selectedSlots).length === 0) {
-      scheduleError.textContent = "Please select at least one teaching slot.";
-      return;
-    }
 
-    // Disable button
-    const submitBtn = form.querySelector(".submitBtn");
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
+scheduleError.textContent="";
 
-    // Create FormData
-    const formData = new FormData(form);
 
-    // Add extra fields expected by backend
-    formData.append("teachingMode", mode.value);
-    formData.append("schedule", JSON.stringify(selectedSlots));
 
-    try {
 
-      const response = await fetch(`${API_BASE}/api/teachers`, {
-        method: "POST",
-        body: formData
-      });
 
-      const data = await response.json();
+/* ==========================
+   CHECK TEACHING MODE
+========================== */
 
-      if (!response.ok) {
-        throw new Error(data.message || "Registration failed.");
-      }
 
-      alert(data.message || "Teacher registered successfully!");
+const mode =
+document.querySelector(
+'input[name="mode"]:checked'
+);
 
-      // Reset form
-      form.reset();
 
-      // Hide image preview
-      if (photoPreview) {
-        photoPreview.src = "";
-        photoPreview.classList.add("hidden");
-      }
 
-      // Clear selected slots
-      selectedSlots = {};
+if(!mode){
 
-      // Clear selected slots bar
-      const bar = document.getElementById("selectedSlots");
-      if (bar) bar.innerHTML = "";
 
-      // Reload reserved slots
-      await loadReservedSlots();
+    scheduleError.textContent =
+    "Please select teaching mode";
 
-    } catch (err) {
 
-      console.error(err);
-      alert(err.message || "Unable to connect to the server.");
+    return;
 
-    } finally {
-
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Submit Form";
-
-    }
-
-  });
 
 }
-/* ======================================
-   INIT
-====================================== */
+
+
+
+
+
+
+/* ==========================
+   CHECK SCHEDULE
+========================== */
+
+
+if(
+Object.keys(selectedSlots).length === 0
+){
+
+
+    scheduleError.textContent =
+    "Please select at least one slot";
+
+
+    return;
+
+
+}
+
+
+
+
+
+
+/* ==========================
+   BUTTON LOADING
+========================== */
+
+
+const submitBtn =
+teacherForm.querySelector(
+".submitBtn"
+);
+
+
+
+submitBtn.disabled=true;
+
+submitBtn.innerText=
+"Submitting...";
+
+
+
+
+
+
+
+/* ==========================
+   CREATE FORM DATA
+========================== */
+
+
+const formData =
+new FormData(
+teacherForm
+);
+
+
+
+
+
+// Add extra values
+
+formData.append(
+"teachingMode",
+mode.value
+);
+
+
+
+formData.append(
+"schedule",
+JSON.stringify(selectedSlots)
+);
+
+
+
+
+
+
+
+try{
+
+
+
+const response =
+await fetch(
+
+`${API_BASE}/api/teachers`,
+
+{
+
+method:"POST",
+
+body:formData
+
+}
+
+);
+
+
+
+
+
+const result =
+await response.json();
+
+
+
+
+
+
+if(!response.ok){
+
+
+throw new Error(
+result.message ||
+"Submission failed"
+);
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+   SUCCESS
+========================== */
+
+
+alert(
+result.message ||
+"Teacher registered successfully"
+);
+
+
+
+
+
+
+
+/*
+================================
+ADD NEW RESERVED SLOTS WITHOUT
+RELOADING PAGE
+================================
+*/
+
+
+Object.entries(selectedSlots)
+.forEach(
+([slot,data])=>{
+
+
+reservedSlots[slot]={
+
+
+teacher:
+teacherForm.fullName.value,
+
+
+subject:
+data.subject,
+
+
+grade:
+data.grade
+
+
+};
+
+
+
+});
+
+
+
+
+
+// rebuild table immediately
 
 buildTable();
 
-loadReservedSlots();
 
-// Refresh reserved slots every 5 minutes
-setInterval(loadReservedSlots, 300000);
 
-// Mobile Menu
-const menuBtn = document.getElementById("menuBtn");
-const mobileMenu = document.getElementById("mobileMenu");
 
-if (menuBtn && mobileMenu) {
 
-  menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
 
-  mobileMenu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.add("hidden");
-    });
-  });
+
+/* ==========================
+   RESET FORM
+========================== */
+
+
+teacherForm.reset();
+
+
+
+
+selectedSlots={};
+
+
+
+updateSelectedSlotsBar();
+
+
+
+
+
+if(photoPreview){
+
+
+photoPreview.src="";
+
+
+photoPreview.classList.add(
+"hidden"
+);
+
 
 }
+
+
+
+
+
+}
+
+catch(error){
+
+
+
+console.error(
+"Submit error:",
+error
+);
+
+
+
+alert(
+error.message ||
+"Server connection error"
+);
+
+
+
+}
+
+finally{
+
+
+submitBtn.disabled=false;
+
+
+submitBtn.innerText=
+"Submit Form";
+
+
+}
+
+
+
+
+});
+
+
+}
+/* ======================================
+   INITIAL LOAD
+====================================== */
+
+
+// Create timetable immediately
+
+buildTable();
+
+
+// Load existing reserved slots from database
+
+loadReservedSlots();
+
+
+
+
+
+/* ======================================
+   AUTO UPDATE RESERVED SLOTS
+   (Optional)
+====================================== */
+
+
+setInterval(
+loadReservedSlots,
+300000
+);
+// 300000 milliseconds = 5 minutes
+
+
+
+
+
+
+
+/* ======================================
+   MOBILE MENU
+====================================== */
+
+
+const menuBtn =
+document.getElementById(
+"menuBtn"
+);
+
+
+const mobileMenu =
+document.getElementById(
+"mobileMenu"
+);
+
+
+
+
+if(menuBtn && mobileMenu){
+
+
+
+menuBtn.addEventListener(
+"click",
+()=>{
+
+
+mobileMenu.classList.toggle(
+"hidden"
+);
+
+
+});
+
+
+
+
+
+
+mobileMenu
+.querySelectorAll("a")
+.forEach(link=>{
+
+
+link.addEventListener(
+"click",
+()=>{
+
+
+mobileMenu.classList.add(
+"hidden"
+);
+
+
+});
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+/* ======================================
+   SAFETY CHECKS
+====================================== */
+
+
+window.addEventListener(
+"error",
+function(e){
+
+
+console.error(
+"JavaScript Error:",
+e.message
+);
+
+
+});
 </script>
 
 </body>
