@@ -536,13 +536,7 @@ input[type="date"]{
 </div>
 
 <script>
-/* ======================================
-   API CONNECTION
-====================================== */
-
 const API_BASE = "https://cognitive-learning-backend.vercel.app";
-
-
 /* ======================================
    PHOTO UPLOAD
 ====================================== */
@@ -552,1260 +546,400 @@ const photoPreview = document.getElementById("photoPreview");
 const profileBtn = document.getElementById("profileBtn");
 
 if (profileBtn && photo) {
-
-    profileBtn.addEventListener("click", () => {
-        photo.click();
-    });
-
+  profileBtn.addEventListener("click", () => photo.click());
 }
-
 
 if (photo) {
+  photo.addEventListener("change", () => {
+    if (!photo.files.length || !photoPreview) return;
 
-    photo.addEventListener("change", () => {
+    const reader = new FileReader();
 
-        if (!photo.files.length) return;
+    reader.onload = (e) => {
+      photoPreview.src = e.target.result;
+      photoPreview.classList.remove("hidden");
+    };
 
-        const reader = new FileReader();
-
-        reader.onload = (e) => {
-
-            photoPreview.src = e.target.result;
-            photoPreview.classList.remove("hidden");
-
-        };
-
-        reader.readAsDataURL(photo.files[0]);
-
-    });
-
+    reader.readAsDataURL(photo.files[0]);
+  });
 }
 
-
-
 /* ======================================
-   HTML REFERENCES
+   DATA
 ====================================== */
 
 const scheduleBody = document.getElementById("schedule");
 
-const teacherForm = document.getElementById("teacherForm");
-
-const scheduleError =
-document.getElementById("scheduleError");
-
-
-
-/* ======================================
-   DAYS
-====================================== */
-
 const days = [
-
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
 ];
-
-
-
-/* ======================================
-   TIME SLOTS
-====================================== */
 
 const times = [
-
-    "2:00pm–3:00pm",
-    "3:00pm–4:00pm",
-    "4:00pm–5:00pm",
-    "5:00pm–6:00pm",
-    "6:00pm–7:00pm",
-    "7:00pm–8:00pm"
-
+  "2:00pm–3:00pm",
+  "3:00pm–4:00pm",
+  "4:00pm–5:00pm",
+  "5:00pm–6:00pm",
+  "6:00pm–7:00pm",
+  "7:00pm–8:00pm"
 ];
 
-
-
-/* ======================================
-   SUBJECTS AND GRADES
-====================================== */
-
 const subjectGrades = {
-
-
-    Mathematics:[
-        "IGCSE",
-        "O Level",
-        "AS Level",
-        "A2 Level"
-    ],
-
-
-    Physics:[
-        "IGCSE",
-        "O Level",
-        "AS Level",
-        "A2 Level"
-    ],
-
-
-    Chemistry:[
-        "IGCSE",
-        "O Level",
-        "AS Level",
-        "A2 Level"
-    ],
-
-
-    "Computer Science":[
-        "IGCSE",
-        "O Level",
-        "AS Level",
-        "A2 Level"
-    ],
-
-
-    Urdu:[
-        "IGCSE",
-        "O Level",
-        "AS Level",
-        "A2 Level"
-    ]
-
+  Mathematics: ["IGCSE", "O Level", "AS Level", "A2 Level"],
+  Physics: ["IGCSE", "O Level", "AS Level", "A2 Level"],
+  Chemistry: ["IGCSE", "O Level", "AS Level", "A2 Level"],
+  "Computer Science": ["IGCSE", "O Level", "AS Level", "A2 Level"],
+  Urdu: ["IGCSE", "O Level", "AS Level", "A2 Level"]
 };
 
-
-
 /* ======================================
-   VARIABLES
+   SLOT STATES
 ====================================== */
 
-
-// Slots already booked by teachers
+// Approved slots from database
 let reservedSlots = {};
 
-
-// Slots selected by current teacher
+// Current teacher selections
 let selectedSlots = {};
-
-
-
-
 
 /* ======================================
    LOAD RESERVED SLOTS
 ====================================== */
 
+async function loadReservedSlots() {
+  try {
+    const res = await fetch(`${API_BASE}/api/reserved-slots`);
 
-async function loadReservedSlots(){
+    reservedSlots = await res.json();
 
+    buildTable();
 
-    try{
-
-
-        const response =
-        await fetch(
-            `${API_BASE}/api/reserved-slots`
-        );
-
-
-        if(!response.ok){
-
-            throw new Error(
-                "Cannot load reserved slots"
-            );
-
-        }
-
-
-        reservedSlots =
-        await response.json();
-
-
-
-        buildTable();
-
-
-
-    }
-    catch(error){
-
-
-        console.error(
-            "Reserved slot error:",
-            error
-        );
-
-
-        reservedSlots = {};
-
-        buildTable();
-
-
-    }
-
-
+  } catch (err) {
+    console.error("Failed to load reserved slots", err);
+  }
 }
 
+/* LIVE REFRESH */
 
-
-
-
+setInterval(loadReservedSlots, 300000); // 5 minutes
 
 /* ======================================
-   CREATE SCHEDULE TABLE
+   BUILD TABLE
 ====================================== */
 
+function buildTable() {
 
-function buildTable(){
+  if (!scheduleBody) return;
 
+  scheduleBody.innerHTML = "";
 
-    if(!scheduleBody) return;
+  days.forEach(day => {
 
+    const tr = document.createElement("tr");
 
-    scheduleBody.innerHTML="";
+    let html = `<td class="day">${day}</td>`;
 
+    times.forEach(time => {
 
+      const key = `${day}-${time}`;
 
-    days.forEach(day=>{
+      const slotInfo = reservedSlots[key];
 
+      const isReserved = !!slotInfo;
 
-        const row =
-        document.createElement("tr");
+      html += `
+        <td>
 
-
-
-        let html =
-        `<td class="day">${day}</td>`;
-
-
-
-        times.forEach(time=>{
-
-
-            const key =
-            `${day}-${time}`;
-
-
-            const reserved =
-            reservedSlots[key];
-
-
-
-            html += `
-
-            <td>
-
-
-            <button
-
+          <button
             type="button"
-
+            ${isReserved ? "disabled" : ""}
             class="time-btn ${
-            reserved
-            ?
-            "bg-green-600"
-            :
-            "bg-blue-300"
+              isReserved
+                ? "bg-green-600 opacity-70 cursor-not-allowed"
+                : "bg-blue-300"
             }"
-
             data-day="${day}"
-
-            data-time="${time}"
-
-            ${reserved ? "disabled":""}
-
-            >
-
-
+            data-time="${time}">
 
             ${
-            reserved
-
-            ?
-
-            `
-
-            <div>${time}</div>
-
-            <div>
-            ${reserved.teacher || "Reserved"}
-            </div>
-
-            <div>
-            ${reserved.subject || ""}
-            </div>
-
-            <div>
-            ${reserved.grade || ""}
-            </div>
-
-            <small>
-            RESERVED
-            </small>
-
-
-            `
-
-            :
-
-            time
-
+              isReserved
+                ? `
+                  <div>${time}</div>
+                  <div>${slotInfo.subject || ""}</div>
+                  <div>${slotInfo.grade || ""}</div>
+                  <div style="font-size:9px;">RESERVED</div>
+                `
+                : time
             }
 
+          </button>
 
+          <div class="selection hidden">
 
-            </button>
+            <div class="subject-buttons">
 
-
-
-            <div class="selection hidden">
-
-
-                <div class="subject-buttons">
-
-
-                ${
-                Object.keys(subjectGrades)
-                .map(subject=>`
-
+              ${Object.keys(subjectGrades)
+                .map(
+                  subject => `
                     <button
-                    type="button"
-                    class="subject-btn">
-
-                    ${subject}
-
+                      type="button"
+                      class="subject-btn">
+                      ${subject}
                     </button>
-
-
-                `).join("")
-                }
-
-
-                </div>
-
-
-
-                <div class="grade-buttons hidden">
-
-                </div>
-
+                  `
+                )
+                .join("")}
 
             </div>
 
+            <div class="grade-buttons hidden"></div>
 
-            </td>
+          </div>
 
-            `;
-
-
-
-        });
-
-
-
-        row.innerHTML=html;
-
-
-        scheduleBody.appendChild(row);
-
-
-
+        </td>
+      `;
     });
 
+    tr.innerHTML = html;
 
-
+    scheduleBody.appendChild(tr);
+  });
 }
+
 /* ======================================
-   RESET SLOT SELECTION BOX
+   RESET SELECTION
 ====================================== */
 
-function resetSelection(selection){
+function resetSelection(selection) {
 
+  if (!selection) return;
 
-    if(!selection) return;
+  delete selection.dataset.subject;
 
+  selection
+    .querySelectorAll(".subject-btn")
+    .forEach(btn => btn.classList.remove("active"));
 
-    delete selection.dataset.subject;
+  const gradeBox = selection.querySelector(".grade-buttons");
 
+  gradeBox.innerHTML = "";
 
+  gradeBox.classList.add("hidden");
+}
+
+/* ======================================
+   CLICK HANDLER
+====================================== */
+
+document.addEventListener("click", (e) => {
+
+  const timeBtn = e.target.closest(".time-btn");
+  const subjectBtn = e.target.closest(".subject-btn");
+  const gradeBtn = e.target.closest(".grade-btn");
+
+  /* SLOT CLICK */
+
+  if (timeBtn) {
+
+    const day = timeBtn.dataset.day;
+    const time = timeBtn.dataset.time;
+
+    const key = `${day}-${time}`;
+
+    // BLOCK RESERVED SLOT FOREVER
+
+    if (reservedSlots[key]) {
+      return;
+    }
+
+    const selection = timeBtn.nextElementSibling;
+
+    document
+      .querySelectorAll(".selection")
+      .forEach(s => {
+        if (s !== selection) {
+          s.classList.add("hidden");
+        }
+      });
+
+    selection.classList.toggle("hidden");
+  }
+
+  /* SUBJECT CLICK */
+
+  if (subjectBtn) {
+
+    const selection = subjectBtn.closest(".selection");
 
     selection
-    .querySelectorAll(".subject-btn")
-    .forEach(btn=>{
+      .querySelectorAll(".subject-btn")
+      .forEach(btn => btn.classList.remove("active"));
 
-        btn.classList.remove("active");
+    subjectBtn.classList.add("active");
 
-    });
+    const subject = subjectBtn.textContent.trim();
 
+    selection.dataset.subject = subject;
 
+    const gradeBox = selection.querySelector(".grade-buttons");
 
-    const gradeBox =
-    selection.querySelector(".grade-buttons");
+    gradeBox.innerHTML = subjectGrades[subject]
+      .map(
+        grade =>
+          `<button type="button" class="grade-btn">${grade}</button>`
+      )
+      .join("");
 
+    gradeBox.classList.remove("hidden");
+  }
 
+  /* GRADE CLICK */
 
-    if(gradeBox){
+  if (gradeBtn) {
 
-        gradeBox.innerHTML="";
+    const selection = gradeBtn.closest(".selection");
 
-        gradeBox.classList.add("hidden");
+    const subject = selection.dataset.subject;
 
-    }
+    const grade = gradeBtn.textContent.trim();
 
+    const btn = selection.previousElementSibling;
 
-}
+    const day = btn.dataset.day;
+    const time = btn.dataset.time;
 
+    const key = `${day}-${time}`;
 
+    selectedSlots[key] = {
+      subject,
+      grade
+    };
 
+    btn.classList.remove("bg-blue-300");
 
-/* ======================================
-   CLICK EVENTS
-====================================== */
+    btn.classList.add("bg-green-600");
 
+    btn.innerHTML = `
+      <div>${time}</div>
+      <div>${subject}</div>
+      <div>${grade}</div>
+      <div style="font-size:9px;">SELECTED</div>
+    `;
 
-document.addEventListener(
-"click",
-function(e){
+    resetSelection(selection);
 
-
-
-    const timeBtn =
-    e.target.closest(".time-btn");
-
-
-
-    const subjectBtn =
-    e.target.closest(".subject-btn");
-
-
-
-    const gradeBtn =
-    e.target.closest(".grade-btn");
-
-
-
-
-
-    /* ==========================
-       TIME SLOT CLICK
-    ========================== */
-
-
-    if(timeBtn){
-
-
-        const day =
-        timeBtn.dataset.day;
-
-
-        const time =
-        timeBtn.dataset.time;
-
-
-
-        const key =
-        `${day}-${time}`;
-
-
-
-
-
-        // Already reserved
-        if(reservedSlots[key]){
-
-            return;
-
-        }
-
-
-
-
-        const selection =
-        timeBtn.nextElementSibling;
-
-
-
-
-
-        // close other boxes
-
-        document
-        .querySelectorAll(".selection")
-        .forEach(box=>{
-
-
-            if(box !== selection){
-
-                box.classList.add("hidden");
-
-            }
-
-
-        });
-
-
-
-
-
-        selection.classList.toggle("hidden");
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ==========================
-       SUBJECT CLICK
-    ========================== */
-
-
-    if(subjectBtn){
-
-
-
-        const selection =
-        subjectBtn.closest(".selection");
-
-
-
-
-        selection
-        .querySelectorAll(".subject-btn")
-        .forEach(btn=>{
-
-            btn.classList.remove("active");
-
-        });
-
-
-
-
-        subjectBtn.classList.add("active");
-
-
-
-
-        const subject =
-        subjectBtn.textContent.trim();
-
-
-
-
-        selection.dataset.subject =
-        subject;
-
-
-
-
-        const gradeBox =
-        selection.querySelector(".grade-buttons");
-
-
-
-
-
-        gradeBox.innerHTML =
-
-        subjectGrades[subject]
-
-        .map(grade=>{
-
-
-            return `
-
-            <button
-
-            type="button"
-
-            class="grade-btn">
-
-            ${grade}
-
-            </button>
-
-            `;
-
-
-        }).join("");
-
-
-
-
-
-        gradeBox.classList.remove("hidden");
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================
-       GRADE CLICK
-    ========================== */
-
-
-    if(gradeBtn){
-
-
-
-        const selection =
-        gradeBtn.closest(".selection");
-
-
-
-
-        const subject =
-        selection.dataset.subject;
-
-
-
-        const grade =
-        gradeBtn.textContent.trim();
-
-
-
-
-        const timeButton =
-        selection.previousElementSibling;
-
-
-
-
-
-        const day =
-        timeButton.dataset.day;
-
-
-
-
-        const time =
-        timeButton.dataset.time;
-
-
-
-
-
-        const key =
-        `${day}-${time}`;
-
-
-
-
-
-
-
-        // SAVE SELECTED SLOT
-
-
-        selectedSlots[key]={
-
-
-            subject:subject,
-
-            grade:grade
-
-
-        };
-
-
-
-
-
-
-
-
-        // Change button colour
-
-
-        timeButton.classList.remove(
-            "bg-blue-300"
-        );
-
-
-        timeButton.classList.add(
-            "bg-green-600"
-        );
-
-
-
-
-
-
-
-        timeButton.innerHTML = `
-
-
-        <div>${time}</div>
-
-        <div>${subject}</div>
-
-        <div>${grade}</div>
-
-        <div style="font-size:10px">
-        SELECTED
-        </div>
-
-
-        `;
-
-
-
-
-
-        updateSelectedSlotsBar();
-
-
-
-
-        resetSelection(selection);
-
-
-
-        selection.classList.add("hidden");
-
-
-
-
-    }
-
-
-
+    selection.classList.add("hidden");
+  }
 });
 
-
-
-
-
-
-
-
-
 /* ======================================
-   SHOW SELECTED SLOTS
+   FORM SUBMIT
 ====================================== */
 
+const form = document.getElementById("teacherForm");
 
-function updateSelectedSlotsBar(){
+const scheduleError =
+  document.getElementById("scheduleError");
 
+if (form) {
 
-    const bar =
-    document.getElementById(
-        "selectedSlots"
+  form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    scheduleError.textContent = "";
+
+    const mode =
+      document.querySelector(
+        'input[name="mode"]:checked'
+      );
+
+    if (!mode) {
+
+      scheduleError.textContent =
+        "Select teaching mode";
+
+      return;
+    }
+
+    if (Object.keys(selectedSlots).length === 0) {
+
+      scheduleError.textContent =
+        "Select at least one slot";
+
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    formData.append(
+      "teachingMode",
+      mode.value
     );
 
+    formData.append(
+      "schedule",
+      JSON.stringify(selectedSlots)
+    );
 
+    try {
 
-    if(!bar) return;
+      const res = await fetch(
+        `${API_BASE}/api/teachers`,
+        {
+          method: "POST",
+          body: formData
+        }
+      );
 
+      const data = await res.json();
 
+      alert(data.message);
 
-    bar.innerHTML="";
+      form.reset();
 
+      photoPreview?.classList.add("hidden");
 
+      selectedSlots = {};
 
+      loadReservedSlots();
 
+    } catch (err) {
 
-    Object.entries(selectedSlots)
+      console.error(err);
 
-    .forEach(([slot,data])=>{
-
-
-
-        const div =
-        document.createElement("div");
-
-
-
-        div.className="slot-tag";
-
-
-
-        div.innerHTML=`
-
-        ${slot}<br>
-
-        ${data.subject}<br>
-
-        ${data.grade}
-
-        `;
-
-
-
-        bar.appendChild(div);
-
-
-
-    });
-
-
-
+      alert("Server Error");
+    }
+  });
 }
+
 /* ======================================
-   TEACHER FORM SUBMISSION
+   INIT
 ====================================== */
 
-
-if(teacherForm){
-
-
-teacherForm.addEventListener(
-"submit",
-async function(e){
-
-
-e.preventDefault();
-
-
-
-scheduleError.textContent="";
-
-
-
-
-
-/* ==========================
-   CHECK TEACHING MODE
-========================== */
-
-
-const mode =
-document.querySelector(
-'input[name="mode"]:checked'
-);
-
-
-
-if(!mode){
-
-
-    scheduleError.textContent =
-    "Please select teaching mode";
-
-
-    return;
-
-
-}
-
-
-
-
-
-
-/* ==========================
-   CHECK SCHEDULE
-========================== */
-
-
-if(
-Object.keys(selectedSlots).length === 0
-){
-
-
-    scheduleError.textContent =
-    "Please select at least one slot";
-
-
-    return;
-
-
-}
-
-
-
-
-
-
-/* ==========================
-   BUTTON LOADING
-========================== */
-
-
-const submitBtn =
-teacherForm.querySelector(
-".submitBtn"
-);
-
-
-
-submitBtn.disabled=true;
-
-submitBtn.innerText=
-"Submitting...";
-
-
-
-
-
-
-
-/* ==========================
-   CREATE FORM DATA
-========================== */
-
-
-const formData =
-new FormData(
-teacherForm
-);
-
-
-
-
-
-// Add extra values
-
-formData.append(
-"teachingMode",
-mode.value
-);
-
-
-
-formData.append(
-"schedule",
-JSON.stringify(selectedSlots)
-);
-
-
-
-
-
-
-
-try{
-
-
-
-const response =
-await fetch(
-
-`${API_BASE}/api/teachers`,
-
-{
-
-method:"POST",
-
-body:formData
-
-}
-
-);
-
-
-
-
-
-const result =
-await response.json();
-
-
-
-
-
-
-if(!response.ok){
-
-
-throw new Error(
-result.message ||
-"Submission failed"
-);
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================
-   SUCCESS
-========================== */
-
-
-alert(
-result.message ||
-"Teacher registered successfully"
-);
-
-
-
-
-
-
-
-/*
-================================
-ADD NEW RESERVED SLOTS WITHOUT
-RELOADING PAGE
-================================
-*/
-
-
-Object.entries(selectedSlots)
-.forEach(
-([slot,data])=>{
-
-
-reservedSlots[slot]={
-
-
-teacher:
-teacherForm.fullName.value,
-
-
-subject:
-data.subject,
-
-
-grade:
-data.grade
-
-
-};
-
-
-
-});
-
-
-
-
-
-// rebuild table immediately
-
 buildTable();
-
-
-
-
-
-
-
-/* ==========================
-   RESET FORM
-========================== */
-
-
-teacherForm.reset();
-
-
-
-
-selectedSlots={};
-
-
-
-updateSelectedSlotsBar();
-
-
-
-
-
-if(photoPreview){
-
-
-photoPreview.src="";
-
-
-photoPreview.classList.add(
-"hidden"
-);
-
-
-}
-
-
-
-
-
-}
-
-catch(error){
-
-
-
-console.error(
-"Submit error:",
-error
-);
-
-
-
-alert(
-error.message ||
-"Server connection error"
-);
-
-
-
-}
-
-finally{
-
-
-submitBtn.disabled=false;
-
-
-submitBtn.innerText=
-"Submit Form";
-
-
-}
-
-
-
-
-});
-
-
-}
-/* ======================================
-   INITIAL LOAD
-====================================== */
-
-
-// Create timetable immediately
-
-buildTable();
-
-
-// Load existing reserved slots from database
 
 loadReservedSlots();
+ // Mobile Menu
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
 
+  if (menuBtn && mobileMenu) {
 
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
 
-
-
-/* ======================================
-   AUTO UPDATE RESERVED SLOTS
-   (Optional)
-====================================== */
-
-
-setInterval(
-loadReservedSlots,
-300000
-);
-// 300000 milliseconds = 5 minutes
-
-
-
-
-
-
-
-/* ======================================
-   MOBILE MENU
-====================================== */
-
-
-const menuBtn =
-document.getElementById(
-"menuBtn"
-);
-
-
-const mobileMenu =
-document.getElementById(
-"mobileMenu"
-);
-
-
-
-
-if(menuBtn && mobileMenu){
-
-
-
-menuBtn.addEventListener(
-"click",
-()=>{
-
-
-mobileMenu.classList.toggle(
-"hidden"
-);
-
-
-});
-
-
-
-
-
-
-mobileMenu
-.querySelectorAll("a")
-.forEach(link=>{
-
-
-link.addEventListener(
-"click",
-()=>{
-
-
-mobileMenu.classList.add(
-"hidden"
-);
-
-
-});
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-/* ======================================
-   SAFETY CHECKS
-====================================== */
-
-
-window.addEventListener(
-"error",
-function(e){
-
-
-console.error(
-"JavaScript Error:",
-e.message
-);
-
-
-});
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+  }
 </script>
 
 </body>
