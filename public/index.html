@@ -474,7 +474,7 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
 
 .article-section {
   padding: 80px 20px;
-  background: #fff;
+  background: #f8fbff;
 }
 
 .article-container {
@@ -591,7 +591,7 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
 
 .mission-section{
   padding:100px 20px;
-  background:#f7f9fc;
+  background:#ffffff;
 }
 
 .mission-container{
@@ -632,7 +632,7 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
 
 .vision-section{
   padding:100px 20px;
-  background:#fff;
+  background:#f7f9fc;
 }
 
 .vision-container{
@@ -643,6 +643,7 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
   gap:60px;
   align-items:center;
 }
+
 
 
 /* =========================
@@ -659,6 +660,8 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     max-width:850px;
     margin:0 auto 70px;
 }
+
+
 
 .why-us-header h2{
     font-size:42px;
@@ -681,26 +684,14 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     gap:30px;
 }
 
-/* CARD */
 .why-us-card{
     position:relative;
     background:#fff;
-    padding:40px 30px;
-    border-radius:16px;
+    padding:35px;
+    border-radius:20px;
     box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    transition:all .35s ease;
     overflow:hidden;
-
-    /* Start from right side */
-    opacity:0;
-    transform:translateX(80px);
-
-    transition:
-        box-shadow 0.3s ease;
-}
-
-/* Visible State */
-.why-us-card.in-view{
-    animation:slideRight 0.8s ease forwards;
 }
 
 .why-us-card::before{
@@ -721,8 +712,9 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
 .why-number{
     font-size:48px;
     font-weight:800;
-    color:#051022;
+    color:#e8f1ff;
     margin-bottom:15px;
+    line-height:1;
 }
 
 .why-us-card h3{
@@ -736,33 +728,6 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     color:#555;
     line-height:1.8;
     font-size:15px;
-}
-
-/* RIGHT → LEFT ANIMATION FOR ALL CARDS */
-@keyframes slideRight{
-    from{
-        opacity:0;
-        transform:translateX(80px);
-    }
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-}
-
-/* RESPONSIVE */
-@media (max-width:900px){
-    .why-us-grid{
-        grid-template-columns:1fr;
-    }
-
-    .why-us-header h2{
-        font-size:32px;
-    }
-
-    .why-us-card{
-        padding:30px 25px;
-    }
 }
 
 /* ==========================================
@@ -829,7 +794,6 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     margin:auto;
   }
 
- 
 
   /* Why Us */
   .why-us-grid{
@@ -894,8 +858,13 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     font-size:15px;
   }
 
-  
- 
+  /* Section Titles */
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2,
+
 
   /* Cards */
   .tuition-card,
@@ -904,7 +873,7 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     max-width:400px;
   }
 
-  
+
   /* Why Us */
   .why-us-grid{
     grid-template-columns:1fr;
@@ -919,9 +888,38 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     justify-content:center;
   }
 
+  /* WhatsApp */
+  .whatsapp-float{
+    width:58px;
+    height:58px;
+    right:15px;
+    bottom:15px;
+  }
 
-  
+  .whatsapp-float svg{
+    width:30px;
+    height:30px;
+  }
+}
 
+
+/* Small Phones */
+@media (max-width: 480px){
+
+  .hero h1{
+    font-size:1.7rem;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2,
+ 
   .article-content h2{
     font-size:28px;
   }
@@ -932,14 +930,23 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
   }
 
   .logo-img{
-    height:80px;
+    height:50px;
   }
 
   .logo-text{
-    font-size:14px;
+    font-size:11px;
   }
+}
+@media (max-width: 576px) {
 
-
+  .hero-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    width:100%;
+  }
 
   .hero-buttons button{
     flex:1;
@@ -947,370 +954,250 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     font-size:14px;
     padding:12px 10px;
   }
-
-
-    /* ==========================================
-   RESPONSIVE CSS ONLY
-========================================== */
-
-/* Large Screens */
-@media screen and (max-width:1200px){
-
-  .container,
-  .article-container,
-  .mission-container,
-  .vision-container,
-  .why-us-grid{
-    width:100%;
-    padding-left:20px;
-    padding-right:20px;
-  }
-
-  .tuition-card,
-  .card{
-    max-width:320px;
-  }
-
 }
+/* WhatsApp Floating Button */
+    .whatsapp-float {
+        position: fixed;
+        bottom:100px;
+        right: 25px;
+        width: 65px;
+        height: 65px;
+        background: #25D366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
 
-/* Tablets */
-@media screen and (max-width:992px){
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+    }
 
-  section{
-    padding:70px 20px;
-  }
+    .whatsapp-float svg {
+        width: 35px;
+        height: 35px;
+        fill: white;
+    }
 
-  .article-container,
-  .mission-container,
-  .vision-container{
-    grid-template-columns:1fr;
-    text-align:center;
-    gap:40px;
-  }
+    /* Tooltip */
+    .tooltip {
+        position: absolute;
+        right: 80px;
+        background: #333;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+    }
 
-  .article-content p{
-    text-align:center;
-  }
+    .whatsapp-float:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
 
-  .article-image img,
-  .mission-image img,
-  .vision-image img{
-    max-width:500px;
-    width:100%;
-    margin:auto;
-  }
-
-  .about-features{
-    justify-content:center;
-  }
-
-  .why-us-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .pricing-cards{
-    justify-content:center;
-  }
-
-  #contact{
-    margin-top:80px;
-  }
-}
-
-/* Mobile Tablets */
-@media screen and (max-width:768px){
-
-  header{
-    padding:0 15px;
-  }
-
-  .logo-img{
-    height:80px;
-  }
-
-  .logo-text{
-    font-size:14px;
-  }
-
-  .hero{
-    padding:120px 20px 80px;
-  }
-
-  .hero h1{
-    font-size:2rem;
-    line-height:1.3;
-  }
-
-  .hero p{
-    font-size:15px;
-  }
-
-  /* BUTTONS SIDE BY SIDE */
-  .hero-buttons{
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items:center;
-    gap:12px;
-    flex-wrap:nowrap;
-    width:100%;
-  }
-
-  .hero-buttons button{
-    flex:1;
-    max-width:220px;
-    min-width:140px;
-  }
-
-  .article-content h2,
-  .tuition-section h2,
-  .pricing-section h2,
-  .mission-content h2,
-  .vision-content h2,
-  .why-us-header h2{
-    font-size:32px;
-  }
-
-  .tuition-card,
-  .card{
-    width:100%;
-    max-width:450px;
-  }
-
-  .tuition-card img{
-    height:240px;
-  }
-
-  .why-us-grid{
-    grid-template-columns:1fr;
-  }
-
-  .grid{
-    text-align:center;
-  }
-
-  .social-icons{
-    display:flex;
-    justify-content:center;
-  }}
-
-/* Phones */
-@media screen and (max-width:576px){
-
-  .hero h1{
-    font-size:1.7rem;
-  }
-
-  .hero p{
-    font-size:14px;
-  }
-
-  /* BUTTONS SIDE BY SIDE */
-  .hero-buttons{
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    gap:8px;
-    flex-wrap:nowrap;
-  }
-
-  .hero-buttons button{
-    flex:1;
-    min-width:0;
-    max-width:170px;
-    font-size:13px;
-    padding:10px 8px;
-  }
-
-  .article-content h2,
-  .tuition-section h2,
-  .pricing-section h2,
-  .mission-content h2,
-  .vision-content h2,
-  .why-us-header h2{
-    font-size:28px;
-  }
-
-  .about-features{
-    flex-direction:column;
-  }
-
-  .about-features a{
-    width:100%;
-  }
-
-  .tuition-card img{
-    height:220px;
-  }
-
-  .contact-section{
-    padding:60px 15px;
-  }
-}
-
-/* Small Phones */
-@media screen and (max-width:400px){
-
-  .hero{
-    padding:110px 15px 60px;
-  }
-
-  .hero h1{
-    font-size:1.4rem;
-  }
-
-  .hero p{
-    font-size:13px;
-  }
-
-  .logo-img{
-    height:85px;
-  }
-
-  .logo-text{
-    font: size 14px;  }
-
-  /* BUTTONS STILL SIDE BY SIDE */
-  .hero-buttons{
-    gap:6px;
-  }
-
-  .hero-buttons button{
-    font-size:12px;
-    padding:10px 6px;
-    max-width:150px;
-  }
-
-  .tuition-card img{
-    height:200px;
-  }
-
-  .card h3{
-    font-size:20px;
-  }
-
-  .card .price{
-    font-size:18px;
-  }
-}
-
-/* Landscape Phones */
-@media screen and (max-height:500px) and (orientation:landscape){
-
-  .hero{
-    min-height:auto;
-    padding:100px 20px 60px;
-  }
-
-  .hero h1{
-    font-size:1.8rem;
-  }
-}
-
-/* Universal Fixes */
-img{
-  max-width:100%;
-  height:auto;
-  display:block;
-}
-
-html,
-body{
-  overflow-x:hidden;
-  width:100%;
-}
-
-*{
-  box-sizing:border-box;
-}
-}
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        70% {
+            box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+    }
 /* =========================
-   WHATSAPP FLOAT BUTTON
+   TIMETABLE SECTION
 ========================= */
 
-.whatsapp-float{
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 65px;
-    height: 65px;
-    background: #25D366;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    z-index: 9999;
-    box-shadow: 0 8px 25px rgba(37,211,102,0.4);
-    transition: all 0.3s ease;
-    animation: whatsappPulse 2s infinite;
+.timetable-section{
+    padding:100px 20px;
+    background:#fff;
 }
 
-.whatsapp-float:hover{
-    transform: translateY(-5px) scale(1.08);
-    box-shadow: 0 12px 30px rgba(37,211,102,0.55);
+.methodology-container{
+    max-width:1200px;
+    margin:auto;
 }
 
-.whatsapp-float svg{
-    width: 34px;
-    height: 34px;
-    fill: #fff;
+.timetable-section h2{
+    text-align:center;
+    font-size:42px;
+    font-weight:700;
+    color:#06184b;
+    margin-bottom:30px;
 }
 
-/* Tooltip */
-.whatsapp-float .tooltip{
-    position: absolute;
-    right: 80px;
-    background: #111;
-    color: #fff;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(10px);
-    transition: all 0.3s ease;
+.timetable-wrapper{
+    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-.whatsapp-float:hover .tooltip{
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
+/* TABLE */
+
+.timetable{
+    width:100%;
+    min-width:1000px;
+    border-collapse:collapse;
+    background:#fff;
 }
 
-/* Pulse Animation */
-@keyframes whatsappPulse{
-    0%{
-        box-shadow: 0 0 0 0 rgba(37,211,102,0.6);
+/* HEADER */
+
+.timetable th{
+    background:#06184b;
+    color:#fff;
+    padding:16px 12px;
+    font-size:15px;
+    font-weight:700;
+    text-align:center;
+    white-space:nowrap;
+}
+
+/* CELLS */
+
+.timetable td{
+    padding:14px 10px;
+    border:1px solid #e9ecef;
+    text-align:center;
+    font-size:14px;
+    color:#444;
+    line-height:1.6;
+    vertical-align:middle;
+}
+
+/* DAY COLUMN */
+
+.timetable td:first-child{
+    font-weight:700;
+    color:#06184b;
+    background:#f8fbff;
+    min-width:120px;
+}
+
+/* ROW COLORS */
+
+.timetable tbody tr:nth-child(even){
+    background:#fafafa;
+}
+
+.timetable tbody tr:hover{
+    background:#eef5ff;
+    transition:.3s;
+}
+
+/* SCROLLBAR */
+
+.timetable-wrapper::-webkit-scrollbar{
+    height:8px;
+}
+
+.timetable-wrapper::-webkit-scrollbar-track{
+    background:#f1f1f1;
+}
+
+.timetable-wrapper::-webkit-scrollbar-thumb{
+    background:#06184b;
+    border-radius:20px;
+}
+
+/* =========================
+   LAPTOP
+========================= */
+
+@media (max-width:1200px){
+
+    .timetable{
+        min-width:950px;
     }
-    70%{
-        box-shadow: 0 0 0 18px rgba(37,211,102,0);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width:992px){
+
+    .timetable-section{
+        padding:80px 15px;
     }
-    100%{
-        box-shadow: 0 0 0 0 rgba(37,211,102,0);
+
+    .timetable-section h2{
+        font-size:36px;
+    }
+
+    .timetable{
+        min-width:900px;
+    }
+
+    .timetable th,
+    .timetable td{
+        font-size:13px;
+        padding:12px 8px;
     }
 }
 
-/* Mobile */
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width:768px){
 
-    .whatsapp-float{
-        width: 58px;
-        height: 58px;
-        right: 18px;
-        bottom: 18px;
+    .timetable-section{
+        padding:70px 10px;
     }
 
-    .whatsapp-float svg{
-        width: 30px;
-        height: 30px;
+    .timetable-section h2{
+        font-size:30px;
     }
 
-    .whatsapp-float .tooltip{
-        display: none;
+    .timetable{
+        min-width:850px;
+    }
+
+    .timetable th,
+    .timetable td{
+        font-size:12px;
+        padding:10px 6px;
     }
 }
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width:480px){
+
+    .timetable-section h2{
+        font-size:26px;
+    }
+
+    .timetable{
+        min-width:800px;
+    }
+
+    .timetable th,
+    .timetable td{
+        font-size:11px;
+        padding:8px 5px;
+    }
+}
+
+
 </style>
 
 </head>
@@ -1336,18 +1223,18 @@ body{
   <!-- NAV LINKS -->
   <nav id="menu" class="hidden md:flex gap-6 font-semibold text-black">
     <a href="#home">Home</a>
-    <a href="#about">About Us</a>
+    <a href="#about">About</a>
     <a href="#courses">Short Courses</a>
     <a href="#pricing">Pricing</a>
     <a href="#contact">Contact</a>
-     <a href="Faculty.html">Teacher Methodology</a>
+     <a href="Faculty.html">Teaching Methodology</a>
   </nav>
 
 </header>
 
 <div id="mobileMenu" class="hidden fixed top-[70px] left-0 w-full bg-white shadow flex flex-col items-center gap-4 py-5 z-40">
   <a href="#home">Home</a>
-  <a href="#about">About Us</a>
+  <a href="#about">About</a>
   <a href="#courses"> Short Courses</a>
   <a href="#pricing">Pricing</a>
   <a href="#contact">Contact</a>
@@ -1359,13 +1246,13 @@ body{
   <!-- HERO -->
   <section class="hero" id="home">
     <h1>Shaping Brilliant Minds for a Smarter Tomorrow</h1>
-    <p>Personalized classes in Physics, Chemistry, Maths, Computer Science, Urdu and Online Classes for Other Subjects for every Students.</p>
+    <p>Personalized classes in Physics, Chemistry, Maths, Computer Science, Urdu and Online Classes for Other Subjects for every student.</p>
    <div class="hero-buttons">
 <button onclick="window.location.href='Student Registration form.html'">
-  Sign-up as a Learner
+  Join Now
 </button>
 <button class="teacher-btn" onclick="window.location.href='Teacher Registration.html'">
-  Sign-up as a Teacher
+  Become a Teacher
 </button>
 </div>
 
@@ -1384,7 +1271,7 @@ body{
     <div class="article-content">
 
      
-      <h2>About Us</h2>
+      <h2>About Cognitive Learning</h2>
 
       <p>
         At <strong>Cognitive Learning</strong>, we believe that every student has
@@ -1406,8 +1293,8 @@ body{
       <div class="about-features">
   <a href="#mission">✓ Our Mission</a>
   <a href="#vision">✓ Our Vision</a>
+  <a href="#methodology">✓ Teaching Methodology</a>
   <a href="#why-us">✓ Why Choose Us</a>
- 
 </div>
 
     </div>
@@ -1447,57 +1334,301 @@ body{
     </div>
 
   </div>
-<section class="why-us-section" id="why-us">
+</section>
+<!-- TEACHER TIMETABLE SECTION -->
+<section class="timetable-section" id="methodology">
 
-  <div class="why-us-header">
-    <h2>Why Choose Us?</h2>
-    <p>
-      We combine expert instruction, personalized guidance, and modern
-      learning techniques to help every student achieve their full potential.
-    </p>
-  </div>
+    <div class="methodology-container">
 
-  <div class="why-us-grid">
+        <h2>Teacher Timetable</h2>
 
-    <div class="why-us-card" data-animate="left">
-      <div class="why-number">01</div>
-      <h3>Personalized Learning</h3>
-      <p>Every student learns differently. We tailor our teaching approach to match individual learning styles, strengths, and academic goals.</p>
+        <div class="timetable-wrapper">
+
+            <table class="timetable">
+
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Misc Time</th>
+                        <th>Time 3:00 - 4:00</th>
+                        <th>Time 4:00 - 5:00</th>
+                        <th>Time 5:00 - 6:00</th>
+                        <th>Time 6:00 - 7:00</th>
+                        <th>Time 7:00 - 8:00</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <!-- Monday -->
+                    <tr>
+                        <td>Monday</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Monday</td>
+                        <td></td>
+                        <td></td>
+                        <td>A2 Physics</td>
+                        <td>AS Maths</td>
+                        <td>IGCSE Maths</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Monday</td>
+                        <td></td>
+                        <td></td>
+                        <td>AS Computer Science</td>
+                        <td></td>
+                        <td></td>
+                        <td>O Level Computer Science "B1"</td>
+                    </tr>
+
+                    <!-- Tuesday -->
+                    <tr>
+                        <td>Tuesday</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Tuesday</td>
+                        <td></td>
+                        <td></td>
+                        <td>A2 Maths</td>
+                        <td>AS Physics</td>
+                        <td>IGCSE Maths</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Tuesday</td>
+                        <td></td>
+                        <td></td>
+                        <td>AS Computer Science</td>
+                        <td>O Level Computer Science "B2"</td>
+                        <td></td>
+                        <td>O Level Computer Science "B1"</td>
+                    </tr>
+
+                    <!-- Wednesday -->
+                    <tr>
+                        <td>Wednesday</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Wednesday</td>
+                        <td></td>
+                        <td></td>
+                        <td>AS Physics</td>
+                        <td>A2 Physics</td>
+                        <td>A2 Maths</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Wednesday</td>
+                        <td></td>
+                        <td></td>
+                        <td>A2 Computer Science</td>
+                        <td></td>
+                        <td>Physics "O" Level</td>
+                        <td>Chemistry "O" Level</td>
+                    </tr>
+
+                    <!-- Thursday -->
+                    <tr>
+                        <td>Thursday</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Thursday</td>
+                        <td></td>
+                        <td></td>
+                        <td>A2 Maths</td>
+                        <td></td>
+                        <td>IGCSE Maths</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Thursday</td>
+                        <td></td>
+                        <td></td>
+                        <td>AS Computer Science</td>
+                        <td>O Level Computer Science "B2"</td>
+                        <td></td>
+                        <td>O Level Computer Science "B1"</td>
+                    </tr>
+
+                    <!-- Friday -->
+                    <tr>
+                        <td>Friday</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Urdu</td>
+                    </tr>
+
+                    <tr>
+                        <td>Friday</td>
+                        <td></td>
+                        <td>A2 Physics</td>
+                        <td>AS Physics</td>
+                        <td>AS Maths</td>
+                        <td>AS Maths</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Friday</td>
+                        <td></td>
+                        <td></td>
+                        <td>A2 Computer Science</td>
+                        <td>O Level Computer Science "B2"</td>
+                        <td>Physics "O" Level</td>
+                        <td>Chemistry "O" Level</td>
+                    </tr>
+
+                    <!-- Saturday -->
+                    <tr>
+                        <td>Saturday</td>
+                        <td>O Level Chemistry 12:00 PM - 2:00 PM</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Saturday</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Urdu</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Saturday</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                  
+
+                </tbody>
+
+            </table>
+
+        </div>
+
     </div>
-
-    <div class="why-us-card" data-animate="right">
-      <div class="why-number">02</div>
-      <h3>Experienced Educators</h3>
-      <p>Our qualified and passionate teachers bring subject expertise, dedication, and proven teaching strategies to every classroom.</p>
-    </div>
-
-    <div class="why-us-card" data-animate="left">
-      <div class="why-number">03</div>
-      <h3>Small Group Classes</h3>
-      <p>We maintain an interactive learning environment that encourages participation, collaboration, and individual attention.</p>
-    </div>
-
-    <div class="why-us-card" data-animate="right">
-      <div class="why-number">04</div>
-      <h3>Progress Monitoring</h3>
-      <p>Regular assessments and performance tracking help students stay on course and continuously improve.</p>
-    </div>
-
-    <div class="why-us-card" data-animate="left">
-      <div class="why-number">05</div>
-      <h3>Modern Learning Resources</h3>
-      <p>Students benefit from carefully designed study materials, digital resources, and engaging learning activities.</p>
-    </div>
-
-    <div class="why-us-card" data-animate="right">
-      <div class="why-number">06</div>
-      <h3>Parent Engagement</h3>
-      <p>We believe in strong partnerships with parents through regular communication, progress updates, and academic guidance.</p>
-    </div>
-
-  </div>
 
 </section>
+
+<section class="why-us-section" id="why-us">
+    <div class="why-us-header">
+     
+        <h2>Why choose Us ?</h2>
+        <p>
+            We combine expert instruction, personalized guidance, and modern
+            learning techniques to help every student achieve their full potential.
+        </p>
+    </div>
+
+    <div class="why-us-grid">
+
+        <div class="why-us-card">
+            <div class="why-number">01</div>
+            <h3>Personalized Learning</h3>
+            <p>
+                Every student learns differently. We tailor our teaching
+                approach to match individual learning styles, strengths,
+                and academic goals.
+            </p>
+        </div>
+
+        <div class="why-us-card">
+            <div class="why-number">02</div>
+            <h3>Experienced Educators</h3>
+            <p>
+                Our qualified and passionate teachers bring subject expertise,
+                dedication, and proven teaching strategies to every classroom.
+            </p>
+        </div>
+
+        <div class="why-us-card">
+            <div class="why-number">03</div>
+            <h3>Small Group Classes</h3>
+            <p>
+                We maintain an interactive learning environment that encourages
+                participation, collaboration, and individual attention.
+            </p>
+        </div>
+
+        <div class="why-us-card">
+            <div class="why-number">04</div>
+            <h3>Progress Monitoring</h3>
+            <p>
+                Regular assessments and performance tracking help students stay
+                on course and continuously improve.
+            </p>
+        </div>
+
+        <div class="why-us-card">
+            <div class="why-number">05</div>
+            <h3>Modern Learning Resources</h3>
+            <p>
+                Students benefit from carefully designed study materials,
+                digital resources, and engaging learning activities.
+            </p>
+        </div>
+
+        <div class="why-us-card">
+            <div class="why-number">06</div>
+            <h3>Parent Engagement</h3>
+            <p>
+                We believe in strong partnerships with parents through regular
+                communication, progress updates, and academic guidance.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
        <!-- Tuition Courses Section -->
       <section class="tuition-section" id="courses">
         <h2>Short Courses</h2>
@@ -1509,8 +1640,9 @@ body{
     <p>Learn Mandarin from basics to fluent conversation. Focus on speaking, listening, and real-life communication.</p>
 
     <!-- BUTTON ADDED -->
-   <button class="course-btn">
-          Free Demo
+    <button class="course-btn"
+      onclick="window.location.href='Student Registration form.html'">
+      Free Demo
     </button>
   </div>
 </article>
@@ -1523,7 +1655,8 @@ body{
     <p>Step-by-step Arabic reading, writing, and speaking. Perfect for Modern Standard Arabic learners.</p>
 
     <!-- BUTTON ADDED -->
-     <button class="course-btn">
+    <button class="course-btn"
+      onclick="window.location.href='Student Registration form.html'">
     Free Demo
     </button>
   </div>
@@ -1537,7 +1670,8 @@ body{
     <p>Grammar, vocabulary, and conversation practice for study, work, travel, and exams</p>
 
     <!-- BUTTON ADDED -->
-    <button class="course-btn">
+    <button class="course-btn"
+      onclick="window.location.href='Student Registration form.html'">
       Free Demo
     </button>
   </div>
@@ -1621,131 +1755,79 @@ body{
 
 </section>
 <script>
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ==========================
-       MOBILE MENU
-    ========================== */
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
+  // Mobile Menu
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
 
-    if (menuBtn && mobileMenu) {
+  if (menuBtn && mobileMenu) {
 
-        menuBtn.addEventListener("click", () => {
-            mobileMenu.classList.toggle("hidden");
-        });
-
-        mobileMenu.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", () => {
-                mobileMenu.classList.add("hidden");
-            });
-        });
-
-    }
-
-
-    /* ==========================
-       WHY CHOOSE US ANIMATION
-    ========================== */
-
-    const whyCards = document.querySelectorAll(".why-us-card");
-
-    const whyUsObserver = new IntersectionObserver((entries) => {
-
-        entries.forEach(entry => {
-
-            const card = entry.target;
-
-            if (entry.isIntersecting) {
-
-                const index = [...whyCards].indexOf(card);
-
-                setTimeout(() => {
-                    card.classList.add("in-view");
-                }, index * 120);
-
-            } else {
-
-                card.classList.remove("in-view");
-
-            }
-
-        });
-
-    }, {
-        threshold: 0.15
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
     });
 
-    whyCards.forEach(card => {
-        whyUsObserver.observe(card);
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+  }
+
+  // Scroll Animations
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if (!entry.isIntersecting) return;
+
+      const element = entry.target;
+      const animation = element.dataset.animate;
+
+      if (animation === "left") {
+        element.classList.add("show-left");
+      } else if (animation === "right") {
+        element.classList.add("show-right");
+      } else {
+        element.classList.add("show-fade-up");
+      }
+
+      observer.unobserve(element);
+
     });
 
+  }, {
+    threshold: 0.15
+  });
 
-    /* ==========================
-       GENERAL SCROLL ANIMATIONS
-    ========================== */
+  document.querySelectorAll(".fade-up").forEach(item => {
+    observer.observe(item);
+  });
 
-    const animationObserver = new IntersectionObserver((entries, observer) => {
-
-        entries.forEach(entry => {
-
-            if (!entry.isIntersecting) return;
-
-            const element = entry.target;
-            const animation = element.dataset.animate;
-
-            if (animation === "left") {
-
-                element.classList.add("show-left");
-
-            } else if (animation === "right") {
-
-                element.classList.add("show-right");
-
-            } else {
-
-                element.classList.add("show-fade-up");
-
-            }
-
-            observer.unobserve(element);
-
-        });
-
-    }, {
-        threshold: 0.15
-    });
-
-
-    // Tuition Cards
-    document.querySelectorAll(".fade-up").forEach(item => {
-        animationObserver.observe(item);
-    });
-
-    // Pricing Cards
-    document.querySelectorAll(".card").forEach(card => {
-        animationObserver.observe(card);
-    });
+  document.querySelectorAll(".card").forEach(card => {
+    observer.observe(card);
+  });
 
 });
-
-
-/* ==========================
-   PRICING BUTTON
-========================== */
-
+ 
+// Pricing Buttons
 function subscribe(planName) {
 
-    localStorage.setItem("selectedPlan", planName);
+  localStorage.setItem("selectedPlan", planName);
 
-    window.location.href = "Student Registration form.html";
-
+  window.location.href = "Student Registration form.html";
 }
-
-
-});
+fetch("https://cognitive-learning-backend.vercel.app/api/test")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+    })
+    .catch(error => {
+        console.error("Connection Error:", error);
+    });
 </script>
-
+  
 
 </body>
 </html>
