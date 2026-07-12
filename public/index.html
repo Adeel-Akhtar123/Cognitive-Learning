@@ -1746,83 +1746,59 @@ footer{
 }
 
 }
+/* Small Phones */
+@media (max-width: 480px){
 
+  .hero h1{
+    font-size:1.7rem;
+  }
 
-/* ==========================================
-   EXTRA SMALL DEVICES
-========================================== */
-
-@media (max-width:480px){
-
-section{
-    padding:50px 12px;
-}
-
-.hero h1{
-    font-size:26px;
-}
-
-.hero p{
+  .hero p{
     font-size:14px;
-}
+  }
 
-.hero-buttons button{
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2,
+ 
+  .article-content h2{
+    font-size:28px;
+  }
+
+  .about-features a{
+    width:100%;
+    text-align:center;
+  }
+
+  .logo-img{
+    height:50px;
+  }
+
+  .logo-text{
+    font-size:11px;
+  }
+}
+@media (max-width: 576px) {
+
+  .hero-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    width:100%;
+  }
+
+  .hero-buttons button{
+    flex:1;
+    max-width:170px;
     font-size:14px;
-    padding:12px;
+    padding:12px 10px;
+  }
 }
 
-.article-content p,
-.mission-content p,
-.vision-content p,
-.why-us-card p{
-    font-size:14px;
-}
-
-.article-content h2,
-.tuition-section h2,
-.pricing-section h2,
-.mission-content h2,
-.vision-content h2,
-.why-us-header h2,
-.timetable-section h2{
-    font-size:24px;
-}
-
-.card{
-    padding:25px 18px;
-}
-
-.card h3{
-    font-size:22px;
-}
-
-.card button{
-    font-size:15px;
-}
-
-.tuition-card img{
-    height:200px;
-}
-
-.logo-img{
-    height:45px;
-}
-
-.logo-text{
-    font-size:10px;
-}
-
-.whatsapp-float{
-    width:55px;
-    height:55px;
-}
-
-.whatsapp-float svg{
-    width:25px;
-    height:25px;
-}
-
-}
 </style>
 
 </head>
