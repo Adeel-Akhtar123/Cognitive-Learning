@@ -647,7 +647,7 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
 
 
 /* =========================
-   WHY CHOOSE US
+   WHY CHOOSE US SECTION
 ========================= */
 
 .why-us-section{
@@ -661,13 +661,11 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     margin:0 auto 70px;
 }
 
-
-
 .why-us-header h2{
     font-size:42px;
     color:#007bff;
-    margin-bottom:20px;
     font-weight:700;
+    margin-bottom:20px;
 }
 
 .why-us-header p{
@@ -684,14 +682,32 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     gap:30px;
 }
 
+/* =========================
+   CARD
+========================= */
+
 .why-us-card{
     position:relative;
     background:#fff;
     padding:35px;
     border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-    transition:all .35s ease;
     overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease,
+        opacity .8s ease;
+
+    /* Initial animation state */
+    opacity:0;
+    transform:translateY(60px);
+}
+
+.why-us-card.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 .why-us-card::before{
@@ -699,28 +715,28 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     position:absolute;
     top:0;
     left:0;
-    width:5px;
+    width:6px;
     height:100%;
     background:#007bff;
 }
 
 .why-us-card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+    transform:translateY(-12px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
 
 .why-number{
     font-size:58px;
     font-weight:900;
     line-height:1;
-    margin-bottom:18px;
+    margin-bottom:20px;
 
     background:linear-gradient(135deg,#007bff,#00c6ff);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     background-clip:text;
 }
-  
+
 .why-us-card h3{
     color:#06184b;
     font-size:22px;
@@ -733,25 +749,10 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     line-height:1.8;
     font-size:15px;
 }
-/* ==========================
-   WHY US ANIMATION
-========================== */
 
-.why-us-card{
-    opacity:0;
-    transform:translateX(80px);
-    transition:
-        transform .8s ease,
-        opacity .8s ease,
-        box-shadow .35s ease;
-}
-
-.why-us-card.show{
-    opacity:1;
-    transform:translateX(0);
-}
-
-/* Delay for each card */
+/* =========================
+   STAGGER DELAYS
+========================= */
 
 .why-us-card:nth-child(1){
     transition-delay:.1s;
@@ -775,6 +776,59 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
 
 .why-us-card:nth-child(6){
     transition-delay:.85s;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+    .why-us-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .why-us-header h2{
+        font-size:36px;
+    }
+}
+
+@media(max-width:768px){
+
+    .why-us-grid{
+        grid-template-columns:1fr;
+    }
+
+    .why-us-card{
+        padding:30px;
+    }
+
+    .why-number{
+        font-size:48px;
+    }
+
+    .why-us-header h2{
+        font-size:32px;
+    }
+}
+
+@media(max-width:480px){
+
+    .why-us-header h2{
+        font-size:28px;
+    }
+
+    .why-us-header p{
+        font-size:16px;
+    }
+
+    .why-us-card{
+        padding:25px;
+    }
+
+    .why-number{
+        font-size:42px;
+    }
 }
 /* ==========================================
    COMPLETE RESPONSIVE FIX
@@ -1648,6 +1702,33 @@ fetch("https://cognitive-learning-backend.vercel.app/api/test")
     .catch(error => {
         console.error("Connection Error:", error);
     });
+  /* =========================
+   WHY CHOOSE US ANIMATION
+========================= */
+
+const whyCards = document.querySelectorAll(".why-us-card");
+
+const whyObserver = new IntersectionObserver((entries, observer) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+            observer.unobserve(entry.target);
+
+        }
+
+    });
+
+},{
+    threshold:0.2
+});
+
+whyCards.forEach(card => {
+    whyObserver.observe(card);
+});
 </script>
   
 
