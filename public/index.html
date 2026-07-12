@@ -74,21 +74,54 @@ nav a:active {
 /* ========================
    HERO SECTION
 ======================== */
-.hero {
-  min-height: calc(100vh - 70px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
+.hero{
+    position:relative;
+    min-height:calc(100vh - 70px);
 
-  background:
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-    url("Image/6.gif") center/cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+    color:#fff;
+    text-align:center;
 }
 
+.hero-video{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+    z-index:-2;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
+}
+
+.hero-content{
+    position:relative;
+    max-width:900px;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:clamp(2rem,5vw,3.5rem);
+    font-weight:700;
+}
+
+.hero p{
+    margin:20px 0;
+    font-size:clamp(1rem,2vw,1.3rem);
+    line-height:1.7;
+}
 .hero h1 {
   font-size: clamp(1.5rem, 4vw, 3rem);
 }
@@ -1344,19 +1377,36 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
 <div class="main-content-area main-content" id="main">
 
   <!-- HERO -->
-  <section class="hero" id="home">
-    <h1>Shaping Brilliant Minds for a Smarter Tomorrow</h1>
-    <p>Personalized classes in Physics, Chemistry, Maths, Computer Science, Urdu and Online Classes for Other Subjects for every student.</p>
-   <div class="hero-buttons">
-<button onclick="window.location.href='Student Registration form.html'">
-  Sign-up as a Learner
-</button>
-<button class="teacher-btn" onclick="window.location.href='Teacher Registration.html'">
- Sign-up as a Teacher
-</button>
-</div>
+<section class="hero" id="home">
 
-  </section>
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="Image/your-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>Shaping Brilliant Minds for a Smarter Tomorrow</h1>
+
+        <p>
+            Personalized classes in Physics, Chemistry, Maths, Computer Science,
+            Urdu and Online Classes for Other Subjects for every student.
+        </p>
+
+        <div class="hero-buttons">
+            <button onclick="window.location.href='Student Registration form.html'">
+                Sign-up as a Learner
+            </button>
+
+            <button class="teacher-btn"
+                onclick="window.location.href='Teacher Registration.html'">
+                Sign-up as a Teacher
+            </button>
+        </div>
+    </div>
+
+</section>
        <!-- UPDATED ABOUT SECTION -->
     <!-- ABOUT SECTION -->
 <section class="article-section" id="about">
