@@ -733,7 +733,49 @@ footer { background: #003366; color: #fff; text-align: center; padding: 20px; ma
     line-height:1.8;
     font-size:15px;
 }
+/* ==========================
+   WHY US ANIMATION
+========================== */
 
+.why-us-card{
+    opacity:0;
+    transform:translateX(80px);
+    transition:
+        transform .8s ease,
+        opacity .8s ease,
+        box-shadow .35s ease;
+}
+
+.why-us-card.show{
+    opacity:1;
+    transform:translateX(0);
+}
+
+/* Delay for each card */
+
+.why-us-card:nth-child(1){
+    transition-delay:.1s;
+}
+
+.why-us-card:nth-child(2){
+    transition-delay:.25s;
+}
+
+.why-us-card:nth-child(3){
+    transition-delay:.4s;
+}
+
+.why-us-card:nth-child(4){
+    transition-delay:.55s;
+}
+
+.why-us-card:nth-child(5){
+    transition-delay:.7s;
+}
+
+.why-us-card:nth-child(6){
+    transition-delay:.85s;
+}
 /* ==========================================
    COMPLETE RESPONSIVE FIX
 ========================================== */
