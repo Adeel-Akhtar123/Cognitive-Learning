@@ -8,6 +8,1141 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 
+:root {
+  --nav-height: 70px;
+  --container-width: 1100px;
+}
+
+/* Global container */
+.container {
+  max-width: var(--container-width);
+  margin: auto;
+  padding: 0 20px;
+}
+ 
+
+
+html {
+  scroll-padding-top: 70px;
+  scroll-behavior: smooth;
+}
+
+section {
+  padding: 80px 0;
+}
+
+
+body {
+  overflow-x: hidden;
+  color: #212529;
+   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+
+
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* NAV LINKS */
+nav a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* HOVER EFFECT */
+nav a:hover {
+  background: rgba(0, 123, 255, 0.12);
+  color: #007bff;
+  transform: translateY(-1px);
+}
+
+/* ACTIVE LOOK (optional) */
+nav a:active {
+  transform: scale(0.97);
+}
+.hero{
+    position:relative;
+    min-height:calc(100vh - 70px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+    color:#fff;
+    text-align:center;
+}
+
+.hero-video{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+    z-index:-2;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
+}
+
+.hero-content{
+    position:relative;
+    max-width:900px;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:clamp(2rem,5vw,3.5rem);
+    font-weight:700;
+}
+
+.hero p{
+    margin:20px 0;
+    font-size:clamp(1rem,2vw,1.3rem);
+    line-height:1.7;
+}
+  .hero h1 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+.hero p {
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  margin: 15px 0;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-buttons button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Join Now Button */
+.hero-buttons button:first-child {
+  background: linear-gradient(135deg, #facc15, #eab308);
+  color: #000;
+}
+
+.hero-buttons button:first-child:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(250,204,21,0.4);
+}
+
+/* Teacher Button */
+.teacher-btn {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+}
+
+.teacher-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(37,99,235,0.4);
+}
+/* =========================
+   TUITION SECTION
+========================= */
+
+.tuition-section {
+  background: #ffffff;
+  padding: 90px 20px;
+  text-align: center;
+}
+
+.tuition-section h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.tuition-section p.section-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+/* Cards Container */
+.tuition-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
+}
+
+/* Individual Card */
+.tuition-card {
+  background: #fff;
+  width: 340px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+/* Hover Effect */
+.tuition-card:hover {
+  transform: translateY(-12px);
+  border-color: #06184b;
+  box-shadow: 0 18px 40px rgba(6,24,75,0.18);
+}
+
+/* Course Images */
+.tuition-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.tuition-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Content Area */
+.tuition-card .content {
+  padding: 25px;
+}
+
+/* Course Title */
+.tuition-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 12px;
+}
+
+/* Description */
+.tuition-card p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* Optional Button */
+.tuition-card .course-btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background: #06184b;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tuition-card .course-btn:hover {
+  background: #007bff;
+  transform: translateY(-2px);
+}
+
+
+/* =========================
+   PRICING SECTION
+========================= */
+
+.pricing-section {
+  background: #f7f9fc;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.pricing-section h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.pricing-section .subtitle {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+/* Cards Container */
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
+}
+
+
+/* Individual Card */
+.card {
+  background: #fff;
+  width: 300px;
+  padding: 35px 25px;
+  border-radius: 18px;
+  border: 2px solid transparent;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  opacity: 0;
+  color: #111;
+  cursor: pointer;
+
+  /* NEW */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Features List */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 25px 0;
+
+  /* NEW */
+  flex-grow: 1;
+}
+
+.card ul li {
+  margin: 12px 0;
+  color: #555;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Button */
+.card button {
+  width: 100%;
+  padding: 14px;
+  background: #06184b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  /* NEW */
+  margin-top: auto;
+}
+
+.card button:hover {
+  background: #007bff;
+  transform: scale(1.03);
+}
+
+/* Hover Effect */
+.card:hover {
+  transform: translateY(-12px);
+  border-color:#ff7f50;
+  box-shadow: 0 18px 35px rgba(6,24,75,0.20);
+}
+
+/* Standard (Middle) Card */
+.card.best {
+  border: 2px solid transparent;
+}
+
+/* Middle Card Hover */
+.card.best:hover {
+  border-color: #ff7f50;
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(6,24,75,0.25);
+}
+
+/* Plan Name */
+.card h3 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 15px;
+}
+
+/* Price */
+.card .price {
+  font-size: 25px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.card .price span {
+  font-size: 16px;
+  color: #777;
+  font-weight: normal;
+}
+
+
+
+
+
+
+    /* Slide + Fade Animations */
+    @keyframes slideFadeLeft { 0% { opacity:0; transform: translateX(-50px);} 100% { opacity:1; transform: translateX(0); } }
+    @keyframes slideFadeRight { 0% { opacity:0; transform: translateX(50px);} 100% { opacity:1; transform: translateX(0); } }
+    @keyframes slideFadeUp { 0% { opacity:0; transform: translateY(50px);} 100% { opacity:1; transform: translateY(0); } }
+
+    .show-left { animation: slideFadeLeft 0.8s forwards; }
+    .show-right { animation: slideFadeRight 0.8s forwards; }
+    .show-fade-up { animation: slideFadeUp 0.8s forwards; }
+
+    /* General fade-up placeholder */
+    .fade-up { opacity:0; }
+
+    @media (max-width: 900px) { .pricing-cards { flex-direction: column; align-items: center; } }
+    @media (max-width: 768px) {
+
+    }
+.contact-box {
+  background:#06184b;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin: auto;
+  text-align: left;
+  justify-content: space-between;
+}
+
+.contact-box h3 {
+  color:#fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.contact-box p {
+  margin: 8px 0;
+  color:#fff;
+}
+
+/* Footer */
+footer { background: #003366; color: #fff; text-align: center; padding: 20px; margin-top: 20px;
+  
+} 
+
+/* Responsive */
+
+
+ .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.logo-img {
+  height:80px;
+  width: auto;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size:14px;
+  line-height: 1.2;
+  color:#000;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+}
+  .contact-section {
+  background: #06184b;
+  color: #fff;
+  padding: 80px 20px;
+}
+@media (max-width: 768px) {
+  .grid {
+    text-align: center;
+  }
+}
+#pricing {
+  padding-bottom: 100px;
+}
+
+#contact {
+  margin-top: 200px;
+}
+.social-icons a{
+ margin-right:12px;
+ font-size:24px;
+ transition:transform .3s;
+}
+.social-icons a:hover{transform:scale(1.2);}
+/* =========================
+   ABOUT SECTION
+========================= */
+
+.article-section {
+  padding: 80px 20px;
+  background: #f8fbff;
+}
+
+.article-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(320px, 450px) 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.article-image {
+  width: 100%;
+}
+
+.article-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+.article-image img:hover {
+  transform: scale(1.02);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.article-content {
+  width: 100%;
+}
+
+.article-content h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.article-content p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #555;
+  margin-bottom: 18px;
+  text-align: justify;
+}
+
+/* =========================
+   FEATURE BUTTONS
+========================= */
+
+.about-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 25px;
+  justify-content: flex-start;
+}
+
+.about-features a {
+  text-decoration: none;
+  background: #e8f2ff;
+  color: #06184b;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.about-features a:hover {
+  background: #007bff;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.delay {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+    /* ==========================
+   MISSION SECTION
+========================== */
+
+.mission-section{
+  padding:100px 20px;
+  background:#ffffff;
+}
+
+.mission-container{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+
+.mission-content h2,
+.vision-content h2,
+.methodology-container h2{
+  font-size:42px;
+  color:#06184b;
+  margin-bottom:20px;
+}
+
+.mission-content p,
+.vision-content p{
+  color:#555;
+  line-height:1.8;
+  font-size:17px;
+  margin-bottom:15px;
+}
+
+.mission-image img,
+.vision-image img{
+  width:70%;
+  border-radius:20px;
+  box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+/* ==========================
+   VISION SECTION
+========================== */
+
+.vision-section{
+  padding:100px 20px;
+  background:#f7f9fc;
+}
+
+.vision-container{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+
+
+
+/* =========================
+   WHY CHOOSE US SECTION
+========================= */
+
+.why-us-section{
+    padding:100px 20px;
+    background:#f8fbff;
+}
+
+.why-us-header{
+    text-align:center;
+    max-width:850px;
+    margin:0 auto 70px;
+}
+
+.why-us-header h2{
+    font-size:42px;
+    color:#007bff;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.why-us-header p{
+    color:#666;
+    font-size:18px;
+    line-height:1.8;
+}
+
+.why-us-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.why-us-card{
+    position:relative;
+    background:#fff;
+    padding:35px;
+    border-radius:20px;
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease,
+        opacity .8s ease;
+
+    /* Initial animation state */
+    opacity:0;
+    transform:translateY(60px);
+}
+
+.why-us-card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.why-us-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:6px;
+    height:100%;
+    background:#007bff;
+}
+
+.why-us-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.why-number{
+    font-size:58px;
+    font-weight:900;
+    line-height:1;
+    margin-bottom:20px;
+
+    background:linear-gradient(135deg,#007bff,#00c6ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+}
+
+.why-us-card h3{
+    color:#06184b;
+    font-size:22px;
+    margin-bottom:15px;
+    font-weight:700;
+}
+
+.why-us-card p{
+    color:#555;
+    line-height:1.8;
+    font-size:15px;
+}
+
+/* =========================
+   STAGGER DELAYS
+========================= */
+
+.why-us-card:nth-child(1){
+    transition-delay:.1s;
+}
+
+.why-us-card:nth-child(2){
+    transition-delay:.25s;
+}
+
+.why-us-card:nth-child(3){
+    transition-delay:.4s;
+}
+
+.why-us-card:nth-child(4){
+    transition-delay:.55s;
+}
+
+.why-us-card:nth-child(5){
+    transition-delay:.7s;
+}
+
+.why-us-card:nth-child(6){
+    transition-delay:.85s;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+    .why-us-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .why-us-header h2{
+        font-size:36px;
+    }
+}
+
+@media(max-width:768px){
+
+    .why-us-grid{
+        grid-template-columns:1fr;
+    }
+
+    .why-us-card{
+        padding:30px;
+    }
+
+    .why-number{
+        font-size:48px;
+    }
+
+    .why-us-header h2{
+        font-size:32px;
+    }
+}
+
+@media(max-width:480px){
+
+    .why-us-header h2{
+        font-size:28px;
+    }
+
+    .why-us-header p{
+        font-size:16px;
+    }
+
+    .why-us-card{
+        padding:25px;
+    }
+
+    .why-number{
+        font-size:42px;
+    }
+}
+/* ==========================================
+   COMPLETE RESPONSIVE FIX
+========================================== */
+
+/* Large Tablets */
+@media (max-width: 992px) {
+
+  section{
+    padding:70px 20px;
+  }
+
+  /* About */
+  .article-container{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+
+  .article-image img{
+    max-width:500px;
+    width:100%;
+    margin:auto;
+  }
+
+  .article-content p{
+    text-align:center;
+  }
+
+  .about-features{
+    justify-content:center;
+  }
+
+  /* Mission & Vision */
+  .mission-container,
+  .vision-container{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+
+  .mission-image{
+    order:1;
+  }
+
+  .mission-content{
+    order:2;
+  }
+
+  .vision-image{
+    order:1;
+  }
+
+  .vision-content{
+    order:2;
+  }
+
+  .mission-image img,
+  .vision-image img{
+    width:100%;
+    max-width:450px;
+    display:block;
+    margin:auto;
+  }
+
+
+  /* Why Us */
+  .why-us-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  /* Pricing */
+  .pricing-cards{
+    justify-content:center;
+  }
+
+  /* Contact */
+  #contact{
+    margin-top:80px;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 768px){
+
+  /* Header */
+  .logo-img{
+    height:80px;
+  }
+
+  .logo-text{
+    font-size:14px;
+  }
+
+  /* Hero */
+  .hero{
+    padding:30px 15px;
+  }
+
+  .hero h1{
+    font-size:2rem;
+    line-height:1.3;
+  }
+
+  .hero p{
+    font-size:1rem;
+    max-width:90%;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+    width:100%;
+    align-items:center;
+  }
+
+  .hero-buttons button{
+    width:220px;
+  }
+
+  /* About */
+  .article-content h2{
+    font-size:32px;
+  }
+
+  .article-content p{
+    font-size:15px;
+  }
+
+  /* Section Titles */
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2,
+
+
+  /* Cards */
+  .tuition-card,
+  .card{
+    width:100%;
+    max-width:400px;
+  }
+
+
+  /* Why Us */
+  .why-us-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* Contact Footer */
+  .grid{
+    text-align:center;
+  }
+
+  .social-icons{
+    justify-content:center;
+  }
+
+  /* WhatsApp */
+  .whatsapp-float{
+    width:58px;
+    height:58px;
+    right:15px;
+    bottom:15px;
+  }
+
+  .whatsapp-float svg{
+    width:30px;
+    height:30px;
+  }
+}
+
+
+/* Small Phones */
+@media (max-width: 480px){
+
+  .hero h1{
+    font-size:1.7rem;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2,
+ 
+  .article-content h2{
+    font-size:28px;
+  }
+
+  .about-features a{
+    width:100%;
+    text-align:center;
+  }
+
+  .logo-img{
+    height:80px;
+  }
+
+  .logo-text{
+    font-size:12px;
+  }
+}
+@media (max-width: 576px) {
+
+  .hero-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    width:100%;
+  }
+
+  .hero-buttons button{
+    flex:1;
+    max-width:170px;
+    font-size:14px;
+    padding:12px 10px;
+  }
+}
+/* WhatsApp Floating Button */
+    .whatsapp-float {
+        position: fixed;
+        bottom:100px;
+        right: 25px;
+        width: 65px;
+        height: 65px;
+        background: #25D366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+    }
+
+    .whatsapp-float svg {
+        width: 35px;
+        height: 35px;
+        fill: white;
+    }
+
+    /* Tooltip */
+    .tooltip {
+        position: absolute;
+        right: 80px;
+        background: #333;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+    }
+
+    .whatsapp-float:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        70% {
+            box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
 /* ==========================================
    RESPONSIVE CSS - PART 1
    Desktop | Laptop | Tablet
@@ -611,1147 +1746,1306 @@ footer{
 }
 
 }
+/* Small Phones */
+@media (max-width: 480px){
+
+  .hero h1{
+    font-size:1.7rem;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2,
+ 
+  .article-content h2{
+    font-size:28px;
+  }
+
+  .about-features a{
+    width:100%;
+    text-align:center;
+  }
+
+  .logo-img{
+    height:50px;
+  }
+
+  .logo-text{
+    font-size:11px;
+  }
+}
+@media (max-width: 576px) {
+
+  .hero-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    width:100%;
+  }
+
+  .hero-buttons button{
+    flex:1;
+    max-width:170px;
+    font-size:14px;
+    padding:12px 10px;
+  }
+}:root {
+  --nav-height: 70px;
+  --container-width: 1100px;
+}
+
+/* Global container */
+.container {
+  max-width: var(--container-width);
+  margin: auto;
+  padding: 0 20px;
+}
+ 
 
 
-/* ==========================================
-   EXTRA SMALL DEVICES
-========================================== */
+html {
+  scroll-padding-top: 70px;
+  scroll-behavior: smooth;
+}
 
-@media (max-width:480px){
+section {
+  padding: 80px 0;
+}
 
-section{
-    padding:50px 12px;
+
+body {
+  overflow-x: hidden;
+  color: #212529;
+   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+
+
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* NAV LINKS */
+nav a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* HOVER EFFECT */
+nav a:hover {
+  background: rgba(0, 123, 255, 0.12);
+  color: #007bff;
+  transform: translateY(-1px);
+}
+
+/* ACTIVE LOOK (optional) */
+nav a:active {
+  transform: scale(0.97);
+}
+.hero{
+    position:relative;
+    min-height:calc(100vh - 70px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+    color:#fff;
+    text-align:center;
+}
+
+.hero-video{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+    z-index:-2;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
+}
+
+.hero-content{
+    position:relative;
+    max-width:900px;
+    padding:20px;
 }
 
 .hero h1{
-    font-size:26px;
+    font-size:clamp(2rem,5vw,3.5rem);
+    font-weight:700;
 }
 
 .hero p{
-    font-size:14px;
+    margin:20px 0;
+    font-size:clamp(1rem,2vw,1.3rem);
+    line-height:1.7;
+}
+  .hero h1 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
 }
 
-.hero-buttons button{
-    font-size:14px;
-    padding:12px;
+.hero p {
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  margin: 15px 0;
 }
 
-.article-content p,
-.mission-content p,
-.vision-content p,
-.why-us-card p{
-    font-size:14px;
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.article-content h2,
-.tuition-section h2,
-.pricing-section h2,
-.mission-content h2,
-.vision-content h2,
-.why-us-header h2,
-.timetable-section h2{
-    font-size:24px;
+.hero-buttons button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.card{
-    padding:25px 18px;
+/* Join Now Button */
+.hero-buttons button:first-child {
+  background: linear-gradient(135deg, #facc15, #eab308);
+  color: #000;
 }
 
-.card h3{
-    font-size:22px;
+.hero-buttons button:first-child:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(250,204,21,0.4);
 }
 
-.card button{
-    font-size:15px;
+/* Teacher Button */
+.teacher-btn {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
 }
 
-.tuition-card img{
-    height:200px;
+.teacher-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(37,99,235,0.4);
+}
+/* =========================
+   TUITION SECTION
+========================= */
+
+.tuition-section {
+  background: #ffffff;
+  padding: 90px 20px;
+  text-align: center;
 }
 
-.logo-img{
-    height:45px;
+.tuition-section h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
 }
 
-.logo-text{
-    font-size:10px;
+.tuition-section p.section-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 50px;
 }
 
-.whatsapp-float{
-    width:55px;
-    height:55px;
+/* Cards Container */
+.tuition-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
 }
 
-.whatsapp-float svg{
-    width:25px;
-    height:25px;
+/* Individual Card */
+.tuition-card {
+  background: #fff;
+  width: 340px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  cursor: pointer;
 }
 
-}
-/*==================================================
-  COGNITIVE LEARNING
-  CLEAN CSS - PART 2
-  About • Tuition • Pricing • Contact • Footer
-===================================================*/
-
-
-/*==================================================
-  ABOUT SECTION
-===================================================*/
-
-.article-section{
-    padding:90px 20px;
-    background:#f8fbff;
+/* Hover Effect */
+.tuition-card:hover {
+  transform: translateY(-12px);
+  border-color: #06184b;
+  box-shadow: 0 18px 40px rgba(6,24,75,0.18);
 }
 
-.article-container{
-    max-width:1100px;
-    margin:auto;
-
-    display:grid;
-    grid-template-columns:420px 1fr;
-    gap:60px;
-
-    align-items:center;
+/* Course Images */
+.tuition-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-.article-image img{
-
-    width:100%;
-    border-radius:20px;
-
-    object-fit:cover;
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,.12);
-
-    transition:.35s;
+.tuition-card:hover img {
+  transform: scale(1.05);
 }
 
-.article-image img:hover{
-
-    transform:scale(1.03);
+/* Content Area */
+.tuition-card .content {
+  padding: 25px;
 }
 
-.article-content h2{
-
-    font-size:42px;
-    color:#007bff;
-
-    margin-bottom:20px;
+/* Course Title */
+.tuition-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 12px;
 }
 
-.article-content p{
-
-    font-size:16px;
-    color:#555;
-
-    line-height:1.9;
-
-    margin-bottom:18px;
-
-    text-align:justify;
+/* Description */
+.tuition-card p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 20px;
 }
 
-/*==================================================
-  ABOUT BUTTONS
-===================================================*/
-
-.about-features{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:15px;
-
-    margin-top:25px;
+/* Optional Button */
+.tuition-card .course-btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background: #06184b;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.about-features a{
-
-    padding:12px 18px;
-
-    border-radius:10px;
-
-    background:#e8f2ff;
-
-    color:#06184b;
-
-    font-size:14px;
-
-    font-weight:600;
-
-    transition:.3s;
-}
-
-.about-features a:hover{
-
-    background:#007bff;
-
-    color:#fff;
-
-    transform:translateY(-3px);
+.tuition-card .course-btn:hover {
+  background: #007bff;
+  transform: translateY(-2px);
 }
 
 
-/*==================================================
-  TUITION SECTION
-===================================================*/
+/* =========================
+   PRICING SECTION
+========================= */
 
-.tuition-section{
-
-    padding:90px 20px;
-
-    background:#fff;
-
-    text-align:center;
+.pricing-section {
+  background: #f7f9fc;
+  padding: 80px 20px;
+  text-align: center;
 }
 
-.tuition-section h2{
-
-    font-size:42px;
-
-    color:#06184b;
-
-    margin-bottom:15px;
+.pricing-section h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
 }
 
-.section-subtitle{
-
-    font-size:18px;
-
-    color:#666;
-
-    margin-bottom:55px;
+.pricing-section .subtitle {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 50px;
 }
 
-.tuition-cards{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(320px,1fr));
-
-    gap:35px;
-}
-
-.tuition-card{
-
-    background:#fff;
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    box-shadow:
-    0 10px 25px rgba(0,0,0,.08);
-
-    transition:.35s;
-}
-
-.tuition-card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:
-    0 18px 40px rgba(0,0,0,.18);
-}
-
-.tuition-card img{
-
-    width:100%;
-
-    height:280px;
-
-    object-fit:cover;
-
-    transition:.4s;
-}
-
-.tuition-card:hover img{
-
-    transform:scale(1.05);
-}
-
-.tuition-card .content{
-
-    padding:25px;
-}
-
-.tuition-card h3{
-
-    font-size:24px;
-
-    color:#06184b;
-
-    margin-bottom:15px;
-}
-
-.tuition-card p{
-
-    color:#555;
-
-    line-height:1.8;
-
-    margin-bottom:20px;
-}
-
-.course-btn{
-
-    display:inline-block;
-
-    padding:12px 24px;
-
-    border-radius:8px;
-
-    background:#06184b;
-
-    color:#fff;
-
-    transition:.3s;
-}
-
-.course-btn:hover{
-
-    background:#007bff;
+/* Cards Container */
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
 }
 
 
-/*==================================================
-  PRICING SECTION
-===================================================*/
+/* Individual Card */
+.card {
+  background: #fff;
+  width: 300px;
+  padding: 35px 25px;
+  border-radius: 18px;
+  border: 2px solid transparent;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  opacity: 0;
+  color: #111;
+  cursor: pointer;
 
-.pricing-section{
-
-    background:#f7f9fc;
-
-    padding:90px 20px;
-
-    text-align:center;
+  /* NEW */
+  display: flex;
+  flex-direction: column;
 }
 
-.pricing-section h2{
+/* Features List */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 25px 0;
 
-    font-size:42px;
-
-    color:#06184b;
-
-    margin-bottom:15px;
+  /* NEW */
+  flex-grow: 1;
 }
 
-.pricing-section .subtitle{
-
-    font-size:18px;
-
-    color:#666;
-
-    margin-bottom:55px;
+.card ul li {
+  margin: 12px 0;
+  color: #555;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
-.pricing-cards{
+/* Button */
+.card button {
+  width: 100%;
+  padding: 14px;
+  background: #06184b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(300px,1fr));
-
-    gap:35px;
+  /* NEW */
+  margin-top: auto;
 }
 
-.card{
-
-    display:flex;
-
-    flex-direction:column;
-
-    padding:35px 30px;
-
-    background:#fff;
-
-    border-radius:18px;
-
-    box-shadow:
-    0 8px 20px rgba(0,0,0,.08);
-
-    transition:.35s;
-
-    opacity:0;
+.card button:hover {
+  background: #007bff;
+  transform: scale(1.03);
 }
 
-.card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:
-    0 18px 35px rgba(6,24,75,.18);
+/* Hover Effect */
+.card:hover {
+  transform: translateY(-12px);
+  border-color:#ff7f50;
+  box-shadow: 0 18px 35px rgba(6,24,75,0.20);
 }
 
-.card.best{
-
-    border:2px solid #ff7f50;
+/* Standard (Middle) Card */
+.card.best {
+  border: 2px solid transparent;
 }
 
-.card h3{
-
-    font-size:30px;
-
-    color:#06184b;
-
-    margin-bottom:15px;
+/* Middle Card Hover */
+.card.best:hover {
+  border-color: #ff7f50;
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(6,24,75,0.25);
 }
 
-.price{
-
-    font-size:28px;
-
-    color:#007bff;
-
-    font-weight:bold;
-
-    margin-bottom:20px;
+/* Plan Name */
+.card h3 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #06184b;
+  margin-bottom: 15px;
 }
 
-.price span{
-
-    font-size:16px;
-
-    color:#777;
-
-    font-weight:400;
+/* Price */
+.card .price {
+  font-size: 25px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
 }
 
-.card ul{
-
-    list-style:none;
-
-    margin:25px 0;
-
-    flex:1;
-}
-
-.card li{
-
-    margin:12px 0;
-
-    color:#555;
-
-    line-height:1.8;
-}
-
-.card button{
-
-    margin-top:auto;
-
-    padding:14px;
-
-    border-radius:10px;
-
-    background:#06184b;
-
-    color:#fff;
-
-    font-weight:600;
-
-    transition:.3s;
-}
-
-.card button:hover{
-
-    background:#007bff;
+.card .price span {
+  font-size: 16px;
+  color: #777;
+  font-weight: normal;
 }
 
 
-/*==================================================
-  CONTACT SECTION
-===================================================*/
 
-.contact-section{
 
-    background:#06184b;
 
-    color:#fff;
 
-    padding:80px 20px;
+    /* Slide + Fade Animations */
+    @keyframes slideFadeLeft { 0% { opacity:0; transform: translateX(-50px);} 100% { opacity:1; transform: translateX(0); } }
+    @keyframes slideFadeRight { 0% { opacity:0; transform: translateX(50px);} 100% { opacity:1; transform: translateX(0); } }
+    @keyframes slideFadeUp { 0% { opacity:0; transform: translateY(50px);} 100% { opacity:1; transform: translateY(0); } }
+
+    .show-left { animation: slideFadeLeft 0.8s forwards; }
+    .show-right { animation: slideFadeRight 0.8s forwards; }
+    .show-fade-up { animation: slideFadeUp 0.8s forwards; }
+
+    /* General fade-up placeholder */
+    .fade-up { opacity:0; }
+
+    @media (max-width: 900px) { .pricing-cards { flex-direction: column; align-items: center; } }
+    @media (max-width: 768px) {
+
+    }
+.contact-box {
+  background:#06184b;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin: auto;
+  text-align: left;
+  justify-content: space-between;
 }
 
-.contact-box{
-
-    max-width:420px;
-
-    margin:auto;
-
-    padding:35px;
-
-    border-radius:15px;
-
-    background:#06184b;
-
-    box-shadow:
-    0 12px 28px rgba(0,0,0,.18);
+.contact-box h3 {
+  color:#fff;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-.contact-box h3{
-
-    text-align:center;
-
-    margin-bottom:18px;
-
-    color:#fff;
+.contact-box p {
+  margin: 8px 0;
+  color:#fff;
 }
 
-.contact-box p{
+/* Footer */
+footer { background: #003366; color: #fff; text-align: center; padding: 20px; margin-top: 20px;
+  
+} 
 
-    margin:10px 0;
+/* Responsive */
 
-    color:#fff;
 
-    line-height:1.8;
+ .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
 }
 
-#pricing{
-
-    padding-bottom:100px;
+.logo-img {
+  height:80px;
+  width: auto;
 }
 
-#contact{
-
-    margin-top:80px;
+.logo-text {
+  font-weight: bold;
+  font-size:14px;
+  line-height: 1.2;
+  color:#000;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+}
+  .contact-section {
+  background: #06184b;
+  color: #fff;
+  padding: 80px 20px;
+}
+@media (max-width: 768px) {
+  .grid {
+    text-align: center;
+  }
+}
+#pricing {
+  padding-bottom: 100px;
 }
 
-
-/*==================================================
-  SOCIAL ICONS
-===================================================*/
-
-.social-icons{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
+#contact {
+  margin-top: 200px;
 }
-
 .social-icons a{
+ margin-right:12px;
+ font-size:24px;
+ transition:transform .3s;
+}
+.social-icons a:hover{transform:scale(1.2);}
+/* =========================
+   ABOUT SECTION
+========================= */
 
-    font-size:24px;
-
-    color:#fff;
-
-    transition:.3s;
+.article-section {
+  padding: 80px 20px;
+  background: #f8fbff;
 }
 
-.social-icons a:hover{
+.article-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(320px, 450px) 1fr;
+  gap: 60px;
+  align-items: center;
+}
 
-    transform:scale(1.15);
+/* =========================
+   IMAGE
+========================= */
 
-    color:#ffd54f;
+.article-image {
+  width: 100%;
+}
+
+.article-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+.article-image img:hover {
+  transform: scale(1.02);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.article-content {
+  width: 100%;
+}
+
+.article-content h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.article-content p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #555;
+  margin-bottom: 18px;
+  text-align: justify;
+}
+
+/* =========================
+   FEATURE BUTTONS
+========================= */
+
+.about-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 25px;
+  justify-content: flex-start;
+}
+
+.about-features a {
+  text-decoration: none;
+  background: #e8f2ff;
+  color: #06184b;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.about-features a:hover {
+  background: #007bff;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.delay {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
-/*==================================================
-  FOOTER
-===================================================*/
 
-footer{
-
-    background:#003366;
-
-    color:#fff;
-
-    text-align:center;
-
-    padding:20px;
-
-    margin-top:0;
-}
-
-
-/*==================================================
-  FADE ANIMATION
-===================================================*/
-
-.fade-in-up{
-
-    opacity:0;
-
-    transform:translateY(40px);
-
-    animation:fadeInUp .8s forwards;
-}
-
-.delay{
-
-    animation-delay:.2s;
-}
-
-@keyframes fadeInUp{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(40px);
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-    }
-}
-/*==================================================
-  COGNITIVE LEARNING
-  CLEAN CSS - PART 3
-  Mission • Vision • Why Choose Us
-  WhatsApp • Animations
-===================================================*/
-
-
-/*==================================================
-  MISSION SECTION
-===================================================*/
+    /* ==========================
+   MISSION SECTION
+========================== */
 
 .mission-section{
-    padding:100px 20px;
-    background:#ffffff;
+  padding:100px 20px;
+  background:#ffffff;
 }
 
 .mission-container{
-
-    max-width:1200px;
-    margin:auto;
-
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:60px;
-    align-items:center;
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
 }
 
-.mission-content h2{
-
-    font-size:42px;
-    color:#06184b;
-    margin-bottom:20px;
+.mission-content h2,
+.vision-content h2,
+.methodology-container h2{
+  font-size:42px;
+  color:#06184b;
+  margin-bottom:20px;
 }
 
-.mission-content p{
-
-    color:#555;
-    line-height:1.9;
-    font-size:16px;
-    margin-bottom:18px;
+.mission-content p,
+.vision-content p{
+  color:#555;
+  line-height:1.8;
+  font-size:17px;
+  margin-bottom:15px;
 }
 
-.mission-image{
-
-    display:flex;
-    justify-content:center;
+.mission-image img,
+.vision-image img{
+  width:70%;
+  border-radius:20px;
+  box-shadow:0 15px 35px rgba(0,0,0,.12);
 }
 
-.mission-image img{
-
-    width:100%;
-    max-width:500px;
-
-    border-radius:20px;
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,.12);
-
-    transition:.35s ease;
-}
-
-.mission-image img:hover{
-
-    transform:scale(1.03);
-}
-
-
-/*==================================================
-  VISION SECTION
-===================================================*/
+/* ==========================
+   VISION SECTION
+========================== */
 
 .vision-section{
-
-    padding:100px 20px;
-
-    background:#f7f9fc;
+  padding:100px 20px;
+  background:#f7f9fc;
 }
 
 .vision-container{
-
-    max-width:1200px;
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:60px;
-
-    align-items:center;
-}
-
-.vision-content h2{
-
-    font-size:42px;
-
-    color:#06184b;
-
-    margin-bottom:20px;
-}
-
-.vision-content p{
-
-    color:#555;
-
-    font-size:16px;
-
-    line-height:1.9;
-
-    margin-bottom:18px;
-}
-
-.vision-image{
-
-    display:flex;
-
-    justify-content:center;
-}
-
-.vision-image img{
-
-    width:100%;
-
-    max-width:500px;
-
-    border-radius:20px;
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,.12);
-
-    transition:.35s ease;
-}
-
-.vision-image img:hover{
-
-    transform:scale(1.03);
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
 }
 
 
-/*==================================================
-  WHY CHOOSE US
-===================================================*/
+
+/* =========================
+   WHY CHOOSE US SECTION
+========================= */
 
 .why-us-section{
-
     padding:100px 20px;
-
     background:#f8fbff;
 }
 
 .why-us-header{
-
-    max-width:800px;
-
-    margin:auto;
-
     text-align:center;
-
-    margin-bottom:70px;
+    max-width:850px;
+    margin:0 auto 70px;
 }
 
 .why-us-header h2{
-
     font-size:42px;
-
     color:#007bff;
-
-    margin-bottom:18px;
+    font-weight:700;
+    margin-bottom:20px;
 }
 
 .why-us-header p{
-
     color:#666;
-
+    font-size:18px;
     line-height:1.8;
-
-    font-size:17px;
 }
 
 .why-us-grid{
-
     max-width:1200px;
-
     margin:auto;
-
     display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:30px;
 }
 
-
-/*==================================================
-  WHY CARD
-===================================================*/
+/* =========================
+   CARD
+========================= */
 
 .why-us-card{
-
     position:relative;
-
     background:#fff;
-
     padding:35px;
-
     border-radius:20px;
-
     overflow:hidden;
 
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.08);
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 
     transition:
-    transform .35s,
-    box-shadow .35s;
+        transform .5s ease,
+        box-shadow .5s ease,
+        opacity .8s ease;
 
+    /* Initial animation state */
     opacity:0;
-
-    transform:translateY(50px);
+    transform:translateY(60px);
 }
 
 .why-us-card.show{
-
     opacity:1;
-
     transform:translateY(0);
 }
 
 .why-us-card::before{
-
     content:"";
-
     position:absolute;
-
-    left:0;
-
     top:0;
-
+    left:0;
     width:6px;
-
     height:100%;
-
     background:#007bff;
 }
 
 .why-us-card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:
-    0 18px 35px rgba(0,0,0,.15);
+    transform:translateY(-12px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
 
 .why-number{
-
     font-size:58px;
-
     font-weight:900;
-
+    line-height:1;
     margin-bottom:20px;
 
-    background:
-    linear-gradient(
-    135deg,
-    #007bff,
-    #00c6ff);
-
+    background:linear-gradient(135deg,#007bff,#00c6ff);
     -webkit-background-clip:text;
-
     -webkit-text-fill-color:transparent;
-
     background-clip:text;
 }
 
 .why-us-card h3{
-
-    font-size:22px;
-
     color:#06184b;
-
+    font-size:22px;
     margin-bottom:15px;
+    font-weight:700;
 }
 
 .why-us-card p{
-
     color:#555;
-
     line-height:1.8;
-
     font-size:15px;
 }
 
+/* =========================
+   STAGGER DELAYS
+========================= */
 
-/*==================================================
-  CARD DELAYS
-===================================================*/
+.why-us-card:nth-child(1){
+    transition-delay:.1s;
+}
 
-.why-us-card:nth-child(1){transition-delay:.10s;}
-.why-us-card:nth-child(2){transition-delay:.20s;}
-.why-us-card:nth-child(3){transition-delay:.30s;}
-.why-us-card:nth-child(4){transition-delay:.40s;}
-.why-us-card:nth-child(5){transition-delay:.50s;}
-.why-us-card:nth-child(6){transition-delay:.60s;}
+.why-us-card:nth-child(2){
+    transition-delay:.25s;
+}
 
+.why-us-card:nth-child(3){
+    transition-delay:.4s;
+}
 
-/*==================================================
-  WHATSAPP FLOAT BUTTON
-===================================================*/
+.why-us-card:nth-child(4){
+    transition-delay:.55s;
+}
 
-.whatsapp-float{
+.why-us-card:nth-child(5){
+    transition-delay:.7s;
+}
 
-    position:fixed;
+.why-us-card:nth-child(6){
+    transition-delay:.85s;
+}
 
-    right:25px;
+/* =========================
+   RESPONSIVE
+========================= */
 
-    bottom:25px;
+@media(max-width:992px){
 
-    width:65px;
+    .why-us-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-    height:65px;
+    .why-us-header h2{
+        font-size:36px;
+    }
+}
 
-    border-radius:50%;
+@media(max-width:768px){
 
-    background:#25D366;
+    .why-us-grid{
+        grid-template-columns:1fr;
+    }
 
-    display:flex;
+    .why-us-card{
+        padding:30px;
+    }
 
+    .why-number{
+        font-size:48px;
+    }
+
+    .why-us-header h2{
+        font-size:32px;
+    }
+}
+
+@media(max-width:480px){
+
+    .why-us-header h2{
+        font-size:28px;
+    }
+
+    .why-us-header p{
+        font-size:16px;
+    }
+
+    .why-us-card{
+        padding:25px;
+    }
+
+    .why-number{
+        font-size:42px;
+    }
+}
+/* ==========================================
+   COMPLETE RESPONSIVE FIX
+========================================== */
+
+/* Large Tablets */
+@media (max-width: 992px) {
+
+  section{
+    padding:70px 20px;
+  }
+
+  /* About */
+  .article-container{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+
+  .article-image img{
+    max-width:500px;
+    width:100%;
+    margin:auto;
+  }
+
+  .article-content p{
+    text-align:center;
+  }
+
+  .about-features{
     justify-content:center;
+  }
 
+  /* Mission & Vision */
+  .mission-container,
+  .vision-container{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+
+  .mission-image{
+    order:1;
+  }
+
+  .mission-content{
+    order:2;
+  }
+
+  .vision-image{
+    order:1;
+  }
+
+  .vision-content{
+    order:2;
+  }
+
+  .mission-image img,
+  .vision-image img{
+    width:100%;
+    max-width:450px;
+    display:block;
+    margin:auto;
+  }
+
+
+  /* Why Us */
+  .why-us-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  /* Pricing */
+  .pricing-cards{
+    justify-content:center;
+  }
+
+  /* Contact */
+  #contact{
+    margin-top:80px;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 768px){
+
+  /* Header */
+  .logo-img{
+    height:80px;
+  }
+
+  .logo-text{
+    font-size:14px;
+  }
+
+  /* Hero */
+  .hero{
+    padding:30px 15px;
+  }
+
+  .hero h1{
+    font-size:2rem;
+    line-height:1.3;
+  }
+
+  .hero p{
+    font-size:1rem;
+    max-width:90%;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+    width:100%;
     align-items:center;
+  }
 
-    color:#fff;
+  .hero-buttons button{
+    width:220px;
+  }
 
-    z-index:999;
+  /* About */
+  .article-content h2{
+    font-size:32px;
+  }
 
-    box-shadow:
-    0 8px 20px rgba(0,0,0,.30);
+  .article-content p{
+    font-size:15px;
+  }
 
-    transition:.3s;
-
-    animation:pulse 2s infinite;
-}
-
-.whatsapp-float:hover{
-
-    transform:scale(1.1);
-}
-
-.whatsapp-float svg{
-
-    width:34px;
-
-    height:34px;
-
-    fill:#fff;
-}
+  /* Section Titles */
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2,
 
 
-/*==================================================
-  TOOLTIP
-===================================================*/
+  /* Cards */
+  .tuition-card,
+  .card{
+    width:100%;
+    max-width:400px;
+  }
 
-.tooltip{
 
-    position:absolute;
+  /* Why Us */
+  .why-us-grid{
+    grid-template-columns:1fr;
+  }
 
-    right:80px;
+  /* Contact Footer */
+  .grid{
+    text-align:center;
+  }
 
-    background:#333;
+  .social-icons{
+    justify-content:center;
+  }
 
-    color:#fff;
+  /* WhatsApp */
+  .whatsapp-float{
+    width:58px;
+    height:58px;
+    right:15px;
+    bottom:15px;
+  }
 
-    padding:8px 12px;
-
-    border-radius:6px;
-
-    white-space:nowrap;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.3s;
-}
-
-.whatsapp-float:hover .tooltip{
-
-    opacity:1;
-
-    visibility:visible;
+  .whatsapp-float svg{
+    width:30px;
+    height:30px;
+  }
 }
 
 
-/*==================================================
-  PULSE ANIMATION
-===================================================*/
+/* Small Phones */
+@media (max-width: 480px){
 
-@keyframes pulse{
+  .hero h1{
+    font-size:1.7rem;
+  }
 
-    0%{
+  .hero p{
+    font-size:14px;
+  }
 
-        box-shadow:
-        0 0 0 0 rgba(37,211,102,.6);
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2,
+ 
+  .article-content h2{
+    font-size:28px;
+  }
+
+  .about-features a{
+    width:100%;
+    text-align:center;
+  }
+
+  .logo-img{
+    height:80px;
+  }
+
+  .logo-text{
+    font-size:12px;
+  }
+}
+@media (max-width: 576px) {
+
+  .hero-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    width:100%;
+  }
+
+  .hero-buttons button{
+    flex:1;
+    max-width:170px;
+    font-size:14px;
+    padding:12px 10px;
+  }
+}
+/* WhatsApp Floating Button */
+    .whatsapp-float {
+        position: fixed;
+        bottom:100px;
+        right: 25px;
+        width: 65px;
+        height: 65px;
+        background: #25D366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
     }
 
-    70%{
-
-        box-shadow:
-        0 0 0 18px rgba(37,211,102,0);
+    .whatsapp-float:hover {
+        transform: scale(1.1);
     }
 
-    100%{
-
-        box-shadow:
-        0 0 0 0 rgba(37,211,102,0);
-    }
-}
-
-
-/*==================================================
-  SCROLL ANIMATIONS
-===================================================*/
-
-@keyframes fadeInUp{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(40px);
+    .whatsapp-float svg {
+        width: 35px;
+        height: 35px;
+        fill: white;
     }
 
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
+    /* Tooltip */
+    .tooltip {
+        position: absolute;
+        right: 80px;
+        background: #333;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
     }
-}
 
-.fade-in-up{
+    .whatsapp-float:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
 
-    opacity:0;
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        70% {
+            box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+/* ==========================================
+   RESPONSIVE CSS - PART 1
+   Desktop | Laptop | Tablet
+========================================== */
 
-    animation:
-    fadeInUp .8s forwards;
-}
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
 
-.delay{
-
-    animation-delay:.2s;
-}
-
-.show-left{
-
-    animation:
-    slideFadeLeft .8s forwards;
-}
-
-.show-right{
-
-    animation:
-    slideFadeRight .8s forwards;
-}
-
-.show-fade-up{
-
-    animation:
-    slideFadeUp .8s forwards;
-}
-/*==================================================
-  COGNITIVE LEARNING
-  CLEAN CSS - PART 4
-  COMPLETE RESPONSIVE
-===================================================*/
-
-
-/*=========================================
-  LARGE DESKTOP (1400px+)
-=========================================*/
-
-@media (min-width:1400px){
+@media (min-width: 1200px) {
 
 .container{
-    max-width:1280px;
+    max-width:1200px;
+    margin:auto;
+    padding:0 20px;
 }
 
 .hero-content{
-    max-width:900px;
+    max-width:850px;
 }
 
 .hero h1{
-    font-size:60px;
+    font-size:58px;
 }
 
 .hero p{
-    font-size:21px;
+    font-size:20px;
 }
 
-}
-
-
-/*=========================================
-  DESKTOP
-=========================================*/
-
-@media (max-width:1200px){
-
-section{
-    padding:80px 20px;
-}
-
-.container{
-    width:100%;
+.tuition-cards,
+.pricing-cards{
+    justify-content:center;
 }
 
 .article-container,
 .mission-container,
-.vision-container{
+.vision-container,
+.why-us-grid{
+    max-width:1200px;
+    margin:auto;
+}
 
-    gap:45px;
+}
+
+
+/* ==========================================
+   LAPTOP
+========================================== */
+
+@media (max-width:1199px){
+
+section{
+    padding:80px 25px;
+}
+
+.container{
+    width:100%;
+    padding:0 20px;
+}
+
+.hero-content{
+    max-width:750px;
+}
+
+.hero h1{
+    font-size:48px;
+}
+
+.hero p{
+    font-size:18px;
+}
+
+.article-container{
+    grid-template-columns:420px 1fr;
+    gap:40px;
+}
+
+.article-image img{
+    width:100%;
+}
+
+.mission-container,
+.vision-container{
+    gap:40px;
+}
+
+.mission-image img,
+.vision-image img{
+    width:100%;
 }
 
 .why-us-grid{
-
-    grid-template-columns:
-    repeat(3,1fr);
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
 }
 
-.tuition-cards{
-
-    grid-template-columns:
-    repeat(3,1fr);
+.tuition-card{
+    width:320px;
 }
 
-.pricing-cards{
+.card{
+    width:290px;
+}
 
-    grid-template-columns:
-    repeat(3,1fr);
+.logo-img{
+    height:70px;
 }
 
 }
 
 
-/*=========================================
-  TABLET
-=========================================*/
+/* ==========================================
+   TABLET
+========================================== */
 
 @media (max-width:992px){
 
@@ -1759,7 +3053,7 @@ section{
     padding:70px 20px;
 }
 
-/* Logo */
+/* Header */
 
 .logo-img{
     height:65px;
@@ -1772,474 +3066,527 @@ section{
 /* Hero */
 
 .hero{
-
     min-height:auto;
-
     padding:120px 20px 80px;
 }
 
 .hero-content{
-
     max-width:700px;
 }
 
 .hero h1{
-
     font-size:42px;
+    line-height:1.3;
 }
 
 .hero p{
-
     font-size:17px;
+    max-width:650px;
+    margin:auto;
 }
 
 /* About */
 
 .article-container{
-
+    display:grid;
     grid-template-columns:1fr;
+    gap:40px;
+    text-align:center;
+}
 
+.article-image{
+    display:flex;
+    justify-content:center;
+}
+
+.article-image img{
+    max-width:420px;
+}
+
+.article-content{
     text-align:center;
 }
 
 .article-content p{
-
     text-align:center;
 }
 
 .about-features{
-
     justify-content:center;
 }
 
 /* Mission */
 
 .mission-container{
-
+    display:grid;
     grid-template-columns:1fr;
-
+    gap:40px;
     text-align:center;
 }
 
 .mission-image{
-
     order:1;
 }
 
 .mission-content{
-
     order:2;
+}
+
+.mission-image img{
+    max-width:420px;
+    margin:auto;
 }
 
 /* Vision */
 
 .vision-container{
-
+    display:grid;
     grid-template-columns:1fr;
-
+    gap:40px;
     text-align:center;
 }
 
-.vision-image{
-
-    order:1;
+.vision-image img{
+    max-width:420px;
+    margin:auto;
 }
 
-.vision-content{
-
-    order:2;
-}
-
-/* Cards */
-
-.tuition-cards{
-
-    grid-template-columns:
-    repeat(2,1fr);
-}
-
-.pricing-cards{
-
-    grid-template-columns:
-    repeat(2,1fr);
-}
+/* Why Us */
 
 .why-us-grid{
-
-    grid-template-columns:
-    repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
 }
 
-/* Images */
+.why-us-card{
+    padding:30px;
+}
 
-.article-image img,
-.mission-image img,
-.vision-image img{
+/* Courses */
 
-    max-width:450px;
+.tuition-cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
 
-    margin:auto;
+.tuition-card{
+    width:100%;
+}
+
+/* Pricing */
+
+.pricing-cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.card{
+    width:100%;
+}
+
+/* Timetable */
+
+.timetable-wrapper{
+    overflow-x:auto;
+}
+
+.timetable{
+    min-width:900px;
 }
 
 /* Contact */
 
-.grid{
+.contact-section{
+    padding:70px 20px;
+}
 
+.contact-section .grid{
     grid-template-columns:1fr;
-
     gap:40px;
-
     text-align:center;
 }
 
 .social-icons{
-
+    display:flex;
     justify-content:center;
 }
 
+/* WhatsApp */
+
+.whatsapp-float{
+    width:60px;
+    height:60px;
+    right:20px;
+    bottom:20px;
 }
 
+.whatsapp-float svg{
+    width:30px;
+    height:30px;
+}
 
-/*=========================================
-  MOBILE
-=========================================*/
+}
+/* ==========================================
+   RESPONSIVE CSS - PART 2
+   Mobile (768px and below)
+========================================== */
 
 @media (max-width:768px){
 
-section{
+/* General */
 
+section{
     padding:60px 15px;
+}
+
+.container{
+    width:100%;
+    padding:0 15px;
 }
 
 /* Header */
 
 header{
-
     padding:0 15px;
+    height:70px;
+}
+
+.logo-container{
+    gap:8px;
 }
 
 .logo-img{
-
     height:55px;
 }
 
 .logo-text{
-
     font-size:12px;
 }
 
-/* Mobile Menu */
-
 #menuBtn{
-
     display:block;
-
-    cursor:pointer;
-
     font-size:28px;
+    cursor:pointer;
 }
 
 #mobileMenu{
-
     width:100%;
     left:0;
 }
 
 #mobileMenu a{
-
-    display:block;
-
     width:100%;
-
-    padding:14px;
-
     text-align:center;
-
+    padding:12px;
     border-bottom:1px solid #eee;
 }
 
 /* Hero */
 
 .hero{
-
-    padding:100px 20px 70px;
+    min-height:100vh;
+    padding:100px 20px 60px;
 }
 
-.hero h1{
-
-    font-size:34px;
-}
-
-.hero p{
-
-    font-size:16px;
-}
-
-.hero-buttons{
-
-    flex-direction:column;
-
+.hero-content{
     width:100%;
 }
 
-.hero-buttons button{
+.hero h1{
+    font-size:34px;
+    line-height:1.3;
+}
 
-    width:240px;
+.hero p{
+    font-size:16px;
+    line-height:1.8;
+    max-width:100%;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    align-items:center;
+}
+
+.hero-buttons button{
+    width:230px;
+    padding:14px;
+}
+
+/* Section Titles */
+
+.article-content h2,
+.tuition-section h2,
+.pricing-section h2,
+.mission-content h2,
+.vision-content h2,
+.why-us-header h2,
+.timetable-section h2{
+    font-size:32px;
 }
 
 /* About */
 
-.article-content h2,
+.article-container{
+    gap:35px;
+}
 
-.tuition-section h2,
-
-.pricing-section h2,
-
-.mission-content h2,
-
-.vision-content h2,
-
-.why-us-header h2{
-
-    font-size:32px;
+.article-image img{
+    max-width:100%;
 }
 
 .article-content p{
-
     text-align:left;
-}
-
-/* Cards */
-
-.tuition-cards,
-
-.pricing-cards,
-
-.why-us-grid{
-
-    grid-template-columns:1fr;
-}
-
-.tuition-card,
-
-.card{
-
-    max-width:420px;
-
-    margin:auto;
+    font-size:15px;
 }
 
 /* About Buttons */
 
 .about-features{
-
+    display:flex;
     flex-direction:column;
+    gap:12px;
 }
 
 .about-features a{
-
     width:100%;
+}
+
+/* Mission */
+
+.mission-container,
+.vision-container{
+    gap:35px;
+}
+
+.mission-image img,
+.vision-image img{
+    width:100%;
+}
+
+/* Why Us */
+
+.why-us-grid{
+    grid-template-columns:1fr;
+}
+
+.why-us-card{
+    padding:28px;
+}
+
+.why-number{
+    font-size:48px;
+}
+
+/* Courses */
+
+.tuition-cards{
+    display:grid;
+    grid-template-columns:1fr;
+}
+
+.tuition-card{
+    width:100%;
+    max-width:420px;
+    margin:auto;
+}
+
+.tuition-card img{
+    height:260px;
+}
+
+/* Pricing */
+
+.pricing-cards{
+    display:grid;
+    grid-template-columns:1fr;
+}
+
+.card{
+    width:100%;
+    max-width:420px;
+    margin:auto;
 }
 
 /* Contact */
 
 .contact-section{
-
     padding:60px 20px;
+}
+
+.contact-section .grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:35px;
+}
+
+.social-icons{
+    display:flex;
+    justify-content:center;
 }
 
 /* Footer */
 
 footer{
-
+    padding:18px;
     font-size:14px;
+}
+
+/* Timetable */
+
+.timetable{
+    min-width:850px;
+}
+
+.timetable th,
+.timetable td{
+    padding:10px 8px;
+    font-size:12px;
 }
 
 /* WhatsApp */
 
 .whatsapp-float{
-
     width:58px;
-
     height:58px;
-
     right:15px;
-
     bottom:15px;
 }
 
 .whatsapp-float svg{
-
     width:28px;
-
     height:28px;
 }
 
 .tooltip{
-
     display:none;
 }
 
 }
 
 
-/*=========================================
-  SMALL MOBILE
-=========================================*/
+/* ==========================================
+   SMALL MOBILE
+========================================== */
 
 @media (max-width:576px){
 
 .hero{
-
     padding:90px 15px 50px;
 }
 
 .hero h1{
-
     font-size:30px;
 }
 
 .hero p{
-
     font-size:15px;
 }
 
 .hero-buttons{
-
-    gap:12px;
+    flex-direction:column;
 }
 
 .hero-buttons button{
-
     width:100%;
-
     max-width:280px;
 }
 
 .article-content h2,
-
 .tuition-section h2,
-
 .pricing-section h2,
-
 .mission-content h2,
-
 .vision-content h2,
-
-.why-us-header h2{
-
+.why-us-header h2,
+.timetable-section h2{
     font-size:28px;
 }
 
 .logo-img{
-
     height:50px;
 }
 
 .logo-text{
-
     font-size:11px;
 }
 
 .card h3{
-
     font-size:24px;
 }
 
 .card .price{
-
     font-size:22px;
 }
 
 .why-number{
-
     font-size:42px;
 }
 
 .tuition-card img{
-
-    height:230px;
+    height:220px;
 }
 
 .contact-section{
-
     padding:50px 15px;
 }
 
 }
+/* Small Phones */
+@media (max-width: 480px){
 
+  .hero h1{
+    font-size:1.7rem;
+  }
 
-/*=========================================
-  EXTRA SMALL DEVICES
-=========================================*/
-
-@media (max-width:480px){
-
-.hero h1{
-
-    font-size:26px;
-}
-
-.hero p{
-
+  .hero p{
     font-size:14px;
-}
+  }
 
-.hero-buttons button{
+  .tuition-section h2,
+  .pricing-section h2,
+  .mission-content h2,
+  .vision-content h2,
+  .why-us-header h2,
+ 
+  .article-content h2{
+    font-size:28px;
+  }
 
+  .about-features a{
     width:100%;
+    text-align:center;
+  }
+
+  .logo-img{
+    height:50px;
+  }
+
+  .logo-text{
+    font-size:11px;
+  }
 }
+@media (max-width: 576px) {
 
-.article-content h2,
+  .hero-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    width:100%;
+  }
 
-.tuition-section h2,
-
-.pricing-section h2,
-
-.mission-content h2,
-
-.vision-content h2,
-
-.why-us-header h2{
-
-    font-size:26px;
+  .hero-buttons button{
+    flex:1;
+    max-width:170px;
+    font-size:14px;
+    padding:12px 10px;
+  }
 }
-
-.article-content p,
-
-.mission-content p,
-
-.vision-content p{
-
-    font-size:15px;
-}
-
-.logo-img{
-
-    height:45px;
-}
-
-.logo-text{
-
-    font-size:10px;
-}
-
-.whatsapp-float{
-
-    width:55px;
-
-    height:55px;
-}
-
-.whatsapp-float svg{
-
-    width:26px;
-
-    height:26px;
-}
-
-}
-
 </style>
 
 </head>
