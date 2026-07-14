@@ -2904,16 +2904,17 @@ function subscribe(planName) {
 }
 
 
-/*==============================
-  TEST API
-==============================*/
-
-fetch("/api/test")
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.message);
+// ==========================
+// BACKEND CONNECTION TEST
+// ==========================
+fetch("https://cognitive-learning-backend.vercel.app/api/test")
+    .then(function (response) {
+        return response.json();
     })
-    .catch(error => {
+    .then(function (data) {
+        console.log("Backend Connected:", data.message);
+    })
+    .catch(function (error) {
         console.error("Connection Error:", error);
     });
 </script>
