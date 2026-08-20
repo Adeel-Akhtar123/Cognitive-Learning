@@ -553,219 +553,481 @@ textarea {
   
 </div>
 <div class="container">
+ 
+<div class="form-title">Student Registration</div>
 
-<div class="container">
+<form id="registrationForm" enctype="multipart/form-data">
 
-  <div class="form-title">Student Registration</div>
-
- <form id="registrationForm" enctype="multipart/form-data">
-
-    <!-- ================= TOP RADIO SECTION ================= -->
+    <!-- =========================================================
+         TOP RADIO SECTION
+         ========================================================= -->
     <div class="top-flex">
 
-      <div class="flex-box">
-        <div class="section-title">Examination Series</div>
-       <div class="radio-group">
-  <label>
-    <input type="radio" name="examSeries" value="Nov 26">
-    Nov 26
-  </label>
+        <!-- Examination Series -->
+        <div class="flex-box">
+            <div class="section-title">Examination Series</div>
 
-  <label>
-    <input type="radio" name="examSeries" value="June 27">
-    June 27
-  </label>
-</div>
-      </div>
+            <div class="radio-group">
+                <label>
+                    <input
+                        type="radio"
+                        name="examSeries"
+                        value="Nov 26"
+                    >
+                    Nov 26
+                </label>
 
-      <div class="flex-box">
-        <div class="section-title">Candidate Type</div>
-        <div class="radio-group">
-          <label><input type="radio" name="candidate" value="regular" onclick="showSchoolField()"> Regular</label>
-          <label><input type="radio" name="candidate" value="private" onclick="showSchoolField()"> Private</label>
+                <label>
+                    <input
+                        type="radio"
+                        name="examSeries"
+                        value="June 27"
+                    >
+                    June 27
+                </label>
+            </div>
         </div>
-      </div>
 
-      <div class="flex-box">
-        <div class="section-title">Select Grade</div>
-        <div class="radio-group">
-          <label><input type="radio" name="grade" value="Cambridge IGCSE"> IGCSE</label>
-          <label><input type="radio" name="grade" value="O/Level"> O Level</label>
-          <label><input type="radio" name="grade" value="AS/Levels">AS level</label>
-          <label><input type="radio" name="grade" value="A2/Level"> A2 level</label>
+
+        <!-- Candidate Type -->
+        <div class="flex-box">
+            <div class="section-title">Candidate Type</div>
+
+            <div class="radio-group">
+                <label>
+                    <input
+                        type="radio"
+                        name="candidate"
+                        value="regular"
+                        onclick="showSchoolField()"
+                    >
+                    Regular
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="candidate"
+                        value="private"
+                        onclick="showSchoolField()"
+                    >
+                    Private
+                </label>
+            </div>
         </div>
-      </div>
+
+
+        <!-- Select Grade -->
+        <div class="flex-box">
+            <div class="section-title">Select Grade</div>
+
+            <div class="radio-group">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="grade"
+                        value="Cambridge IGCSE"
+                    >
+                    IGCSE
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="grade"
+                        value="O/Level"
+                    >
+                    O Level
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="grade"
+                        value="AS/Levels"
+                    >
+                    AS level
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="grade"
+                        value="A2/Level"
+                    >
+                    A2 level
+                </label>
+
+            </div>
+        </div>
 
     </div>
 
-    <!-- ================= SCHOOL FIELD ================= -->
-    <div class="row" id="schoolField" style="display:none;">
-      <div class="input-group">
-        <label>Name of School</label>
-       <input type="text" id="schoolName" placeholder="Enter School Name">
-      </div>
+
+    <!-- =========================================================
+         SCHOOL FIELD
+         ========================================================= -->
+    <div
+        class="row"
+        id="schoolField"
+        style="display:none;"
+    >
+
+        <div class="input-group">
+
+            <label for="schoolName">
+                Name of School
+            </label>
+
+            <input
+                type="text"
+                id="schoolName"
+                placeholder="Enter School Name"
+            >
+
+        </div>
+
     </div>
 
-    <!-- ================= SUBJECT + TEACHER + BUTTON ================= -->
+
+    <!-- =========================================================
+         SUBJECT + TEACHER + AVAILABLE TEACHERS
+         ========================================================= -->
     <div class="after-radio-row">
 
-      <div class="input-group">
-        <label>Select Subjects</label>
-        <button type="button" id="subjectBtn" class="upload-btn" onclick="toggleDropdown()">
-          Select Subjects
-        </button>
-       <div id="dropdown" style="display:none; border:1px solid #ddd; padding:8px; background:#fff;"></div>
-      </div>
+        <!-- Subjects -->
+        <div class="input-group">
+
+            <label>
+                Select Subjects
+            </label>
+
+            <button
+                type="button"
+                id="subjectBtn"
+                class="upload-btn"
+                onclick="toggleDropdown()"
+            >
+                Select Subjects
+            </button>
+
+            <div
+                id="dropdown"
+                style="
+                    display:none;
+                    border:1px solid #ddd;
+                    padding:8px;
+                    background:#fff;
+                "
+            ></div>
+
+        </div>
 
 
+        <!-- Teacher Name -->
+        <div class="input-group">
 
-      <div class="input-group">
-        <label>Teacher Name</label>
-        <input type="text" id="teacherName" readonly>
-      </div>
+            <label for="teacherName">
+                Teacher Name
+            </label>
 
-     <div class="input-group">
-  <label>&nbsp;</label>
+            <input
+                type="text"
+                id="teacherName"
+                readonly
+            >
 
-  <button
-    type="button"
-    id="teacherBtn"
-    class="select-btn"
-  >
-    Available Teachers
-  </button>
+        </div>
 
-        <div id="scheduleOutput" style="margin-top:15px;"></div>
-      </div>
+
+        <!-- Available Teachers -->
+        <div class="input-group">
+
+            <label>&nbsp;</label>
+
+            <button
+                type="button"
+                id="teacherBtn"
+                class="select-btn"
+            >
+                Available Teachers
+            </button>
+
+            <div
+                id="scheduleOutput"
+                style="margin-top:15px;"
+            ></div>
+
+        </div>
 
     </div>
 
-     <div class="student-layout">
 
-  <div class="student-left">
+    <!-- =========================================================
+         STUDENT MAIN LAYOUT
+         LEFT = UPLOADS
+         RIGHT = STUDENT INFORMATION
+         ========================================================= -->
+    <div class="student-layout">
 
-  <div class="upload-mini">
 
-    <!-- Profile Upload -->
-    <div class="upload-box-small">
-      <img id="profilePreview" />
+        <!-- =====================================================
+             LEFT SIDE
+             PROFILE + MARKSHEET UPLOAD
+             ===================================================== -->
+        <div class="student-left">
 
-      <input type="file" id="profileInput" accept="image/*" hidden>
+            <div class="upload-mini">
 
-      <button type="button" class="upload-btn-small"
-        onclick="document.getElementById('profileInput').click()">
-        Upload Picture
-      </button>
+                <!-- Profile Upload -->
+                <div class="upload-box-small">
+
+                    <img
+                        id="profilePreview"
+                        alt="Profile Preview"
+                    >
+
+                    <input
+                        type="file"
+                        id="profileInput"
+                        accept="image/*"
+                        hidden
+                    >
+
+                    <button
+                        type="button"
+                        class="upload-btn-small"
+                        onclick="document.getElementById('profileInput').click()"
+                    >
+                        Upload Picture
+                    </button>
+
+                </div>
+
+
+                <!-- Marksheet Upload -->
+                <div class="upload-box-small">
+
+                    <img
+                        id="marksheetPreview"
+                        alt="Marksheet Preview"
+                    >
+
+                    <input
+                        type="file"
+                        id="marksheetInput"
+                        accept="image/*"
+                        hidden
+                    >
+
+                    <button
+                        type="button"
+                        class="upload-btn-small"
+                        onclick="document.getElementById('marksheetInput').click()"
+                    >
+                        Previous Score Card
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             RIGHT SIDE
+             STUDENT INFORMATION
+             ===================================================== -->
+        <div class="student-right">
+
+
+            <!-- ================================================
+                 STUDENT INFORMATION
+                 ================================================ -->
+
+            <!-- Student Name + WhatsApp -->
+            <div class="row">
+
+                <div class="input-group">
+
+                    <label for="studentName">
+                        Student Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentName"
+                        name="studentName"
+                        placeholder="Full Name *"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="whatsapp">
+                        WhatsApp Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="whatsapp"
+                        name="whatsapp"
+                        placeholder="WhatsApp Number *"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Email -->
+            <div class="row">
+
+                <div class="input-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email Address *"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================
+                 PARENT INFORMATION
+                 ================================================ -->
+
+            <!-- Father/Mother Name + Contact -->
+            <div class="row">
+
+                <div class="input-group">
+
+                    <label for="fatherName">
+                        Father/Mother Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fatherName"
+                        name="fatherName"
+                        placeholder="Parent's Name *"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="contactNumber">
+                        Father Contact Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="contactNumber"
+                        name="contactNumber"
+                        placeholder="Father Contact Number *"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Father Occupation -->
+            <div class="row">
+
+                <div class="input-group">
+
+                    <label for="occupation">
+                        Father Occupation
+                    </label>
+
+                    <input
+                        type="text"
+                        id="occupation"
+                        name="occupation"
+                        placeholder="Father Occupation *"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================
+                 ADDRESS
+                 ================================================ -->
+            <div class="address-box">
+
+                <div class="input-group">
+
+                    <label for="address">
+                        Residential Address
+                    </label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        placeholder="Enter full residential address *"
+                        rows="4"
+                        autocomplete="street-address"
+                        required
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- END .student-right -->
+
+    </div>
+    <!-- END .student-layout -->
+
+
+    <!-- =========================================================
+         FORM SUBMIT BUTTON
+         ========================================================= -->
+    <div class="submit-section">
+
+        <div class="input-group">
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit Form
+            </button>
+
+        </div>
+
     </div>
 
-    <!-- Marksheet Upload -->
-    <div class="upload-box-small">
-      <img id="marksheetPreview" />
-
-      <input type="file" id="marksheetInput" accept="image/*" hidden>
-
-      <button type="button" class="upload-btn-small"
-        onclick="document.getElementById('marksheetInput').click()">
-        Previous Score Card
-      </button>
-    </div>
-
-  </div>
-
-</div>
-<!-- ================= RIGHT: STUDENT INFO ================= -->
-<div class="student-right">
-
-  <div class="row">
-  <div class="input-group">
-    <label>Student Name</label>
-    <input
-      type="text"
-      id="studentName"
-      name="studentName"
-      placeholder="Full Name *"
-    >
-  </div>
-
-  <div class="input-group">
-    <label>Father/Mother Name</label>
-    <input
-      type="text"
-      id="fatherName"
-      name="fatherName"
-      placeholder="Parents Name *"
-    >
-  </div>
-</div>
-
-<div class="row">
-  <div class="input-group">
-    <label>Email Address</label>
-    <input
-      type="email"
-      id="email"
-      name="email"
-      placeholder="Email Address *"
-    >
-  </div>
-
-  <div class="input-group">
-    <label>Parent Whatsapp Number</label>
-    <input
-      type="text"
-      id="whatsapp"
-      name="whatsapp"
-      placeholder="Whatsapp Number *"
-    >
-  </div>
-</div>
-
-<div class="row">
-  <div class="input-group">
-    <label>Father Occupation</label>
-    <input
-      type="text"
-      id="occupation"
-      name="occupation"
-      placeholder="Father Occupation *"
-    >
-  </div>
-
-  <div class="input-group">
-    <label> Student Contact Number</label>
-    <input
-      type="text"
-      id="contactNumber"
-      name="contactNumber"
-      placeholder="Contact Number *"
-    >
-  </div>
-</div>
-
-<div class="address-box">
-  <div class="input-group">
-    <label>Residential Address</label>
-    <textarea
-      id="address"
-      name="address"
-      placeholder="Enter full address *"
-    ></textarea>
-  </div>
-</div>
-
-<div class="row">
-  <div class="input-group">
-    <button type="submit" class="submit-btn">
-      Submit Form
-    </button>
-  </div>
-</div>
-
-
-
-</div>
-
-  </form>
+</form>
 
 </div>
 <script>
