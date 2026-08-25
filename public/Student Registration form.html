@@ -1585,83 +1585,254 @@ document.getElementById("teacherBtn").addEventListener("click", e => {
   e.preventDefault();
   showSchedule();
 });
-   form.addEventListener("submit", async (e) => {
+/* ============================================================
+   STUDENT FORM SUBMISSION
+   ============================================================ */
+
+form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
 
-    // =========================
+    // =========================================================
     // VALIDATION
-    // =========================
+    // =========================================================
 
     const examSeries =
-        document.querySelector('input[name="examSeries"]:checked');
+        document.querySelector(
+            'input[name="examSeries"]:checked'
+        );
+
 
     if (!examSeries) {
-        return alert("Please select Examination Series.");
+
+        alert(
+            "Please select Examination Series."
+        );
+
+        return;
+
     }
 
 
     const candidate =
-        document.querySelector('input[name="candidate"]:checked');
+        document.querySelector(
+            'input[name="candidate"]:checked'
+        );
+
 
     if (!candidate) {
-        return alert("Please select Candidate Type.");
+
+        alert(
+            "Please select Candidate Type."
+        );
+
+        return;
+
     }
 
 
     if (!selectedGrade) {
-        return alert("Please select Grade.");
-    }
 
+        alert(
+            "Please select Grade."
+        );
 
-    if (selectedSubjects.length === 0) {
-        return alert("Please select at least one subject.");
+        return;
+
     }
 
 
     if (
-        Object.keys(selectedTeachers).length !== selectedSubjects.length
+        selectedSubjects.length === 0
     ) {
-        return alert("Please select a teacher for every subject.");
+
+        alert(
+            "Please select at least one subject."
+        );
+
+        return;
+
     }
 
 
+    // =========================================================
+    // CHECK TEACHER SELECTION
+    // =========================================================
+
+    if (
+        Object.keys(selectedTeachers).length !==
+        selectedSubjects.length
+    ) {
+
+        alert(
+            "Please select a teacher for every subject."
+        );
+
+        return;
+
+    }
+
+
+    // =========================================================
+    // STUDENT NAME
+    // =========================================================
+
     const studentName =
-        document.getElementById("studentName")
-        .value
-        .trim();
+        document
+            .getElementById("studentName")
+            .value
+            .trim();
 
 
     if (!studentName) {
-        return alert("Student Name is required.");
+
+        alert(
+            "Student Name is required."
+        );
+
+        return;
+
     }
 
 
+    // =========================================================
+    // SUBMIT BUTTON
+    // =========================================================
 
     const submitBtn =
-        document.querySelector(".submit-btn");
+        document.querySelector(
+            ".submit-btn"
+        );
 
 
     submitBtn.disabled = true;
 
-    submitBtn.innerText = "Submitting...";
-
+    submitBtn.innerText =
+        "Submitting...";
 
 
     try {
 
 
-        // =========================
+        // =====================================================
+        // CREATE TEACHER SUMMARY
+        // =====================================================
+
+        /*
+            selectedTeachers looks like:
+
+            {
+                "Mathematics": {
+                    name: "Sir Ahemad Javed",
+                    photo: "...",
+                    schedule: [...]
+                },
+
+                "Physics": {
+                    name: "Sir Shariq Rafiq",
+                    photo: "...",
+                    schedule: [...]
+                }
+            }
+        */
+
+
+        const teacherSummary =
+            Object.entries(
+                selectedTeachers
+            ).map(
+                ([subject, teacher]) => {
+
+                    return {
+
+                        subject:
+                            subject,
+
+                        teacher:
+                            teacher.name,
+
+                        grade:
+                            selectedGrade,
+
+                        photo:
+                            teacher.photo || "",
+
+                        schedule:
+                            teacher.schedule || []
+
+                    };
+
+                }
+            );
+
+
+        // =====================================================
+        // FINAL TEACHER VALIDATION
+        // =====================================================
+
+        if (
+            teacherSummary.length !==
+            selectedSubjects.length
+        ) {
+
+            alert(
+                "Teacher information is incomplete. Please select a teacher for every subject."
+            );
+
+            return;
+
+        }
+
+
+        // =====================================================
+        // DEBUG
+        // =====================================================
+
+        console.log(
+            "======================================"
+        );
+
+        console.log(
+            "STUDENT SUBMISSION"
+        );
+
+        console.log(
+            "======================================"
+        );
+
+        console.log(
+            "Selected Grade:",
+            selectedGrade
+        );
+
+        console.log(
+            "Selected Subjects:",
+            selectedSubjects
+        );
+
+        console.log(
+            "Selected Teachers:",
+            selectedTeachers
+        );
+
+        console.log(
+            "Teacher Summary:",
+            teacherSummary
+        );
+
+
+        // =====================================================
         // CREATE FORM DATA
-        // =========================
+        // =====================================================
+
+        const formData =
+            new FormData();
 
 
-        const formData = new FormData();
-
-
-
-        // Radio fields
+        // =====================================================
+        // EXAMINATION INFORMATION
+        // =====================================================
 
         formData.append(
             "examSeries",
@@ -1675,65 +1846,82 @@ document.getElementById("teacherBtn").addEventListener("click", e => {
         );
 
 
-
-        // =========================
+        // =====================================================
         // STUDENT INFORMATION
-        // =========================
-
+        // =====================================================
 
         formData.append(
             "schoolName",
-            document.getElementById("schoolName").value
+            document
+                .getElementById("schoolName")
+                .value
+                .trim()
         );
 
 
         formData.append(
             "studentName",
-            document.getElementById("studentName").value
+            studentName
         );
 
 
         formData.append(
             "fatherName",
-            document.getElementById("fatherName").value
+            document
+                .getElementById("fatherName")
+                .value
+                .trim()
         );
 
 
         formData.append(
             "email",
-            document.getElementById("email").value
+            document
+                .getElementById("email")
+                .value
+                .trim()
         );
 
 
         formData.append(
             "whatsapp",
-            document.getElementById("whatsapp").value
+            document
+                .getElementById("whatsapp")
+                .value
+                .trim()
         );
 
 
         formData.append(
             "occupation",
-            document.getElementById("occupation").value
+            document
+                .getElementById("occupation")
+                .value
+                .trim()
         );
 
 
         formData.append(
             "contactNumber",
-            document.getElementById("contactNumber").value
+            document
+                .getElementById("contactNumber")
+                .value
+                .trim()
         );
 
 
         formData.append(
             "address",
-            document.getElementById("address").value
+            document
+                .getElementById("address")
+                .value
+                .trim()
         );
 
 
-
-        // =========================
-        // ACADEMIC DATA
-        // =========================
-
+        // =====================================================
+        // ACADEMIC INFORMATION
+        // =====================================================
 
         formData.append(
             "grade",
@@ -1743,40 +1931,54 @@ document.getElementById("teacherBtn").addEventListener("click", e => {
 
         formData.append(
             "subjects",
-            JSON.stringify(selectedSubjects)
+            JSON.stringify(
+                selectedSubjects
+            )
         );
 
+
+        // =====================================================
+        // COMPLETE TEACHER DATA
+        // =====================================================
 
         formData.append(
             "teachers",
-            JSON.stringify(selectedTeachers)
+            JSON.stringify(
+                selectedTeachers
+            )
         );
 
+
+        // =====================================================
+        // TEACHER SUMMARY
+        //
+        // IMPORTANT:
+        // SEND JSON, NOT teacherName.value
+        // =====================================================
 
         formData.append(
             "teacherSummary",
-            teacherName.value
+            JSON.stringify(
+                teacherSummary
+            )
         );
 
 
+        // =====================================================
+        // PROFILE IMAGE
+        // =====================================================
 
-        // =========================
-        // IMAGES
-        // =========================
+        const profileInput =
+            document.getElementById(
+                "profileInput"
+            );
 
 
         const profile =
-            document.getElementById("profileInput")
-            .files[0];
+            profileInput?.files?.[0];
 
 
-        const marksheet =
-            document.getElementById("marksheetInput")
-            .files[0];
-
-
-
-        if(profile){
+        if (profile) {
 
             formData.append(
                 "profileImage",
@@ -1786,8 +1988,21 @@ document.getElementById("teacherBtn").addEventListener("click", e => {
         }
 
 
+        // =====================================================
+        // MARKSHEET IMAGE
+        // =====================================================
 
-        if(marksheet){
+        const marksheetInput =
+            document.getElementById(
+                "marksheetInput"
+            );
+
+
+        const marksheet =
+            marksheetInput?.files?.[0];
+
+
+        if (marksheet) {
 
             formData.append(
                 "marksheetImage",
@@ -1797,145 +2012,305 @@ document.getElementById("teacherBtn").addEventListener("click", e => {
         }
 
 
+        // =====================================================
+        // SHOW WHAT IS BEING SENT
+        // =====================================================
 
-        // =========================
-        // SEND TO SERVER
-        // =========================
-
-
-        const response = await fetch(
-
-            "https://cognitive-learning-backend.vercel.app/api/students",
-
-            {
-
-                method:"POST",
-
-                body:formData
-
-            }
-
+        console.log(
+            "Teacher Summary JSON:",
+            JSON.stringify(
+                teacherSummary
+            )
         );
 
 
+        // =====================================================
+        // SEND TO BACKEND
+        // =====================================================
 
-        const result = await response.json();
+        const response =
+            await fetch(
+
+                "https://cognitive-learning-backend.vercel.app/api/students",
+
+                {
+
+                    method:
+                        "POST",
+
+                    body:
+                        formData
+
+                }
+
+            );
 
 
+        // =====================================================
+        // READ SERVER RESPONSE
+        // =====================================================
 
-        if(!response.ok){
+        let result;
+
+
+        try {
+
+            result =
+                await response.json();
+
+        }
+
+        catch (jsonError) {
+
+            console.error(
+                "Invalid server response:",
+                jsonError
+            );
 
             throw new Error(
-                result.message || 
-                "Submission Failed"
+                "The server returned an invalid response."
             );
 
         }
 
 
+        // =====================================================
+        // SERVER ERROR
+        // =====================================================
+
+        if (!response.ok) {
+
+            console.error(
+                "Backend Error:",
+                result
+            );
 
 
-        // =========================
-        // SUCCESS
-        // =========================
-
-
-        if(result.success){
-
-
-            alert(result.message);
-
-
-
-            form.reset();
-
-
-
-            selectedSubjects = [];
-
-            selectedTeachers = {};
-
-            selectedGrade = "";
-
-
-
-            teacherName.value = "";
-
-            dropdown.innerHTML = "";
-
-            scheduleBox.innerHTML = "";
-
-            subjectBtn.innerText =
-            "Select Subjects";
-
-
-
-            document.getElementById(
-                "profilePreview"
-            ).src = "";
-
-
-
-            document.getElementById(
-                "marksheetPreview"
-            ).src = "";
-
-
-
-            document.getElementById(
-                "profileInput"
-            ).value = "";
-
-
-
-            document.getElementById(
-                "marksheetInput"
-            ).value = "";
-
-
+            throw new Error(
+                result.message ||
+                "Student submission failed."
+            );
 
         }
 
 
+        // =====================================================
+        // SUCCESS
+        // =====================================================
+
+        if (
+            result.success
+        ) {
+
+            console.log(
+                "Student saved successfully:",
+                result
+            );
+
+
+            alert(
+                result.message ||
+                "Student Registered Successfully."
+            );
+
+
+            // =================================================
+            // RESET FORM
+            // =================================================
+
+            form.reset();
+
+
+            // =================================================
+            // RESET APPLICATION STATE
+            // =================================================
+
+            selectedSubjects =
+                [];
+
+            selectedTeachers =
+                {};
+
+            selectedGrade =
+                "";
+
+
+            // =================================================
+            // RESET TEACHER SUMMARY
+            // =================================================
+
+            teacherName.value =
+                "";
+
+
+            // =================================================
+            // RESET SUBJECT DROPDOWN
+            // =================================================
+
+            dropdown.innerHTML =
+                "";
+
+
+            subjectBtn.innerText =
+                "Select Subjects";
+
+
+            // =================================================
+            // RESET TEACHER SCHEDULE
+            // =================================================
+
+            scheduleBox.innerHTML =
+                "";
+
+            scheduleBox.style.display =
+                "";
+
+
+            // =================================================
+            // RESET PROFILE PREVIEW
+            // =================================================
+
+            const profilePreview =
+                document.getElementById(
+                    "profilePreview"
+                );
+
+
+            if (profilePreview) {
+
+                profilePreview.src =
+                    "";
+
+            }
+
+
+            // =================================================
+            // RESET MARKSHEET PREVIEW
+            // =================================================
+
+            const marksheetPreview =
+                document.getElementById(
+                    "marksheetPreview"
+                );
+
+
+            if (marksheetPreview) {
+
+                marksheetPreview.src =
+                    "";
+
+            }
+
+
+            // =================================================
+            // RESET FILE INPUTS
+            // =================================================
+
+            if (profileInput) {
+
+                profileInput.value =
+                    "";
+
+            }
+
+
+            if (marksheetInput) {
+
+                marksheetInput.value =
+                    "";
+
+            }
+
+
+            // =================================================
+            // RESET SCHOOL FIELD
+            // =================================================
+
+            const schoolField =
+                document.getElementById(
+                    "schoolField"
+                );
+
+
+            if (schoolField) {
+
+                schoolField.style.display =
+                    "none";
+
+            }
+
+
+            // =================================================
+            // RESET MOBILE / OTHER UI
+            // =================================================
+
+            console.log(
+                "Form reset successfully."
+            );
+
+        }
+
+        else {
+
+            throw new Error(
+                result.message ||
+                "Student registration failed."
+            );
+
+        }
+
 
     }
 
+    catch (error) {
 
-    catch(error){
 
+        // =====================================================
+        // ERROR HANDLING
+        // =====================================================
 
         console.error(
-            "Submission Error:",
+            "======================================"
+        );
+
+        console.error(
+            "STUDENT SUBMISSION ERROR"
+        );
+
+        console.error(
+            "======================================"
+        );
+
+        console.error(
             error
         );
 
 
         alert(
             error.message ||
-            "Server Error"
+            "Unable to submit the student registration."
         );
-
 
     }
 
 
+    finally {
 
-    finally{
 
+        // =====================================================
+        // ENABLE SUBMIT BUTTON
+        // =====================================================
 
-        submitBtn.disabled = false;
+        submitBtn.disabled =
+            false;
 
 
         submitBtn.innerText =
-        "Submit Form";
-
+            "Submit Form";
 
     }
 
-
-
 });
-
 </script>
 </body>
 
