@@ -59,6 +59,35 @@ header {
   font-size: 14px;
   font-weight: 600;
 }
+nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* NAV LINKS */
+nav a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* HOVER EFFECT */
+nav a:hover {
+  background: rgba(0, 123, 255, 0.12);
+  color: #007bff;
+  transform: translateY(-1px);
+}
+
+/* ACTIVE LOOK (optional) */
+nav a:active {
+  transform: scale(0.97);
+}
 
 /* =========================
    MAIN CONTAINER
@@ -518,518 +547,1444 @@ textarea {
     min-width: 100%;
   }
 }
+.download-btn{
+    width:100%;
+    padding:5px 20px;
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.download-btn:hover{
+    background:#1d4ed8;
+}
+/* =========================================================
+   FEES POPUP - FULLY RESPONSIVE
+   ========================================================= */
+
+.fees-modal {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    z-index: 99999;
+
+    align-items: center;
+    justify-content: center;
+
+    /* Safe spacing for mobile devices */
+    padding: 16px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* =========================================================
+   POPUP CONTENT
+   ========================================================= */
+
+.fees-modal-content {
+    position: relative;
+
+    width: min(100%, 650px);
+
+    max-height: calc(100vh - 32px);
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.30);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-overflow-scrolling: touch;
+
+    animation: feesPopupOpen 0.25s ease;
+
+    /* Prevent content from touching screen edges */
+    margin: auto;
+}
+
+
+/* =========================================================
+   POPUP ANIMATION
+   ========================================================= */
+
+@keyframes feesPopupOpen {
+
+    from {
+        opacity: 0;
+        transform: scale(0.90);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.fees-close-btn {
+    position: absolute;
+
+    right: 12px;
+    top: 10px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 30px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    color: #333;
+
+    border-radius: 50%;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.fees-close-btn:hover {
+    color: #000;
+    background: #f2f2f2;
+}
+
+
+.fees-close-btn:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.fees-header {
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    padding-right: 25px;
+}
+
+
+.fees-header h2 {
+    margin: 0;
+
+    font-size: clamp(22px, 4vw, 28px);
+
+    line-height: 1.25;
+
+    font-weight: 700;
+
+    color: #111;
+}
+
+
+.fees-header p {
+    margin: 8px 0 0;
+
+    font-size: clamp(14px, 2.5vw, 16px);
+
+    line-height: 1.5;
+
+    color: #666;
+}
+
+
+/* =========================================================
+   TABLE CONTAINER
+   ========================================================= */
+
+.fees-table-container {
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.fees-table {
+    width: 100%;
+
+    min-width: 420px;
+
+    border-collapse: collapse;
+
+    font-size: 15px;
+
+    color: #222;
+}
+
+
+.fees-table th {
+    padding: 14px 12px;
+
+    text-align: left;
+
+    border-bottom: 2px solid #ddd;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.fees-table td {
+    padding: 14px 12px;
+
+    border-bottom: 1px solid #eee;
+
+    vertical-align: middle;
+}
+
+
+.fees-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+
+.fees-table tbody tr:hover {
+    background: #f8f8f8;
+}
+
+
+/* =========================================================
+   TOTAL
+   ========================================================= */
+
+.fees-total-label {
+    font-weight: 700;
+
+    font-size: 17px;
+
+    padding-top: 18px !important;
+
+    white-space: nowrap;
+}
+
+
+.fees-total {
+    font-weight: 700;
+
+    font-size: 18px;
+
+    padding-top: 18px !important;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   NOTE
+   ========================================================= */
+
+.fees-note {
+    margin-top: 20px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: #f7f7f7;
+
+    box-sizing: border-box;
+}
+
+
+.fees-note strong {
+    display: block;
+
+    font-size: 15px;
+
+    line-height: 1.4;
+}
+
+
+.fees-note p {
+    margin: 6px 0 0;
+
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   DONE BUTTON
+   ========================================================= */
+
+.fees-done-btn {
+    width: 100%;
+
+    margin-top: 20px;
+
+    min-height: 48px;
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    background: #111;
+
+    color: #fff;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.15s ease;
+}
+
+
+.fees-done-btn:hover {
+    opacity: 0.9;
+}
+
+
+.fees-done-btn:active {
+    transform: scale(0.98);
+}
+
+
+.fees-done-btn:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .fees-modal {
+        padding: 14px;
+    }
+
+    .fees-modal-content {
+        width: 100%;
+
+        max-height: calc(100vh - 28px);
+
+        padding: 25px 20px;
+
+        border-radius: 16px;
+    }
+
+    .fees-header {
+        margin-bottom: 20px;
+    }
+
+    .fees-table {
+        font-size: 14px;
+    }
+
+    .fees-table th,
+    .fees-table td {
+        padding: 12px 10px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .fees-modal {
+        padding: 10px;
+    }
+
+    .fees-modal-content {
+        width: 100%;
+
+        max-height: calc(100vh - 20px);
+
+        padding: 22px 14px;
+
+        border-radius: 14px;
+    }
+
+    .fees-close-btn {
+        top: 7px;
+        right: 7px;
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 27px;
+    }
+
+    .fees-header {
+        margin-bottom: 18px;
+
+        padding-right: 25px;
+    }
+
+    .fees-header h2 {
+        font-size: 22px;
+    }
+
+    .fees-header p {
+        font-size: 14px;
+    }
+
+    .fees-table-container {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .fees-table {
+        min-width: 400px;
+
+        font-size: 13px;
+    }
+
+    .fees-table th,
+    .fees-table td {
+        padding: 10px 8px;
+    }
+
+    .fees-total-label {
+        font-size: 15px;
+    }
+
+    .fees-total {
+        font-size: 16px;
+    }
+
+    .fees-note {
+        margin-top: 16px;
+
+        padding: 13px;
+    }
+
+    .fees-note strong {
+        font-size: 14px;
+    }
+
+    .fees-note p {
+        font-size: 13px;
+    }
+
+    .fees-done-btn {
+        margin-top: 16px;
+
+        min-height: 46px;
+
+        font-size: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .fees-modal {
+        padding: 7px;
+    }
+
+    .fees-modal-content {
+        max-height: calc(100vh - 14px);
+
+        padding: 20px 11px;
+
+        border-radius: 12px;
+    }
+
+    .fees-header h2 {
+        font-size: 20px;
+    }
+
+    .fees-header p {
+        font-size: 13px;
+    }
+
+    .fees-table {
+        min-width: 360px;
+
+        font-size: 12px;
+    }
+
+    .fees-table th,
+    .fees-table td {
+        padding: 9px 7px;
+    }
+
+    .fees-note {
+        padding: 11px;
+    }
+
+    .fees-note p {
+        font-size: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 320px) {
+
+    .fees-modal-content {
+        padding: 18px 9px;
+    }
+
+    .fees-header h2 {
+        font-size: 19px;
+    }
+
+    .fees-table {
+        min-width: 340px;
+    }
+
+    .fees-table th,
+    .fees-table td {
+        padding: 8px 6px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .fees-modal-content {
+        animation: none;
+    }
+
+    .fees-close-btn,
+    .fees-done-btn,
+    .fees-table tbody tr {
+        transition: none;
+    }
+
+}
  </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
 <header class="fixed top-0 left-0 w-full bg-white z-50 flex items-center justify-between px-4 h-[70px]">
+
   <div class="logo-container">
-  <img src="Image/logo_CLC-removebg-preview.png" class="logo-img">
-  <span class="logo-text">
-    Cognitive<br>Learning
-  </span>
-</div>
+
+    <img
+      src="Image/logo_CLC-removebg-preview.png"
+      class="logo-img"
+    >
+
+    <span class="logo-text">
+      Cognitive<br>Learning
+    </span>
+
+  </div>
+
+
   <!-- HAMBURGER -->
-  <button id="menuBtn" class="md:hidden text-2xl text-black 500">
+
+  <button
+    id="menuBtn"
+    class="md:hidden text-2xl text-black 500"
+    type="button"
+  >
     ☰
   </button>
 
+
   <!-- NAV LINKS -->
-  <nav id="menu" class="hidden md:flex gap-6 font-semibold">
-  <a href="index.html">Home</a>
-   <a href="Faculty.html">Faculty</a>
-   <a href="Teacher Registration.html">Become a Teacher</a>
-    
+
+  <nav
+    id="menu"
+    class="hidden md:flex gap-6 font-semibold"
+  >
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="Faculty.html">
+      Faculty
+    </a>
+
+    <a href="Teacher Registration.html">
+      Become a Teacher
+    </a>
+
   </nav>
 
 </header>
 
-<div id="mobileMenu" class="hidden fixed top-16 left-0 w-full bg-white shadow flex flex-col items-center gap-4 py-5 z-40 text-black 600">
-  <a href="index.html">Home</a>
-   <a href="Faculty.html">Faculty</a>
-   <a href="Teacher Registration.html">Become a Teacher</a>
-  
+
+
+<!-- =========================================================
+     MOBILE MENU
+     ========================================================= -->
+
+<div
+  id="mobileMenu"
+  class="hidden fixed top-16 left-0 w-full bg-white shadow flex flex-col items-center gap-4 py-5 z-40 text-black 600"
+>
+
+  <a href="index.html">
+    Home
+  </a>
+
+  <a href="Faculty.html">
+    Faculty
+  </a>
+
+  <a href="Teacher Registration.html">
+    Become a Teacher
+  </a>
+
 </div>
-<div class="container">
- 
-<div class="form-title">Student Registration</div>
 
-<form id="registrationForm" enctype="multipart/form-data">
 
-    <!-- =========================================================
+
+<!-- =========================================================
+     MAIN CONTAINER
+     ========================================================= -->
+
+<div
+  class="container"
+  id="downloadArea"
+>
+
+
+  <!-- FORM TITLE -->
+
+  <div class="form-title">
+    Student Registration
+  </div>
+
+
+
+  <!-- =======================================================
+       REGISTRATION FORM
+       ======================================================= -->
+
+  <form
+    id="registrationForm"
+    enctype="multipart/form-data"
+  >
+
+
+    <!-- =====================================================
          TOP RADIO SECTION
-         ========================================================= -->
+         ===================================================== -->
+
     <div class="top-flex">
 
-        <!-- Examination Series -->
-        <div class="flex-box">
-            <div class="section-title">Examination Series</div>
 
-            <div class="radio-group">
-                <label>
-                    <input
-                        type="radio"
-                        name="examSeries"
-                        value="Nov 26"
-                    >
-                    Nov 26
-                </label>
+      <!-- ===================================================
+           EXAMINATION SERIES
+           =================================================== -->
 
-                <label>
-                    <input
-                        type="radio"
-                        name="examSeries"
-                        value="June 27"
-                    >
-                    June 27
-                </label>
-            </div>
+      <div class="flex-box">
+
+        <div class="section-title">
+          Examination Series
         </div>
 
+        <div class="radio-group">
 
-        <!-- Candidate Type -->
-        <div class="flex-box">
-            <div class="section-title">Candidate Type</div>
+          <label>
 
-            <div class="radio-group">
-                <label>
-                    <input
-                        type="radio"
-                        name="candidate"
-                        value="regular"
-                        onclick="showSchoolField()"
-                    >
-                    Regular
-                </label>
+            <input
+              type="radio"
+              name="examSeries"
+              value="Nov 26"
+            >
 
-                <label>
-                    <input
-                        type="radio"
-                        name="candidate"
-                        value="private"
-                        onclick="showSchoolField()"
-                    >
-                    Private
-                </label>
-            </div>
+            Nov 26
+
+          </label>
+
+
+          <label>
+
+            <input
+              type="radio"
+              name="examSeries"
+              value="June 27"
+            >
+
+            June 27
+
+          </label>
+
         </div>
 
+      </div>
 
-        <!-- Select Grade -->
-        <div class="flex-box">
-            <div class="section-title">Select Grade</div>
 
-            <div class="radio-group">
 
-                <label>
-                    <input
-                        type="radio"
-                        name="grade"
-                        value="Cambridge IGCSE"
-                    >
-                    IGCSE
-                </label>
+      <!-- ===================================================
+           CANDIDATE TYPE
+           =================================================== -->
 
-                <label>
-                    <input
-                        type="radio"
-                        name="grade"
-                        value="O/Level"
-                    >
-                    O Level
-                </label>
+      <div class="flex-box">
 
-                <label>
-                    <input
-                        type="radio"
-                        name="grade"
-                        value="AS/Levels"
-                    >
-                    AS level
-                </label>
-
-                <label>
-                    <input
-                        type="radio"
-                        name="grade"
-                        value="A2/Level"
-                    >
-                    A2 level
-                </label>
-
-            </div>
+        <div class="section-title">
+          Candidate Type
         </div>
+
+        <div class="radio-group">
+
+          <label>
+
+            <input
+              type="radio"
+              name="candidate"
+              value="regular"
+              onclick="showSchoolField()"
+            >
+
+            Regular
+
+          </label>
+
+
+          <label>
+
+            <input
+              type="radio"
+              name="candidate"
+              value="private"
+              onclick="showSchoolField()"
+            >
+
+            Private
+
+          </label>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ===================================================
+           SELECT GRADE
+           =================================================== -->
+
+      <div class="flex-box">
+
+        <div class="section-title">
+          Select Grade
+        </div>
+
+        <div class="radio-group">
+
+          <label>
+
+            <input
+              type="radio"
+              name="grade"
+              value="Cambridge IGCSE"
+            >
+
+            IGCSE
+
+          </label>
+
+
+          <label>
+
+            <input
+              type="radio"
+              name="grade"
+              value="O/Level"
+            >
+
+            O Level
+
+          </label>
+
+
+          <label>
+
+            <input
+              type="radio"
+              name="grade"
+              value="AS/Levels"
+            >
+
+            AS level
+
+          </label>
+
+
+          <label>
+
+            <input
+              type="radio"
+              name="grade"
+              value="A2/Level"
+            >
+
+            A2 level
+
+          </label>
+
+        </div>
+
+      </div>
 
     </div>
 
 
-    <!-- =========================================================
+
+    <!-- =====================================================
          SCHOOL FIELD
-         ========================================================= -->
+         ===================================================== -->
+
     <div
-        class="row"
-        id="schoolField"
-        style="display:none;"
+      class="row"
+      id="schoolField"
+      style="display:none;"
     >
 
-        <div class="input-group">
+      <div class="input-group">
 
-            <label for="schoolName">
-                Name of School
-            </label>
+        <label>
+          Name of School
+        </label>
 
-            <input
-                type="text"
-                id="schoolName"
-                placeholder="Enter School Name"
-            >
+        <input
+          type="text"
+          id="schoolName"
+          placeholder="Enter School Name"
+        >
 
-        </div>
+      </div>
 
     </div>
 
 
-    <!-- =========================================================
-         SUBJECT + TEACHER + AVAILABLE TEACHERS
-         ========================================================= -->
+
+    <!-- =====================================================
+         SUBJECT + TEACHER SECTION
+         ===================================================== -->
+
     <div class="after-radio-row">
 
-        <!-- Subjects -->
-        <div class="input-group">
 
-            <label>
-                Select Subjects
-            </label>
+      <!-- ===================================================
+           SUBJECTS
+           =================================================== -->
 
-            <button
-                type="button"
-                id="subjectBtn"
-                class="upload-btn"
-                onclick="toggleDropdown()"
-            >
-                Select Subjects
-            </button>
+      <div class="input-group">
 
-            <div
-                id="dropdown"
-                style="
-                    display:none;
-                    border:1px solid #ddd;
-                    padding:8px;
-                    background:#fff;
-                "
-            ></div>
-
-        </div>
+        <label>
+          Select Subjects
+        </label>
 
 
-        <!-- Teacher Name -->
-        <div class="input-group">
+        <!-- SUBJECT BUTTON -->
 
-            <label for="teacherName">
-                Teacher Name
-            </label>
-
-            <input
-                type="text"
-                id="teacherName"
-                readonly
-            >
-
-        </div>
+        <button
+          type="button"
+          id="subjectBtn"
+          class="upload-btn"
+          onclick="toggleDropdown()"
+        >
+          Select Subjects
+        </button>
 
 
-        <!-- Available Teachers -->
-        <div class="input-group">
+        <!-- SUBJECT DROPDOWN -->
 
-            <label>&nbsp;</label>
+        <div
+          id="dropdown"
+          style="
+            display:none;
+            border:1px solid #ddd;
+            padding:8px;
+            background:#fff;
+          "
+        ></div>
 
-            <button
-                type="button"
-                id="teacherBtn"
-                class="select-btn"
-            >
-                Available Teachers
-            </button>
+      </div>
 
-            <div
-                id="scheduleOutput"
-                style="margin-top:15px;"
-            ></div>
 
-        </div>
+
+      <!-- ===================================================
+           TEACHER NAME
+           =================================================== -->
+
+      <div class="input-group">
+
+        <label>
+          Teacher Name
+        </label>
+
+        <input
+          type="text"
+          id="teacherName"
+          readonly
+        >
+
+      </div>
+
+
+
+      <!-- ===================================================
+           AVAILABLE TEACHERS
+           =================================================== -->
+
+      <div class="input-group">
+
+        <label>
+          &nbsp;
+        </label>
+
+        <button
+          type="button"
+          id="teacherBtn"
+          class="select-btn"
+        >
+          Available Teachers
+        </button>
+
+
+        <div
+          id="scheduleOutput"
+          style="margin-top:15px;"
+        ></div>
+
+      </div>
 
     </div>
 
 
-    <!-- =========================================================
+
+    <!-- =====================================================
          STUDENT MAIN LAYOUT
-         LEFT = UPLOADS
-         RIGHT = STUDENT INFORMATION
-         ========================================================= -->
+         ===================================================== -->
+
     <div class="student-layout">
 
 
-        <!-- =====================================================
-             LEFT SIDE
-             PROFILE + MARKSHEET UPLOAD
-             ===================================================== -->
-        <div class="student-left">
+      <!-- ===================================================
+           LEFT SIDE
+           =================================================== -->
 
-            <div class="upload-mini">
+      <div class="student-left">
 
-                <!-- Profile Upload -->
-                <div class="upload-box-small">
+        <div class="upload-mini">
 
-                    <img
-                        id="profilePreview"
-                        alt="Profile Preview"
-                    >
 
-                    <input
-                        type="file"
-                        id="profileInput"
-                        accept="image/*"
-                        hidden
-                    >
+          <!-- =================================================
+               PROFILE UPLOAD
+               ================================================= -->
 
-                    <button
-                        type="button"
-                        class="upload-btn-small"
-                        onclick="document.getElementById('profileInput').click()"
-                    >
-                        Upload Picture
-                    </button>
+          <div class="upload-box-small">
 
-                </div>
+            <img
+              id="profilePreview"
+              alt="Profile Preview"
+            >
 
 
-                <!-- Marksheet Upload -->
-                <div class="upload-box-small">
+            <input
+              type="file"
+              id="profileInput"
+              accept="image/*"
+              hidden
+            >
 
-                    <img
-                        id="marksheetPreview"
-                        alt="Marksheet Preview"
-                    >
-
-                    <input
-                        type="file"
-                        id="marksheetInput"
-                        accept="image/*"
-                        hidden
-                    >
-
-                    <button
-                        type="button"
-                        class="upload-btn-small"
-                        onclick="document.getElementById('marksheetInput').click()"
-                    >
-                        Previous Score Card
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =====================================================
-             RIGHT SIDE
-             STUDENT INFORMATION
-             ===================================================== -->
-        <div class="student-right">
-
-
-            <!-- ================================================
-                 STUDENT INFORMATION
-                 ================================================ -->
-
-            <!-- Student Name + WhatsApp -->
-            <div class="row">
-
-                <div class="input-group">
-
-                    <label for="studentName">
-                        Student Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="studentName"
-                        name="studentName"
-                        placeholder="Full Name *"
-                        autocomplete="name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="whatsapp">
-                        Student's Whatsapp
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="whatsapp"
-                        name="whatsapp"
-                        placeholder="WhatsApp Number *"
-                        autocomplete="tel"
-                        required
-                    >
-
-                </div>
-
-            </div>
-
-
-            <!-- Email -->
-            <div class="row">
-
-                <div class="input-group">
-
-                    <label for="email">
-                        Email Address
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email Address *"
-                        autocomplete="email"
-                        required
-                    >
-
-                </div>
-
-            </div>
-
-
-            <!-- ================================================
-                 PARENT INFORMATION
-                 ================================================ -->
-
-            <!-- Father/Mother Name + Contact -->
-            <div class="row">
-
-                <div class="input-group">
-
-                    <label for="fatherName">
-                        Father/ Mother Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="fatherName"
-                        name="fatherName"
-                        placeholder="Parent's Name *"
-                        autocomplete="name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="input-group">
-
-                    <label for="contactNumber">
-                        Parent's Whatsapp
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="contactNumber"
-                        name="contactNumber"
-                        placeholder="Father Contact Number *"
-                        autocomplete="tel"
-                        required
-                    >
-
-                </div>
-
-            </div>
-
-
-            <!-- Father Occupation -->
-            <div class="row">
-
-                <div class="input-group">
-
-                    <label for="occupation">
-                        Father Occupation
-                    </label>
-
-                    <input
-                        type="text"
-                        id="occupation"
-                        name="occupation"
-                        placeholder="Father Occupation *"
-                        required
-                    >
-
-                </div>
-
-            </div>
-
-
-            <!-- ================================================
-                 ADDRESS
-                 ================================================ -->
-            <div class="address-box">
-
-                <div class="input-group">
-
-                    <label for="address">
-                        Residential Address
-                    </label>
-
-                    <textarea
-                        id="address"
-                        name="address"
-                        placeholder="Enter full residential address *"
-                        rows="4"
-                        autocomplete="street-address"
-                        required
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-        </div>
-        <!-- END .student-right -->
-
-    </div>
-    <!-- END .student-layout -->
-
-
-    <!-- =========================================================
-         FORM SUBMIT BUTTON
-         ========================================================= -->
-    <div class="submit-section">
-
-        <div class="input-group">
 
             <button
-                type="submit"
-                class="submit-btn"
+              type="button"
+              class="upload-btn-small"
+              onclick="document.getElementById('profileInput').click()"
             >
-                Submit Form
+              Upload Picture
             </button>
+
+          </div>
+
+
+
+          <!-- =================================================
+               MARKSHEET UPLOAD
+               ================================================= -->
+
+          <div class="upload-box-small">
+
+            <img
+              id="marksheetPreview"
+              alt="Marksheet Preview"
+            >
+
+
+            <input
+              type="file"
+              id="marksheetInput"
+              accept="image/*"
+              hidden
+            >
+
+
+            <button
+              type="button"
+              class="upload-btn-small"
+              onclick="document.getElementById('marksheetInput').click()"
+            >
+              Previous Score Card
+            </button>
+
+          </div>
 
         </div>
 
+      </div>
+
+
+
+      <!-- ===================================================
+           RIGHT SIDE
+           =================================================== -->
+
+      <div class="student-right">
+
+
+        <!-- =================================================
+             STUDENT NAME + PARENT NAME
+             ================================================= -->
+
+        <div class="row">
+
+
+          <div class="input-group">
+
+            <label>
+              Student Name
+            </label>
+
+            <input
+              type="text"
+              id="studentName"
+              name="studentName"
+              placeholder="Full Name *"
+            >
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label>
+              Father/Mother Name
+            </label>
+
+            <input
+              type="text"
+              id="fatherName"
+              name="fatherName"
+              placeholder="Parents Name *"
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             EMAIL + WHATSAPP
+             ================================================= -->
+
+        <div class="row">
+
+
+          <div class="input-group">
+
+            <label>
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email Address *"
+            >
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label>
+              Whatsapp Number
+            </label>
+
+            <input
+              type="text"
+              id="whatsapp"
+              name="whatsapp"
+              placeholder="Whatsapp Number *"
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             OCCUPATION + CONTACT
+             ================================================= -->
+
+        <div class="row">
+
+
+          <div class="input-group">
+
+            <label>
+              Father Occupation
+            </label>
+
+            <input
+              type="text"
+              id="occupation"
+              name="occupation"
+              placeholder="Father Occupation *"
+            >
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label>
+              Contact Number
+            </label>
+
+            <input
+              type="text"
+              id="contactNumber"
+              name="contactNumber"
+              placeholder="Contact Number *"
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ADDRESS
+             ================================================= -->
+
+        <div class="address-box">
+
+          <div class="input-group">
+
+            <label>
+              Residential Address
+            </label>
+
+            <textarea
+              id="address"
+              name="address"
+              placeholder="Enter full address *"
+            ></textarea>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FORM BUTTONS
+             ================================================= -->
+
+        <div class="row">
+
+
+          <!-- SUBMIT -->
+
+          <div class="input-group">
+
+            <button
+              type="submit"
+              class="submit-btn"
+            >
+              Submit Form
+            </button>
+
+          </div>
+
+
+          <!-- DOWNLOAD -->
+
+          <div class="input-group">
+
+            <button
+              type="button"
+              class="download-btn"
+              onclick="downloadPage()"
+            >
+              Download Form
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
-</form>
+  </form>
 
 </div>
+
+
+
+<!-- =========================================================
+     FEES STRUCTURE POPUP
+     ========================================================= -->
+
+<div
+  id="feesModal"
+  class="fees-modal"
+>
+
+
+  <div class="fees-modal-content">
+
+
+    <!-- CLOSE BUTTON -->
+
+    <button
+      type="button"
+      class="fees-close-btn"
+      onclick="closeFeesPopup()"
+    >
+      &times;
+    </button>
+
+
+
+    <!-- =====================================================
+         FEES HEADER
+         ===================================================== -->
+
+    <div class="fees-header">
+
+      <h2>
+        Fees Structure
+      </h2>
+
+      <p id="feesGradeTitle">
+        Select Grade
+      </p>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FEES TABLE
+         ===================================================== -->
+
+    <div class="fees-table-container">
+
+      <table class="fees-table">
+
+
+        <thead>
+
+          <tr>
+
+            <th>
+              #
+            </th>
+
+            <th>
+              Subject
+            </th>
+
+            <th>
+              Fee
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="feesTableBody">
+
+          <!-- Subjects generated by JavaScript -->
+
+        </tbody>
+
+
+        <tfoot>
+
+          <tr>
+
+            <td
+              colspan="2"
+              class="fees-total-label"
+            >
+              Total Fees
+            </td>
+
+            <td
+              id="feesTotal"
+              class="fees-total"
+            >
+              Rs. 0
+            </td>
+
+          </tr>
+
+        </tfoot>
+
+      </table>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FEE INFORMATION
+         ===================================================== -->
+
+    <div class="fees-note">
+
+      <strong>
+        Fee Information
+      </strong>
+
+      <p id="feesPerSubjectText">
+        Fee will be calculated according to the selected grade.
+      </p>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         POPUP ACTION BUTTONS
+         ===================================================== -->
+
+    <div class="fees-actions">
+
+
+      <!-- GO BACK -->
+
+      <button
+        type="button"
+        class="fees-done-btn"
+        onclick="closeFeesPopup()"
+      >
+        Edit Form
+      </button>
+
+
+      <!-- CONFIRM & SUBMIT -->
+
+      <button
+        type="button"
+        class="fees-done-btn"
+        onclick="confirmFeesAndSubmit()"
+      >
+        Confirm & Submit
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+</div>
+
 <script>
   /* =========================
    STATE
