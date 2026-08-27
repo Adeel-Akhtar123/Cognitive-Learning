@@ -2540,18 +2540,186 @@ document.getElementById("teacherBtn").addEventListener("click", e => {
   e.preventDefault();
   showSchedule();
 });
-/* ============================================================
-   STUDENT FORM SUBMISSION
-   ============================================================ */
+   /* =========================================================
+   FEES CONFIGURATION
+   CHANGE THESE AMOUNTS TO YOUR ACTUAL FEES
+========================================================= */
 
-form.addEventListener("submit", async (e) => {
+const feeStructure = {
+    "Cambridge IGCSE": {
+        "Mathematics": 5000,
+        "Physics": 5000,
+        "Chemistry": 5000,
+        "Computer Science": 5000,
+        "Urdu": 4000
+    },
+
+    "O/Level": {
+        "Mathematics": 5000,
+        "Physics": 5000,
+        "Chemistry": 5000,
+        "Computer Science": 5000,
+        "Urdu": 4000
+    },
+
+    "AS/Levels": {
+        "Mathematics": 6000,
+        "Physics": 6000,
+        "Chemistry": 6000,
+        "Computer Science": 6000,
+        "Urdu": 5000
+    },
+
+    "A2/Level": {
+        "Mathematics": 6000,
+        "Physics": 6000,
+        "Chemistry": 6000,
+        "Computer Science": 6000,
+        "Urdu": 5000
+    }
+};
+
+
+/* =========================================================
+   FEES POPUP ELEMENTS
+========================================================= */
+
+const feesModal = document.getElementById("feesModal");
+const feesTableBody = document.getElementById("feesTableBody");
+const feesTotal = document.getElementById("feesTotal");
+const feesGradeTitle = document.getElementById("feesGradeTitle");
+const feesPerSubjectText = document.getElementById("feesPerSubjectText");
+
+
+/* =========================================================
+   SHOW FEES POPUP
+========================================================= */
+
+function showFeesPopup() {
+
+    if (!selectedGrade) {
+        alert("Please select a grade first.");
+        return;
+    }
+
+    if (selectedSubjects.length === 0) {
+        alert("Please select at least one subject.");
+        return;
+    }
+
+
+    const gradeFees = feeStructure[selectedGrade] || {};
+
+    feesTableBody.innerHTML = "";
+
+    let total = 0;
+
+
+    selectedSubjects.forEach((subject, index) => {
+
+        const fee = Number(gradeFees[subject] || 0);
+
+        total += fee;
+
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${subject}</td>
+            <td>Rs. ${fee.toLocaleString()}</td>
+        `;
+
+        feesTableBody.appendChild(row);
+
+    });
+
+
+    /* Grade */
+
+    feesGradeTitle.innerText =
+        `${selectedGrade} - Selected Subjects`;
+
+
+    /* Total */
+
+    feesTotal.innerText =
+        `Rs. ${total.toLocaleString()}`;
+
+
+    /* Information */
+
+    feesPerSubjectText.innerText =
+        `Fees shown above are calculated according to the selected grade and subjects.`;
+
+
+    /* Show popup */
+
+    feesModal.style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+/* =========================================================
+   CLOSE FEES POPUP
+========================================================= */
+
+function closeFeesPopup() {
+
+    feesModal.style.display = "none";
+
+    document.body.style.overflow = "";
+
+}
+
+
+/* =========================================================
+   CLOSE POPUP WHEN CLICKING OUTSIDE
+========================================================= */
+
+feesModal.addEventListener("click", function(e) {
+
+    if (e.target === feesModal) {
+        closeFeesPopup();
+    }
+
+});
+
+
+/* =========================================================
+   ESC KEY CLOSE
+========================================================= */
+
+document.addEventListener("keydown", function(e) {
+
+    if (
+        e.key === "Escape" &&
+        feesModal.style.display === "flex"
+    ) {
+
+        closeFeesPopup();
+
+    }
+
+});
+   /* =========================================================
+   FORM SUBMIT
+   STEP 1:
+   VALIDATE FORM
+   STEP 2:
+   SHOW FEES POPUP
+========================================================= */
+
+form.addEventListener("submit", function(e) {
 
     e.preventDefault();
 
 
-    // =========================================================
-    // VALIDATION
-    // =========================================================
+    /* =====================================================
+       EXAMINATION SERIES
+    ===================================================== */
 
     const examSeries =
         document.querySelector(
@@ -2570,6 +2738,10 @@ form.addEventListener("submit", async (e) => {
     }
 
 
+    /* =====================================================
+       CANDIDATE TYPE
+    ===================================================== */
+
     const candidate =
         document.querySelector(
             'input[name="candidate"]:checked'
@@ -2587,6 +2759,10 @@ form.addEventListener("submit", async (e) => {
     }
 
 
+    /* =====================================================
+       GRADE
+    ===================================================== */
+
     if (!selectedGrade) {
 
         alert(
@@ -2598,9 +2774,11 @@ form.addEventListener("submit", async (e) => {
     }
 
 
-    if (
-        selectedSubjects.length === 0
-    ) {
+    /* =====================================================
+       SUBJECTS
+    ===================================================== */
+
+    if (selectedSubjects.length === 0) {
 
         alert(
             "Please select at least one subject."
@@ -2611,9 +2789,9 @@ form.addEventListener("submit", async (e) => {
     }
 
 
-    // =========================================================
-    // CHECK TEACHER SELECTION
-    // =========================================================
+    /* =====================================================
+       TEACHERS
+    ===================================================== */
 
     if (
         Object.keys(selectedTeachers).length !==
@@ -2629,9 +2807,9 @@ form.addEventListener("submit", async (e) => {
     }
 
 
-    // =========================================================
-    // STUDENT NAME
-    // =========================================================
+    /* =====================================================
+       STUDENT NAME
+    ===================================================== */
 
     const studentName =
         document
@@ -2651,14 +2829,124 @@ form.addEventListener("submit", async (e) => {
     }
 
 
-    // =========================================================
-    // SUBMIT BUTTON
-    // =========================================================
+    /* =====================================================
+       PARENT NAME
+    ===================================================== */
+
+    const fatherName =
+        document
+            .getElementById("fatherName")
+            .value
+            .trim();
+
+
+    if (!fatherName) {
+
+        alert(
+            "Father/Mother Name is required."
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       WHATSAPP
+    ===================================================== */
+
+    const whatsapp =
+        document
+            .getElementById("whatsapp")
+            .value
+            .trim();
+
+
+    if (!whatsapp) {
+
+        alert(
+            "WhatsApp Number is required."
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       CONTACT NUMBER
+    ===================================================== */
+
+    const contactNumber =
+        document
+            .getElementById("contactNumber")
+            .value
+            .trim();
+
+
+    if (!contactNumber) {
+
+        alert(
+            "Contact Number is required."
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       ADDRESS
+    ===================================================== */
+
+    const address =
+        document
+            .getElementById("address")
+            .value
+            .trim();
+
+
+    if (!address) {
+
+        alert(
+            "Residential Address is required."
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       EVERYTHING IS VALID
+       NOW SHOW FEES POPUP
+    ===================================================== */
+
+    showFeesPopup();
+
+});
+
+
+/* =========================================================
+   CONFIRM & SUBMIT
+   This function is called by the popup button.
+========================================================= */
+
+async function confirmFeesAndSubmit() {
+
+    /* =====================================================
+       CLOSE POPUP
+    ===================================================== */
+
+    closeFeesPopup();
+
+
+    /* =====================================================
+       DISABLE SUBMIT BUTTON
+    ===================================================== */
 
     const submitBtn =
-        document.querySelector(
-            ".submit-btn"
-        );
+        document.querySelector(".submit-btn");
 
 
     submitBtn.disabled = true;
@@ -2669,29 +2957,9 @@ form.addEventListener("submit", async (e) => {
 
     try {
 
-
-        // =====================================================
-        // CREATE TEACHER SUMMARY
-        // =====================================================
-
-        /*
-            selectedTeachers looks like:
-
-            {
-                "Mathematics": {
-                    name: "Sir Ahemad Javed",
-                    photo: "...",
-                    schedule: [...]
-                },
-
-                "Physics": {
-                    name: "Sir Shariq Rafiq",
-                    photo: "...",
-                    schedule: [...]
-                }
-            }
-        */
-
+        /* =================================================
+           CREATE TEACHER SUMMARY
+        ================================================= */
 
         const teacherSummary =
             Object.entries(
@@ -2701,14 +2969,11 @@ form.addEventListener("submit", async (e) => {
 
                     return {
 
-                        subject:
-                            subject,
+                        subject: subject,
 
-                        teacher:
-                            teacher.name,
+                        teacher: teacher.name,
 
-                        grade:
-                            selectedGrade,
+                        grade: selectedGrade,
 
                         photo:
                             teacher.photo || "",
@@ -2722,9 +2987,9 @@ form.addEventListener("submit", async (e) => {
             );
 
 
-        // =====================================================
-        // FINAL TEACHER VALIDATION
-        // =====================================================
+        /* =================================================
+           FINAL TEACHER VALIDATION
+        ================================================= */
 
         if (
             teacherSummary.length !==
@@ -2740,54 +3005,28 @@ form.addEventListener("submit", async (e) => {
         }
 
 
-        // =====================================================
-        // DEBUG
-        // =====================================================
-
-        console.log(
-            "======================================"
-        );
-
-        console.log(
-            "STUDENT SUBMISSION"
-        );
-
-        console.log(
-            "======================================"
-        );
-
-        console.log(
-            "Selected Grade:",
-            selectedGrade
-        );
-
-        console.log(
-            "Selected Subjects:",
-            selectedSubjects
-        );
-
-        console.log(
-            "Selected Teachers:",
-            selectedTeachers
-        );
-
-        console.log(
-            "Teacher Summary:",
-            teacherSummary
-        );
-
-
-        // =====================================================
-        // CREATE FORM DATA
-        // =====================================================
+        /* =================================================
+           CREATE FORM DATA
+        ================================================= */
 
         const formData =
             new FormData();
 
 
-        // =====================================================
-        // EXAMINATION INFORMATION
-        // =====================================================
+        /* =================================================
+           EXAMINATION INFORMATION
+        ================================================= */
+
+        const examSeries =
+            document.querySelector(
+                'input[name="examSeries"]:checked'
+            );
+
+        const candidate =
+            document.querySelector(
+                'input[name="candidate"]:checked'
+            );
+
 
         formData.append(
             "examSeries",
@@ -2801,9 +3040,9 @@ form.addEventListener("submit", async (e) => {
         );
 
 
-        // =====================================================
-        // STUDENT INFORMATION
-        // =====================================================
+        /* =================================================
+           STUDENT INFORMATION
+        ================================================= */
 
         formData.append(
             "schoolName",
@@ -2816,7 +3055,10 @@ form.addEventListener("submit", async (e) => {
 
         formData.append(
             "studentName",
-            studentName
+            document
+                .getElementById("studentName")
+                .value
+                .trim()
         );
 
 
@@ -2874,9 +3116,9 @@ form.addEventListener("submit", async (e) => {
         );
 
 
-        // =====================================================
-        // ACADEMIC INFORMATION
-        // =====================================================
+        /* =================================================
+           ACADEMIC INFORMATION
+        ================================================= */
 
         formData.append(
             "grade",
@@ -2892,9 +3134,9 @@ form.addEventListener("submit", async (e) => {
         );
 
 
-        // =====================================================
-        // COMPLETE TEACHER DATA
-        // =====================================================
+        /* =================================================
+           TEACHERS
+        ================================================= */
 
         formData.append(
             "teachers",
@@ -2904,12 +3146,9 @@ form.addEventListener("submit", async (e) => {
         );
 
 
-        // =====================================================
-        // TEACHER SUMMARY
-        //
-        // IMPORTANT:
-        // SEND JSON, NOT teacherName.value
-        // =====================================================
+        /* =================================================
+           TEACHER SUMMARY
+        ================================================= */
 
         formData.append(
             "teacherSummary",
@@ -2919,9 +3158,9 @@ form.addEventListener("submit", async (e) => {
         );
 
 
-        // =====================================================
-        // PROFILE IMAGE
-        // =====================================================
+        /* =================================================
+           PROFILE IMAGE
+        ================================================= */
 
         const profileInput =
             document.getElementById(
@@ -2943,9 +3182,9 @@ form.addEventListener("submit", async (e) => {
         }
 
 
-        // =====================================================
-        // MARKSHEET IMAGE
-        // =====================================================
+        /* =================================================
+           MARKSHEET IMAGE
+        ================================================= */
 
         const marksheetInput =
             document.getElementById(
@@ -2967,21 +3206,46 @@ form.addEventListener("submit", async (e) => {
         }
 
 
-        // =====================================================
-        // SHOW WHAT IS BEING SENT
-        // =====================================================
+        /* =================================================
+           DEBUG
+        ================================================= */
 
         console.log(
-            "Teacher Summary JSON:",
-            JSON.stringify(
-                teacherSummary
-            )
+            "======================================"
+        );
+
+        console.log(
+            "CONFIRMED STUDENT SUBMISSION"
+        );
+
+        console.log(
+            "======================================"
+        );
+
+        console.log(
+            "Grade:",
+            selectedGrade
+        );
+
+        console.log(
+            "Subjects:",
+            selectedSubjects
+        );
+
+        console.log(
+            "Teachers:",
+            selectedTeachers
+        );
+
+        console.log(
+            "Teacher Summary:",
+            teacherSummary
         );
 
 
-        // =====================================================
-        // SEND TO BACKEND
-        // =====================================================
+        /* =================================================
+           SEND TO BACKEND
+        ================================================= */
 
         const response =
             await fetch(
@@ -2990,20 +3254,18 @@ form.addEventListener("submit", async (e) => {
 
                 {
 
-                    method:
-                        "POST",
+                    method: "POST",
 
-                    body:
-                        formData
+                    body: formData
 
                 }
 
             );
 
 
-        // =====================================================
-        // READ SERVER RESPONSE
-        // =====================================================
+        /* =================================================
+           SERVER RESPONSE
+        ================================================= */
 
         let result;
 
@@ -3029,9 +3291,9 @@ form.addEventListener("submit", async (e) => {
         }
 
 
-        // =====================================================
-        // SERVER ERROR
-        // =====================================================
+        /* =================================================
+           SERVER ERROR
+        ================================================= */
 
         if (!response.ok) {
 
@@ -3049,13 +3311,11 @@ form.addEventListener("submit", async (e) => {
         }
 
 
-        // =====================================================
-        // SUCCESS
-        // =====================================================
+        /* =================================================
+           SUCCESS
+        ================================================= */
 
-        if (
-            result.success
-        ) {
+        if (result.success) {
 
             console.log(
                 "Student saved successfully:",
@@ -3069,61 +3329,36 @@ form.addEventListener("submit", async (e) => {
             );
 
 
-            // =================================================
-            // RESET FORM
-            // =================================================
+            /* =============================================
+               RESET FORM
+            ============================================= */
 
             form.reset();
 
 
-            // =================================================
-            // RESET APPLICATION STATE
-            // =================================================
+            selectedSubjects = [];
 
-            selectedSubjects =
-                [];
+            selectedTeachers = {};
 
-            selectedTeachers =
-                {};
-
-            selectedGrade =
-                "";
+            selectedGrade = "";
 
 
-            // =================================================
-            // RESET TEACHER SUMMARY
-            // =================================================
+            teacherName.value = "";
 
-            teacherName.value =
-                "";
-
-
-            // =================================================
-            // RESET SUBJECT DROPDOWN
-            // =================================================
-
-            dropdown.innerHTML =
-                "";
-
+            dropdown.innerHTML = "";
 
             subjectBtn.innerText =
                 "Select Subjects";
 
 
-            // =================================================
-            // RESET TEACHER SCHEDULE
-            // =================================================
+            scheduleBox.innerHTML = "";
 
-            scheduleBox.innerHTML =
-                "";
-
-            scheduleBox.style.display =
-                "";
+            scheduleBox.style.display = "";
 
 
-            // =================================================
-            // RESET PROFILE PREVIEW
-            // =================================================
+            /* =============================================
+               RESET PROFILE
+            ============================================= */
 
             const profilePreview =
                 document.getElementById(
@@ -3133,15 +3368,14 @@ form.addEventListener("submit", async (e) => {
 
             if (profilePreview) {
 
-                profilePreview.src =
-                    "";
+                profilePreview.src = "";
 
             }
 
 
-            // =================================================
-            // RESET MARKSHEET PREVIEW
-            // =================================================
+            /* =============================================
+               RESET MARKSHEET
+            ============================================= */
 
             const marksheetPreview =
                 document.getElementById(
@@ -3151,35 +3385,32 @@ form.addEventListener("submit", async (e) => {
 
             if (marksheetPreview) {
 
-                marksheetPreview.src =
-                    "";
+                marksheetPreview.src = "";
 
             }
 
 
-            // =================================================
-            // RESET FILE INPUTS
-            // =================================================
+            /* =============================================
+               RESET FILE INPUTS
+            ============================================= */
 
             if (profileInput) {
 
-                profileInput.value =
-                    "";
+                profileInput.value = "";
 
             }
 
 
             if (marksheetInput) {
 
-                marksheetInput.value =
-                    "";
+                marksheetInput.value = "";
 
             }
 
 
-            // =================================================
-            // RESET SCHOOL FIELD
-            // =================================================
+            /* =============================================
+               RESET SCHOOL FIELD
+            ============================================= */
 
             const schoolField =
                 document.getElementById(
@@ -3194,10 +3425,6 @@ form.addEventListener("submit", async (e) => {
 
             }
 
-
-            // =================================================
-            // RESET MOBILE / OTHER UI
-            // =================================================
 
             console.log(
                 "Form reset successfully."
@@ -3218,11 +3445,6 @@ form.addEventListener("submit", async (e) => {
     }
 
     catch (error) {
-
-
-        // =====================================================
-        // ERROR HANDLING
-        // =====================================================
 
         console.error(
             "======================================"
@@ -3248,24 +3470,20 @@ form.addEventListener("submit", async (e) => {
 
     }
 
-
     finally {
 
+        /* =================================================
+           ENABLE BUTTON AGAIN
+        ================================================= */
 
-        // =====================================================
-        // ENABLE SUBMIT BUTTON
-        // =====================================================
-
-        submitBtn.disabled =
-            false;
-
+        submitBtn.disabled = false;
 
         submitBtn.innerText =
             "Submit Form";
 
     }
 
-});
+}
 </script>
 </body>
 
