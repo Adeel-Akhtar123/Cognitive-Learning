@@ -1985,931 +1985,22 @@ textarea {
 
 </div>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-/* =========================================================
-   STATE
-========================================================= */
+
+const API_BASE_URL = "https://cognitive-learning-backend.vercel.app";
 
 let selectedGrade = "";
 let selectedSubjects = [];
 let selectedTeachers = {};
 
-
-/* =========================================================
-   GRADE / SUBJECT / TEACHER DATA
-========================================================= */
-
-const gradeSubjects = {
-
-    "Cambridge IGCSE": {
-
-        "Mathematics": {
-            teachers: [
-                {
-                    name: "Sir Ahemad Javed",
-                    photo: "Image/Ahmed  Javaid removebg-preview.png",
-                    schedule: [
-                        ["Monday", "6:00 PM - 7:00 PM"],
-                        ["Tuesday", "6:00 PM - 7:00 PM"],
-                        ["Thursday", "6:00 PM - 7:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Physics": {
-            teachers: [
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Wednesday", "6:00 PM - 7:00 PM"],
-                        ["Friday", "6:00 PM - 7:00 PM"]
-                    ]
-                },
-
-                {
-                    name: "Sir Ahemad Javed",
-                    photo: "Image/Ahmed  Javaid removebg-preview.png",
-                    schedule: [
-                        ["Monday", "3:00 PM - 4:00 PM"],
-                        ["Tuesday", "3:00 PM - 4:00 PM"],
-                        ["Thursday", "3:00 PM - 4:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Chemistry": {
-            teachers: [
-                {
-                    name: "Sir Behroz Esshani",
-                    photo: "Image/Behroze Essani.jpg",
-                    schedule: [
-                        ["Saturday", "12:00 PM - 2:00 PM"]
-                    ]
-                },
-
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Wednesday", "7:00 PM - 8:00 PM"],
-                        ["Friday", "7:00 PM - 8:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Computer Science": {
-            teachers: [
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Monday", "7:00 PM - 8:00 PM"],
-                        ["Tuesday", "7:00 PM - 8:00 PM"],
-                        ["Thursday", "7:00 PM - 8:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Urdu": {
-            teachers: [
-                {
-                    name: "Sir Faheem Ahemad",
-                    photo: "Image/fA-removebg-preview-removebg-preview.png",
-                    schedule: [
-                        ["Friday", "6:00 PM - 7:00 PM"],
-                        ["Saturday", "6:00 PM - 7:00 PM"]
-                    ]
-                }
-            ]
-        }
-    },
-
-
-    /* =====================================================
-       O / LEVEL
-    ===================================================== */
-
-    "O/Level": {
-
-        "Mathematics": {
-            teachers: [
-                {
-                    name: "Sir Ahemad Javed",
-                    photo: "Image/Ahmed  Javaid removebg-preview.png",
-                    schedule: [
-                        ["Monday", "6:00 PM - 7:00 PM"],
-                        ["Tuesday", "6:00 PM - 7:00 PM"],
-                        ["Thursday", "6:00 PM - 7:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Physics": {
-            teachers: [
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Wednesday", "6:00 PM - 7:00 PM"],
-                        ["Friday", "6:00 PM - 7:00 PM"]
-                    ]
-                },
-
-                {
-                    name: "Sir Ahemad Javed",
-                    photo: "Image/Ahmed  Javaid removebg-preview.png",
-                    schedule: [
-                        ["Monday", "3:00 PM - 4:00 PM"],
-                        ["Tuesday", "3:00 PM - 4:00 PM"],
-                        ["Thursday", "3:00 PM - 4:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Chemistry": {
-            teachers: [
-                {
-                    name: "Sir Behroz Esshani",
-                    photo: "Image/Behroze Essani.jpg",
-                    schedule: [
-                        ["Saturday", "12:00 PM - 2:00 PM"]
-                    ]
-                },
-
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Wednesday", "7:00 PM - 8:00 PM"],
-                        ["Friday", "7:00 PM - 8:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Computer Science": {
-            teachers: [
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Monday", "7:00 PM - 8:00 PM"],
-                        ["Tuesday", "7:00 PM - 8:00 PM"],
-                        ["Thursday", "7:00 PM - 8:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Urdu": {
-            teachers: [
-                {
-                    name: "Sir Faheem Ahemad",
-                    photo: "Image/fA-removebg-preview-removebg-preview.png",
-                    schedule: [
-                        ["Friday", "6:00 PM - 7:00 PM"],
-                        ["Saturday", "6:00 PM - 7:00 PM"]
-                    ]
-                }
-            ]
-        }
-    },
-
-
-    /* =====================================================
-       AS / LEVELS
-    ===================================================== */
-
-    "AS/Levels": {
-
-        "Mathematics": {
-            teachers: [
-                {
-                    name: "Sir Ahemad Javed",
-                    photo: "Image/Ahmed  Javaid removebg-preview.png",
-                    schedule: [
-                        ["Monday", "6:00 PM - 7:00 PM"],
-                        ["Tuesday", "6:00 PM - 7:00 PM"],
-                        ["Thursday", "6:00 PM - 7:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Physics": {
-            teachers: [
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Wednesday", "6:00 PM - 7:00 PM"],
-                        ["Friday", "6:00 PM - 7:00 PM"]
-                    ]
-                },
-
-                {
-                    name: "Sir Ahemad Javed",
-                    photo: "Image/Ahmed  Javaid removebg-preview.png",
-                    schedule: [
-                        ["Monday", "3:00 PM - 4:00 PM"],
-                        ["Tuesday", "3:00 PM - 4:00 PM"],
-                        ["Thursday", "3:00 PM - 4:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Chemistry": {
-            teachers: [
-                {
-                    name: "Sir Behroz Esshani",
-                    photo: "Image/Behroze Essani.jpg",
-                    schedule: [
-                        ["Saturday", "12:00 PM - 2:00 PM"]
-                    ]
-                },
-
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Wednesday", "7:00 PM - 8:00 PM"],
-                        ["Friday", "7:00 PM - 8:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Computer Science": {
-            teachers: [
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Monday", "7:00 PM - 8:00 PM"],
-                        ["Tuesday", "7:00 PM - 8:00 PM"],
-                        ["Thursday", "7:00 PM - 8:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Urdu": {
-            teachers: [
-                {
-                    name: "Sir Faheem Ahemad",
-                    photo: "Image/fA-removebg-preview-removebg-preview.png",
-                    schedule: [
-                        ["Friday", "6:00 PM - 7:00 PM"],
-                        ["Saturday", "6:00 PM - 7:00 PM"]
-                    ]
-                }
-            ]
-        }
-    },
-
-
-    /* =====================================================
-       A2 / LEVEL
-    ===================================================== */
-
-    "A2/Level": {
-
-        "Mathematics": {
-            teachers: [
-                {
-                    name: "Sir Ahemad Javed",
-                    photo: "Image/Ahmed  Javaid removebg-preview.png",
-                    schedule: [
-                        ["Monday", "6:00 PM - 7:00 PM"],
-                        ["Tuesday", "6:00 PM - 7:00 PM"],
-                        ["Thursday", "6:00 PM - 7:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Physics": {
-            teachers: [
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Wednesday", "6:00 PM - 7:00 PM"],
-                        ["Friday", "6:00 PM - 7:00 PM"]
-                    ]
-                },
-
-                {
-                    name: "Sir Ahemad Javed",
-                    photo: "Image/Ahmed  Javaid removebg-preview.png",
-                    schedule: [
-                        ["Monday", "3:00 PM - 4:00 PM"],
-                        ["Tuesday", "3:00 PM - 4:00 PM"],
-                        ["Thursday", "3:00 PM - 4:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Chemistry": {
-            teachers: [
-                {
-                    name: "Sir Behroz Esshani",
-                    photo: "Image/Behroze Essani.jpg",
-                    schedule: [
-                        ["Saturday", "12:00 PM - 2:00 PM"]
-                    ]
-                },
-
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Wednesday", "7:00 PM - 8:00 PM"],
-                        ["Friday", "7:00 PM - 8:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Computer Science": {
-            teachers: [
-                {
-                    name: "Sir Shariq Rafiq",
-                    photo: "Image/SR1-removebg-preview.png",
-                    schedule: [
-                        ["Monday", "7:00 PM - 8:00 PM"],
-                        ["Tuesday", "7:00 PM - 8:00 PM"],
-                        ["Thursday", "7:00 PM - 8:00 PM"]
-                    ]
-                }
-            ]
-        },
-
-        "Urdu": {
-            teachers: [
-                {
-                    name: "Sir Faheem Ahemad",
-                    photo: "Image/fA-removebg-preview-removebg-preview.png",
-                    schedule: [
-                        ["Friday", "6:00 PM - 7:00 PM"],
-                        ["Saturday", "6:00 PM - 7:00 PM"]
-                    ]
-                }
-            ]
-        }
-    }
-};
+let feesConfirmed = false;
 
 
 /* =========================================================
-   ELEMENTS
-========================================================= */
-
-const dropdown = document.getElementById("dropdown");
-const subjectBtn = document.getElementById("subjectBtn");
-const teacherName = document.getElementById("teacherName");
-const scheduleBox = document.getElementById("scheduleOutput");
-const form = document.getElementById("registrationForm");
-
-
-/* =========================================================
-   SHOW SCHOOL FIELD
-========================================================= */
-
-function showSchoolField() {
-
-    const type =
-        document.querySelector(
-            'input[name="candidate"]:checked'
-        )?.value;
-
-    const schoolField =
-        document.getElementById("schoolField");
-
-    if (!schoolField) return;
-
-    schoolField.style.display =
-        type === "regular" ? "block" : "none";
-}
-
-
-/* =========================================================
-   CANDIDATE TYPE CHANGE
-========================================================= */
-
-document
-    .querySelectorAll('input[name="candidate"]')
-    .forEach(radio => {
-
-        radio.addEventListener("change", showSchoolField);
-
-    });
-
-
-/* =========================================================
-   GRADE CHANGE
-========================================================= */
-
-document
-    .querySelectorAll('input[name="grade"]')
-    .forEach(radio => {
-
-        radio.addEventListener("change", function (e) {
-
-            selectedGrade = e.target.value;
-
-            resetSelection();
-
-            buildSubjectList();
-
-        });
-
-    });
-
-
-/* =========================================================
-   RESET SELECTION
-========================================================= */
-
-function resetSelection() {
-
-    selectedSubjects = [];
-    selectedTeachers = {};
-
-    if (subjectBtn) {
-        subjectBtn.innerText = "Select Subjects";
-    }
-
-    if (teacherName) {
-        teacherName.value = "";
-    }
-
-    if (dropdown) {
-        dropdown.innerHTML = "";
-        dropdown.style.display = "none";
-    }
-
-    if (scheduleBox) {
-        scheduleBox.innerHTML = "";
-        scheduleBox.style.display = "";
-    }
-}
-
-
-/* =========================================================
-   BUILD SUBJECT LIST
-========================================================= */
-
-function buildSubjectList() {
-
-    if (!dropdown) return;
-
-    dropdown.innerHTML = "";
-
-    const subjects =
-        Object.keys(
-            gradeSubjects[selectedGrade] || {}
-        );
-
-    subjects.forEach(subject => {
-
-        const label =
-            document.createElement("label");
-
-        label.innerHTML = `
-            <input
-                type="checkbox"
-                value="${subject}"
-            >
-            ${subject}
-        `;
-
-        const checkbox =
-            label.querySelector("input");
-
-        checkbox.addEventListener(
-            "change",
-            updateSubjects
-        );
-
-        dropdown.appendChild(label);
-
-    });
-}
-
-
-/* =========================================================
-   TOGGLE SUBJECT DROPDOWN
-========================================================= */
-
-function toggleDropdown() {
-
-    if (!dropdown) return;
-
-    dropdown.style.display =
-        dropdown.style.display === "block"
-            ? "none"
-            : "block";
-}
-
-
-/* =========================================================
-   UPDATE SUBJECTS
-========================================================= */
-
-function updateSubjects() {
-
-    if (!dropdown) return;
-
-    selectedSubjects =
-        [
-            ...dropdown.querySelectorAll(
-                "input:checked"
-            )
-        ].map(
-            el => el.value
-        );
-
-    if (subjectBtn) {
-
-        subjectBtn.innerText =
-            selectedSubjects.length
-                ? selectedSubjects.join(", ")
-                : "Select Subjects";
-
-    }
-
-    selectedTeachers = {};
-
-    if (teacherName) {
-        teacherName.value = "";
-    }
-
-    if (scheduleBox) {
-        scheduleBox.innerHTML = "";
-        scheduleBox.style.display = "";
-    }
-}
-
-
-/* =========================================================
-   SHOW TEACHERS / SCHEDULE
-========================================================= */
-
-function showSchedule() {
-
-    if (!selectedGrade) {
-
-        alert("Please select a grade first.");
-
-        return;
-    }
-
-    if (selectedSubjects.length === 0) {
-
-        alert("Please select at least one subject.");
-
-        return;
-    }
-
-    if (!scheduleBox) return;
-
-    scheduleBox.innerHTML = "";
-
-    scheduleBox.style.display = "grid";
-
-
-    selectedSubjects.forEach(subject => {
-
-        const subjectData =
-            gradeSubjects[selectedGrade]?.[subject];
-
-        if (!subjectData) return;
-
-
-        const subjectSection =
-            document.createElement("div");
-
-        subjectSection.className =
-            "subject-section";
-
-
-        subjectSection.innerHTML = `
-            <div class="subject-title">
-                ${subject}
-            </div>
-        `;
-
-
-        subjectData.teachers.forEach(teacher => {
-
-            const card =
-                document.createElement("div");
-
-            card.className =
-                "teacher-card-mini";
-
-
-            const scheduleHTML =
-                teacher.schedule
-                    .map(schedule => {
-
-                        return `
-                            <span class="schedule-badge">
-                                ${schedule[0]}: ${schedule[1]}
-                            </span>
-                        `;
-
-                    })
-                    .join("");
-
-
-            card.innerHTML = `
-                <img
-                    src="${teacher.photo}"
-                    alt="${teacher.name}"
-                >
-
-                <div class="teacher-name">
-                    ${teacher.name}
-                </div>
-
-                <div class="schedule-list">
-                    ${scheduleHTML}
-                </div>
-
-                <button
-                    type="button"
-                    class="select-btn"
-                >
-                    Select Teacher
-                </button>
-            `;
-
-
-            const btn =
-                card.querySelector(
-                    ".select-btn"
-                );
-
-
-            btn.addEventListener(
-                "click",
-                function (e) {
-
-                    e.preventDefault();
-
-                    e.stopPropagation();
-
-                    selectTeacher(
-                        subject,
-                        teacher,
-                        btn
-                    );
-
-                }
-            );
-
-
-            subjectSection.appendChild(card);
-
-        });
-
-
-        scheduleBox.appendChild(
-            subjectSection
-        );
-
-    });
-}
-
-
-/* =========================================================
-   SELECT TEACHER
-========================================================= */
-
-function selectTeacher(
-    subject,
-    teacher,
-    btn
-) {
-
-    const section =
-        btn.closest(".subject-section");
-
-
-    if (
-        selectedTeachers[subject]?.name ===
-        teacher.name
-    ) {
-
-        delete selectedTeachers[subject];
-
-        btn.classList.remove("active");
-
-        btn.innerText =
-            "Select Teacher";
-
-    }
-
-    else {
-
-        selectedTeachers[subject] =
-            teacher;
-
-
-        section
-            .querySelectorAll(".select-btn")
-            .forEach(button => {
-
-                button.classList.remove(
-                    "active"
-                );
-
-                button.innerText =
-                    "Select Teacher";
-
-            });
-
-
-        btn.classList.add("active");
-
-        btn.innerText =
-            "Selected ✓";
-    }
-
-
-    updateTeacherSummary();
-
-
-    /* Hide teacher cards once every subject
-       has a selected teacher */
-
-    if (
-        Object.keys(selectedTeachers).length ===
-        selectedSubjects.length
-    ) {
-
-        setTimeout(() => {
-
-            scheduleBox.style.display =
-                "none";
-
-        }, 500);
-
-    }
-}
-
-
-/* =========================================================
-   TEACHER SUMMARY
-========================================================= */
-
-function updateTeacherSummary() {
-
-    if (!teacherName) return;
-
-    teacherName.value =
-        Object.entries(selectedTeachers)
-            .map(
-                ([subject, teacher]) =>
-                    `${subject}: ${teacher.name}`
-            )
-            .join(" | ");
-}
-
-
-/* =========================================================
-   IMAGE PREVIEW - PROFILE
-========================================================= */
-
-const profileInput =
-    document.getElementById(
-        "profileInput"
-    );
-
-const profilePreview =
-    document.getElementById(
-        "profilePreview"
-    );
-
-
-if (profileInput) {
-
-    profileInput.addEventListener(
-        "change",
-        function (e) {
-
-            const file =
-                e.target.files?.[0];
-
-            if (
-                file &&
-                profilePreview
-            ) {
-
-                profilePreview.src =
-                    URL.createObjectURL(file);
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   IMAGE PREVIEW - MARKSHEET
-========================================================= */
-
-const marksheetInput =
-    document.getElementById(
-        "marksheetInput"
-    );
-
-const marksheetPreview =
-    document.getElementById(
-        "marksheetPreview"
-    );
-
-
-if (marksheetInput) {
-
-    marksheetInput.addEventListener(
-        "change",
-        function (e) {
-
-            const file =
-                e.target.files?.[0];
-
-            if (
-                file &&
-                marksheetPreview
-            ) {
-
-                marksheetPreview.src =
-                    URL.createObjectURL(file);
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-document
-    .getElementById("menuBtn")
-    ?.addEventListener(
-        "click",
-        function () {
-
-            document
-                .getElementById("mobileMenu")
-                ?.classList
-                .toggle("hidden");
-
-        }
-    );
-
-
-/* =========================================================
-   TEACHER BUTTON
-========================================================= */
-
-document
-    .getElementById("teacherBtn")
-    ?.addEventListener(
-        "click",
-        function (e) {
-
-            e.preventDefault();
-
-            showSchedule();
-
-        }
-    );
-
-
-/* =========================================================
-   FEES CONFIGURATION
-   IMPORTANT:
-   THESE ARE PER-SUBJECT FEES
-========================================================= */
+   FEES STRUCTURE
+   ========================================================= */
 
 const feesStructure = {
 
@@ -2925,1220 +2016,1697 @@ const feesStructure = {
 
 
 /* =========================================================
-   FEES POPUP ELEMENTS
-========================================================= */
+   GRADE + SUBJECT + TEACHER DATA
+   ========================================================= */
 
-const feesModal =
-    document.getElementById(
-        "feesModal"
-    );
+const gradeSubjects = {
 
-const feesTableBody =
-    document.getElementById(
-        "feesTableBody"
-    );
+  "Cambridge IGCSE": {
 
-const feesTotal =
-    document.getElementById(
-        "feesTotal"
-    );
+    "Mathematics": {
+      teachers: [
+        {
+          name: "Sir Ahemad Javed",
+          photo: "Image/Ahmed  Javaid removebg-preview.png",
+          schedule: [
+            ["Monday", "6:00 PM - 7:00 PM"],
+            ["Tuesday", "6:00 PM - 7:00 PM"],
+            ["Thursday", "6:00 PM - 7:00 PM"]
+          ]
+        }
+      ]
+    },
 
-const feesGradeTitle =
-    document.getElementById(
-        "feesGradeTitle"
-    );
+    "Physics": {
+      teachers: [
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Wednesday", "6:00 PM - 7:00 PM"],
+            ["Friday", "6:00 PM - 7:00 PM"]
+          ]
+        },
+        {
+          name: "Sir Ahemad Javed",
+          photo: "Image/Ahmed  Javaid removebg-preview.png",
+          schedule: [
+            ["Monday", "3:00 PM - 4:00 PM"],
+            ["Tuesday", "3:00 PM - 4:00 PM"],
+            ["Thursday", "3:00 PM - 4:00 PM"]
+          ]
+        }
+      ]
+    },
 
-const feesPerSubjectText =
-    document.getElementById(
-        "feesPerSubjectText"
-    );
+    "Chemistry": {
+      teachers: [
+        {
+          name: "Sir Behroz Esshani",
+          photo: "Image/Behroze Essani.jpg",
+          schedule: [
+            ["Saturday", "12:00 PM - 2:00 PM"]
+          ]
+        },
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Wednesday", "7:00 PM - 8:00 PM"],
+            ["Friday", "7:00 PM - 8:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Computer Science": {
+      teachers: [
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Monday", "7:00 PM - 8:00 PM"],
+            ["Tuesday", "7:00 PM - 8:00 PM"],
+            ["Thursday", "7:00 PM - 8:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Urdu": {
+      teachers: [
+        {
+          name: "Sir Faheem Ahemad",
+          photo: "Image/fA-removebg-preview-removebg-preview.png",
+          schedule: [
+            ["Friday", "6:00 PM - 7:00 PM"],
+            ["Saturday", "6:00 PM - 7:00 PM"]
+          ]
+        }
+      ]
+    }
+
+  },
+
+
+  "O/Level": {
+
+    "Mathematics": {
+      teachers: [
+        {
+          name: "Sir Ahemad Javed",
+          photo: "Image/Ahmed  Javaid removebg-preview.png",
+          schedule: [
+            ["Monday", "6:00 PM - 7:00 PM"],
+            ["Tuesday", "6:00 PM - 7:00 PM"],
+            ["Thursday", "6:00 PM - 7:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Physics": {
+      teachers: [
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Wednesday", "6:00 PM - 7:00 PM"],
+            ["Friday", "6:00 PM - 7:00 PM"]
+          ]
+        },
+        {
+          name: "Sir Ahemad Javed",
+          photo: "Image/Ahmed  Javaid removebg-preview.png",
+          schedule: [
+            ["Monday", "3:00 PM - 4:00 PM"],
+            ["Tuesday", "3:00 PM - 4:00 PM"],
+            ["Thursday", "3:00 PM - 4:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Chemistry": {
+      teachers: [
+        {
+          name: "Sir Behroz Esshani",
+          photo: "Image/Behroze Essani.jpg",
+          schedule: [
+            ["Saturday", "12:00 PM - 2:00 PM"]
+          ]
+        },
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Wednesday", "7:00 PM - 8:00 PM"],
+            ["Friday", "7:00 PM - 8:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Computer Science": {
+      teachers: [
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Monday", "7:00 PM - 8:00 PM"],
+            ["Tuesday", "7:00 PM - 8:00 PM"],
+            ["Thursday", "7:00 PM - 8:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Urdu": {
+      teachers: [
+        {
+          name: "Sir Faheem Ahemad",
+          photo: "Image/fA-removebg-preview-removebg-preview.png",
+          schedule: [
+            ["Friday", "6:00 PM - 7:00 PM"],
+            ["Saturday", "6:00 PM - 7:00 PM"]
+          ]
+        }
+      ]
+    }
+
+  },
+
+
+  "AS/Levels": {
+
+    "Mathematics": {
+      teachers: [
+        {
+          name: "Sir Ahemad Javed",
+          photo: "Image/Ahmed  Javaid removebg-preview.png",
+          schedule: [
+            ["Monday", "6:00 PM - 7:00 PM"],
+            ["Tuesday", "6:00 PM - 7:00 PM"],
+            ["Thursday", "6:00 PM - 7:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Physics": {
+      teachers: [
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Wednesday", "6:00 PM - 7:00 PM"],
+            ["Friday", "6:00 PM - 7:00 PM"]
+          ]
+        },
+        {
+          name: "Sir Ahemad Javed",
+          photo: "Image/Ahmed  Javaid removebg-preview.png",
+          schedule: [
+            ["Monday", "3:00 PM - 4:00 PM"],
+            ["Tuesday", "3:00 PM - 4:00 PM"],
+            ["Thursday", "3:00 PM - 4:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Chemistry": {
+      teachers: [
+        {
+          name: "Sir Behroz Esshani",
+          photo: "Image/Behroze Essani.jpg",
+          schedule: [
+            ["Saturday", "12:00 PM - 2:00 PM"]
+          ]
+        },
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Wednesday", "7:00 PM - 8:00 PM"],
+            ["Friday", "7:00 PM - 8:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Computer Science": {
+      teachers: [
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Monday", "7:00 PM - 8:00 PM"],
+            ["Tuesday", "7:00 PM - 8:00 PM"],
+            ["Thursday", "7:00 PM - 8:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Urdu": {
+      teachers: [
+        {
+          name: "Sir Faheem Ahemad",
+          photo: "Image/fA-removebg-preview-removebg-preview.png",
+          schedule: [
+            ["Friday", "6:00 PM - 7:00 PM"],
+            ["Saturday", "6:00 PM - 7:00 PM"]
+          ]
+        }
+      ]
+    }
+
+  },
+
+
+  "A2/Level": {
+
+    "Mathematics": {
+      teachers: [
+        {
+          name: "Sir Ahemad Javed",
+          photo: "Image/Ahmed  Javaid removebg-preview.png",
+          schedule: [
+            ["Monday", "6:00 PM - 7:00 PM"],
+            ["Tuesday", "6:00 PM - 7:00 PM"],
+            ["Thursday", "6:00 PM - 7:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Physics": {
+      teachers: [
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Wednesday", "6:00 PM - 7:00 PM"],
+            ["Friday", "6:00 PM - 7:00 PM"]
+          ]
+        },
+        {
+          name: "Sir Ahemad Javed",
+          photo: "Image/Ahmed  Javaid removebg-preview.png",
+          schedule: [
+            ["Monday", "3:00 PM - 4:00 PM"],
+            ["Tuesday", "3:00 PM - 4:00 PM"],
+            ["Thursday", "3:00 PM - 4:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Chemistry": {
+      teachers: [
+        {
+          name: "Sir Behroz Esshani",
+          photo: "Image/Behroze Essani.jpg",
+          schedule: [
+            ["Saturday", "12:00 PM - 2:00 PM"]
+          ]
+        },
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Wednesday", "7:00 PM - 8:00 PM"],
+            ["Friday", "7:00 PM - 8:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Computer Science": {
+      teachers: [
+        {
+          name: "Sir Shariq Rafiq",
+          photo: "Image/SR1-removebg-preview.png",
+          schedule: [
+            ["Monday", "7:00 PM - 8:00 PM"],
+            ["Tuesday", "7:00 PM - 8:00 PM"],
+            ["Thursday", "7:00 PM - 8:00 PM"]
+          ]
+        }
+      ]
+    },
+
+    "Urdu": {
+      teachers: [
+        {
+          name: "Sir Faheem Ahemad",
+          photo: "Image/fA-removebg-preview-removebg-preview.png",
+          schedule: [
+            ["Friday", "6:00 PM - 7:00 PM"],
+            ["Saturday", "6:00 PM - 7:00 PM"]
+          ]
+        }
+      ]
+    }
+
+  }
+
+};
+
 
 
 /* =========================================================
-   SHOW FEES POPUP
-========================================================= */
+   ELEMENTS
+   ========================================================= */
 
-function showFeesPopup() {
+const dropdown =
+  document.getElementById("dropdown");
 
-    if (!selectedGrade) {
+const subjectBtn =
+  document.getElementById("subjectBtn");
 
-        alert(
-            "Please select a grade first."
-        );
+const teacherName =
+  document.getElementById("teacherName");
 
-        return;
-    }
+const scheduleBox =
+  document.getElementById("scheduleOutput");
 
+const form =
+  document.getElementById("registrationForm");
 
-    if (selectedSubjects.length === 0) {
+const feesModal =
+  document.getElementById("feesModal");
 
-        alert(
-            "Please select at least one subject."
-        );
+const feesGradeTitle =
+  document.getElementById("feesGradeTitle");
 
-        return;
-    }
+const feesTableBody =
+  document.getElementById("feesTableBody");
 
+const feesTotal =
+  document.getElementById("feesTotal");
 
-    /*
-       Get fee PER SUBJECT
-       according to selected grade
-    */
-
-    const feePerSubject =
-        Number(
-            feesStructure[selectedGrade] || 0
-        );
+const feesPerSubjectText =
+  document.getElementById("feesPerSubjectText");
 
 
-    if (feePerSubject <= 0) {
 
-        alert(
-            "Fee structure not found for this grade."
-        );
+/* =========================================================
+   SHOW SCHOOL FIELD
+   ========================================================= */
 
-        return;
-    }
+function showSchoolField() {
 
+  const type =
+    document.querySelector(
+      'input[name="candidate"]:checked'
+    )?.value;
 
-    if (feesTableBody) {
+  const schoolField =
+    document.getElementById("schoolField");
 
-        feesTableBody.innerHTML = "";
+  if (!schoolField) return;
 
-    }
-
-
-    let total = 0;
-
-
-    /* =====================================================
-       CREATE ONE ROW FOR EACH SUBJECT
-    ===================================================== */
-
-    selectedSubjects.forEach(
-        (subject, index) => {
-
-            const fee =
-                feePerSubject;
+  schoolField.style.display =
+    type === "regular"
+      ? "block"
+      : "none";
+}
 
 
-            total += fee;
+
+/* =========================================================
+   GRADE CHANGE HANDLER
+   ========================================================= */
+
+document
+  .querySelectorAll('input[name="grade"]')
+  .forEach(radio => {
+
+    radio.addEventListener("change", e => {
+
+      selectedGrade = e.target.value;
+
+      resetSelection();
+
+      buildSubjectList();
+
+    });
+
+  });
 
 
-            const row =
-                document.createElement("tr");
+
+/* =========================================================
+   RESET UI STATE
+   ========================================================= */
+
+function resetSelection() {
+
+  selectedSubjects = [];
+
+  selectedTeachers = {};
+
+  subjectBtn.innerText =
+    "Select Subjects";
+
+  teacherName.value = "";
+
+  dropdown.innerHTML = "";
+
+  scheduleBox.innerHTML = "";
+
+  scheduleBox.style.display = "";
+
+}
 
 
-            row.innerHTML = `
-                <td>
-                    ${index + 1}
-                </td>
 
-                <td>
-                    ${subject}
-                </td>
+/* =========================================================
+   BUILD SUBJECT LIST
+   ========================================================= */
 
-                <td>
-                    Rs. ${fee.toLocaleString()}
-                </td>
-            `;
+function buildSubjectList() {
 
-
-            if (feesTableBody) {
-
-                feesTableBody.appendChild(
-                    row
-                );
-
-            }
-
-        }
+  const subjects =
+    Object.keys(
+      gradeSubjects[selectedGrade] || {}
     );
 
 
-    /* =====================================================
-       GRADE TITLE
-    ===================================================== */
+  subjects.forEach(subject => {
 
-    if (feesGradeTitle) {
-
-        feesGradeTitle.innerText =
-            `${selectedGrade} - Selected Subjects`;
-
-    }
+    const label =
+      document.createElement("label");
 
 
-    /* =====================================================
-       TOTAL
-    ===================================================== */
-
-    if (feesTotal) {
-
-        feesTotal.innerText =
-            `Rs. ${total.toLocaleString()}`;
-
-    }
+    label.innerHTML = `
+      <input type="checkbox" value="${subject}">
+      ${subject}
+    `;
 
 
-    /* =====================================================
-       FEE INFORMATION
-    ===================================================== */
-
-    if (feesPerSubjectText) {
-
-        feesPerSubjectText.innerText =
-            `Fee per subject: Rs. ${feePerSubject.toLocaleString()}`;
-
-    }
+    const checkbox =
+      label.querySelector("input");
 
 
-    /* =====================================================
-       SHOW POPUP
-    ===================================================== */
-
-    if (feesModal) {
-
-        feesModal.style.display =
-            "flex";
-
-    }
+    checkbox.addEventListener(
+      "change",
+      updateSubjects
+    );
 
 
-    document.body.style.overflow =
-        "hidden";
+    dropdown.appendChild(label);
+
+  });
+
 }
+
+
+
+/* =========================================================
+   TOGGLE SUBJECT DROPDOWN
+   ========================================================= */
+
+function toggleDropdown() {
+
+  dropdown.style.display =
+    dropdown.style.display === "block"
+      ? "none"
+      : "block";
+
+}
+
+
+
+/* =========================================================
+   UPDATE SUBJECTS
+   ========================================================= */
+
+function updateSubjects() {
+
+  selectedSubjects =
+    [
+      ...dropdown.querySelectorAll(
+        "input:checked"
+      )
+    ].map(el => el.value);
+
+
+  subjectBtn.innerText =
+    selectedSubjects.length
+      ? selectedSubjects.join(", ")
+      : "Select Subjects";
+
+
+  selectedTeachers = {};
+
+  teacherName.value = "";
+
+  scheduleBox.innerHTML = "";
+
+}
+
+
+
+/* =========================================================
+   SHOW TEACHERS
+   ========================================================= */
+
+function showSchedule() {
+
+  if (
+    !selectedGrade ||
+    selectedSubjects.length === 0
+  ) {
+
+    alert(
+      "Please select Grade and Subject first."
+    );
+
+    return;
+
+  }
+
+
+  scheduleBox.innerHTML = "";
+
+  scheduleBox.style.display = "grid";
+
+
+  selectedSubjects.forEach(subject => {
+
+    const subjectData =
+      gradeSubjects[selectedGrade]?.[subject];
+
+
+    if (!subjectData) return;
+
+
+    const subjectSection =
+      document.createElement("div");
+
+    subjectSection.className =
+      "subject-section";
+
+
+    subjectSection.innerHTML = `
+      <div class="subject-title">
+        ${subject}
+      </div>
+    `;
+
+
+    subjectData.teachers.forEach(teacher => {
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "teacher-card-mini";
+
+
+      const scheduleHTML =
+        teacher.schedule
+          .map(
+            s =>
+              `<span class="schedule-badge">
+                ${s[0]}: ${s[1]}
+              </span>`
+          )
+          .join("");
+
+
+      card.innerHTML = `
+        <img
+          src="${teacher.photo}"
+          alt="Teacher"
+        >
+
+        <div class="teacher-name">
+          ${teacher.name}
+        </div>
+
+        <div class="schedule-list">
+          ${scheduleHTML}
+        </div>
+
+        <button
+          type="button"
+          class="select-btn"
+        >
+          Select Teacher
+        </button>
+      `;
+
+
+      const btn =
+        card.querySelector(".select-btn");
+
+
+      btn.addEventListener(
+        "click",
+        e => {
+
+          e.preventDefault();
+
+          e.stopPropagation();
+
+          selectTeacher(
+            subject,
+            teacher,
+            btn
+          );
+
+        }
+      );
+
+
+      subjectSection.appendChild(card);
+
+    });
+
+
+    scheduleBox.appendChild(
+      subjectSection
+    );
+
+  });
+
+}
+
+
+
+/* =========================================================
+   SELECT TEACHER
+   ========================================================= */
+
+function selectTeacher(
+  subject,
+  teacher,
+  btn
+) {
+
+  const section =
+    btn.closest(".subject-section");
+
+
+  if (
+    selectedTeachers[subject]?.name ===
+    teacher.name
+  ) {
+
+    delete selectedTeachers[subject];
+
+    btn.classList.remove("active");
+
+    btn.innerText =
+      "Select Teacher";
+
+  } else {
+
+    selectedTeachers[subject] =
+      teacher;
+
+
+    section
+      .querySelectorAll(".select-btn")
+      .forEach(b => {
+
+        b.classList.remove("active");
+
+        b.innerText =
+          "Select Teacher";
+
+      });
+
+
+    btn.classList.add("active");
+
+    btn.innerText =
+      "Selected ✓";
+
+  }
+
+
+  updateTeacherSummary();
+
+
+  if (
+    Object.keys(selectedTeachers).length ===
+    selectedSubjects.length
+  ) {
+
+    setTimeout(() => {
+
+      scheduleBox.style.display =
+        "none";
+
+    }, 500);
+
+  }
+
+}
+
+
+
+/* =========================================================
+   TEACHER SUMMARY
+   ========================================================= */
+
+function updateTeacherSummary() {
+
+  teacherName.value =
+    Object.entries(selectedTeachers)
+      .map(
+        ([sub, teacher]) =>
+          `${sub}: ${teacher.name}`
+      )
+      .join(" | ");
+
+}
+
+
+
+/* =========================================================
+   IMAGE PREVIEW
+   ========================================================= */
+
+document
+  .getElementById("profileInput")
+  ?.addEventListener(
+    "change",
+    e => {
+
+      const file =
+        e.target.files[0];
+
+      if (file) {
+
+        document.getElementById(
+          "profilePreview"
+        ).src =
+          URL.createObjectURL(file);
+
+      }
+
+    }
+  );
+
+
+
+document
+  .getElementById("marksheetInput")
+  ?.addEventListener(
+    "change",
+    e => {
+
+      const file =
+        e.target.files[0];
+
+      if (file) {
+
+        document.getElementById(
+          "marksheetPreview"
+        ).src =
+          URL.createObjectURL(file);
+
+      }
+
+    }
+  );
+
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+document
+  .getElementById("menuBtn")
+  ?.addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById("mobileMenu")
+        .classList.toggle("hidden");
+
+    }
+  );
+
+
+
+/* =========================================================
+   TEACHER BUTTON
+   ========================================================= */
+
+document
+  .getElementById("teacherBtn")
+  ?.addEventListener(
+    "click",
+    e => {
+
+      e.preventDefault();
+
+      showSchedule();
+
+    }
+  );
+
+
+
+/* =========================================================
+   UPDATE FEES POPUP
+   ========================================================= */
+
+function updateFeesPopup() {
+
+  if (!feesModal) {
+    console.error("feesModal not found.");
+    return;
+  }
+
+  /* =======================================================
+     FEE PER SUBJECT
+     ======================================================= */
+
+  const feePerSubject =
+    feesStructure[selectedGrade] || 0;
+
+
+  /* =======================================================
+     GRADE TITLE
+     ======================================================= */
+
+  if (feesGradeTitle) {
+
+    feesGradeTitle.innerText =
+      selectedGrade;
+
+  }
+
+
+  /* =======================================================
+     CLEAR OLD TABLE
+     ======================================================= */
+
+  if (feesTableBody) {
+
+    feesTableBody.innerHTML = "";
+
+  }
+
+
+  /* =======================================================
+     TOTAL FEE
+     ======================================================= */
+
+  const totalFee =
+    selectedSubjects.length * feePerSubject;
+
+
+  /* =======================================================
+     DISPLAY EACH SUBJECT + ITS FEE
+     ======================================================= */
+
+  selectedSubjects.forEach(
+    (subject, index) => {
+
+      const row =
+        document.createElement("tr");
+
+
+      row.innerHTML = `
+
+        <td>
+          ${index + 1}
+        </td>
+
+        <td>
+          ${subject}
+        </td>
+
+        <td>
+          Rs. ${feePerSubject.toLocaleString()}
+        </td>
+
+      `;
+
+
+      feesTableBody.appendChild(row);
+
+    }
+  );
+
+
+  /* =======================================================
+     DISPLAY TOTAL
+     ======================================================= */
+
+  if (feesTotal) {
+
+    feesTotal.innerText =
+      "Rs. " +
+      totalFee.toLocaleString();
+
+  }
+
+
+  /* =======================================================
+     FEE INFORMATION
+     ======================================================= */
+
+  if (feesPerSubjectText) {
+
+    feesPerSubjectText.innerText =
+      `Fee per subject: Rs. ${feePerSubject.toLocaleString()}. ` +
+      `You have selected ${selectedSubjects.length} subject` +
+      `${selectedSubjects.length !== 1 ? "s" : ""}. ` +
+      `Total fee: Rs. ${totalFee.toLocaleString()}.`;
+
+  }
+
+}
+
+
+/* =========================================================
+   OPEN FEES POPUP
+   ========================================================= */
+
+function openFeesPopup() {
+
+  if (!feesModal) {
+
+    console.error(
+      "feesModal not found."
+    );
+
+    return;
+
+  }
+
+
+  updateFeesPopup();
+
+
+  feesModal.style.display =
+    "flex";
+
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
 
 
 /* =========================================================
    CLOSE FEES POPUP
-========================================================= */
+   ========================================================= */
 
 function closeFeesPopup() {
 
-    if (feesModal) {
+  if (!feesModal) return;
 
-        feesModal.style.display =
-            "none";
 
-    }
+  feesModal.style.display =
+    "none";
 
-    document.body.style.overflow =
-        "";
+
+  document.body.style.overflow =
+    "";
+
 }
 
 
+
 /* =========================================================
-   CLOSE POPUP WHEN CLICKING OUTSIDE
-========================================================= */
+   VALIDATE FORM
+   ========================================================= */
 
-if (feesModal) {
+function validateForm() {
 
-    feesModal.addEventListener(
-        "click",
-        function (e) {
+  const examSeries =
+    document.querySelector(
+      'input[name="examSeries"]:checked'
+    )?.value || "";
 
-            if (
-                e.target === feesModal
-            ) {
 
-                closeFeesPopup();
+  const candidateType =
+    document.querySelector(
+      'input[name="candidate"]:checked'
+    )?.value || "";
 
-            }
 
-        }
+  if (!examSeries) {
+
+    alert(
+      "Please select Examination Series."
     );
 
+    return false;
+
+  }
+
+
+  if (!candidateType) {
+
+    alert(
+      "Please select Candidate Type."
+    );
+
+    return false;
+
+  }
+
+
+  if (!selectedGrade) {
+
+    alert(
+      "Please select Grade."
+    );
+
+    return false;
+
+  }
+
+
+  if (selectedSubjects.length === 0) {
+
+    alert(
+      "Please select Subject."
+    );
+
+    return false;
+
+  }
+
+
+  if (
+    Object.keys(selectedTeachers).length !==
+    selectedSubjects.length
+  ) {
+
+    alert(
+      "Please select teacher for every subject."
+    );
+
+    return false;
+
+  }
+
+
+  const requiredFields = [
+
+    "studentName",
+
+    "fatherName",
+
+    "email",
+
+    "whatsapp",
+
+    "contactNumber",
+
+    "address"
+
+  ];
+
+
+  for (
+    const field of requiredFields
+  ) {
+
+    const element =
+      document.getElementById(field);
+
+
+    if (
+      !element ||
+      !element.value.trim()
+    ) {
+
+      alert(
+        "Please fill " +
+        field.replace(
+          /([A-Z])/g,
+          " $1"
+        )
+      );
+
+      element?.focus();
+
+      return false;
+
+    }
+
+  }
+
+
+  return true;
+
 }
 
 
-/* =========================================================
-   ESC KEY CLOSE
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function (e) {
-
-        if (
-            e.key === "Escape" &&
-            feesModal?.style.display ===
-            "flex"
-        ) {
-
-            closeFeesPopup();
-
-        }
-
-    }
-);
-
 
 /* =========================================================
-   FORM SUBMIT
-   STEP 1:
-   VALIDATE FORM
-
-   STEP 2:
-   SHOW FEES POPUP
-========================================================= */
+   STUDENT FORM SUBMIT
+   ========================================================= */
 
 if (form) {
 
-    form.addEventListener(
-        "submit",
-        function (e) {
+  form.addEventListener(
+    "submit",
+    async function (e) {
 
-            e.preventDefault();
+      /*
+       * ALWAYS STOP DEFAULT HTML SUBMISSION
+       */
 
+      e.preventDefault();
 
-            /* =================================================
-               EXAMINATION SERIES
-            ================================================= */
 
-            const examSeries =
-                document.querySelector(
-                    'input[name="examSeries"]:checked'
-                );
+      /* =====================================================
+         STEP 1
+         NORMAL SUBMIT CLICK
+         ===================================================== */
 
+      if (!feesConfirmed) {
 
-            if (!examSeries) {
+        /*
+         * Validate everything first.
+         */
 
-                alert(
-                    "Please select Examination Series."
-                );
+        const valid =
+          validateForm();
 
-                return;
 
-            }
+        if (!valid) {
 
-
-            /* =================================================
-               CANDIDATE TYPE
-            ================================================= */
-
-            const candidate =
-                document.querySelector(
-                    'input[name="candidate"]:checked'
-                );
-
-
-            if (!candidate) {
-
-                alert(
-                    "Please select Candidate Type."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               GRADE
-            ================================================= */
-
-            if (!selectedGrade) {
-
-                alert(
-                    "Please select Grade."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               SUBJECTS
-            ================================================= */
-
-            if (
-                selectedSubjects.length === 0
-            ) {
-
-                alert(
-                    "Please select at least one subject."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               TEACHERS
-            ================================================= */
-
-            if (
-                Object.keys(selectedTeachers).length !==
-                selectedSubjects.length
-            ) {
-
-                alert(
-                    "Please select a teacher for every subject."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               STUDENT NAME
-            ================================================= */
-
-            const studentName =
-                document
-                    .getElementById(
-                        "studentName"
-                    )
-                    ?.value
-                    .trim();
-
-
-            if (!studentName) {
-
-                alert(
-                    "Student Name is required."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               PARENT NAME
-            ================================================= */
-
-            const fatherName =
-                document
-                    .getElementById(
-                        "fatherName"
-                    )
-                    ?.value
-                    .trim();
-
-
-            if (!fatherName) {
-
-                alert(
-                    "Father/Mother Name is required."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               WHATSAPP
-            ================================================= */
-
-            const whatsapp =
-                document
-                    .getElementById(
-                        "whatsapp"
-                    )
-                    ?.value
-                    .trim();
-
-
-            if (!whatsapp) {
-
-                alert(
-                    "WhatsApp Number is required."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               CONTACT NUMBER
-            ================================================= */
-
-            const contactNumber =
-                document
-                    .getElementById(
-                        "contactNumber"
-                    )
-                    ?.value
-                    .trim();
-
-
-            if (!contactNumber) {
-
-                alert(
-                    "Contact Number is required."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               ADDRESS
-            ================================================= */
-
-            const address =
-                document
-                    .getElementById(
-                        "address"
-                    )
-                    ?.value
-                    .trim();
-
-
-            if (!address) {
-
-                alert(
-                    "Residential Address is required."
-                );
-
-                return;
-
-            }
-
-
-            /* =================================================
-               EVERYTHING VALID
-               SHOW FEES
-            ================================================= */
-
-            showFeesPopup();
+          return;
 
         }
-    );
+
+
+        /*
+         * Form is valid.
+         *
+         * NOW show fees popup.
+         */
+
+        openFeesPopup();
+
+
+        return;
+
+      }
+
+
+
+      /* =====================================================
+         STEP 2
+         CONFIRMED FEES
+         ===================================================== */
+
+      feesConfirmed = false;
+
+
+      /*
+       * At this point the user has already
+       * seen the fees and clicked
+       * "Confirm & Submit".
+       *
+       * Now create FormData and send it.
+       */
+
+
+      const examSeries =
+        document.querySelector(
+          'input[name="examSeries"]:checked'
+        )?.value || "";
+
+
+      const candidateType =
+        document.querySelector(
+          'input[name="candidate"]:checked'
+        )?.value || "";
+
+
+
+      /* =====================================================
+         CREATE FORM DATA
+         ===================================================== */
+
+      const formData =
+        new FormData();
+
+
+      formData.append(
+        "examSeries",
+        examSeries
+      );
+
+
+      formData.append(
+        "candidateType",
+        candidateType
+      );
+
+
+      formData.append(
+        "grade",
+        selectedGrade
+      );
+
+
+      formData.append(
+        "schoolName",
+        document.getElementById(
+          "schoolName"
+        ).value
+      );
+
+
+      formData.append(
+        "studentName",
+        document.getElementById(
+          "studentName"
+        ).value
+      );
+
+
+      formData.append(
+        "fatherName",
+        document.getElementById(
+          "fatherName"
+        ).value
+      );
+
+
+      formData.append(
+        "email",
+        document.getElementById(
+          "email"
+        ).value
+      );
+
+
+      formData.append(
+        "whatsapp",
+        document.getElementById(
+          "whatsapp"
+        ).value
+      );
+
+
+      formData.append(
+        "occupation",
+        document.getElementById(
+          "occupation"
+        ).value
+      );
+
+
+      formData.append(
+        "contactNumber",
+        document.getElementById(
+          "contactNumber"
+        ).value
+      );
+
+
+      formData.append(
+        "address",
+        document.getElementById(
+          "address"
+        ).value
+      );
+
+
+
+      /* =====================================================
+         SUBJECT DATA
+         ===================================================== */
+
+      formData.append(
+        "subjects",
+        JSON.stringify(
+          selectedSubjects
+        )
+      );
+
+
+
+      /* =====================================================
+         TEACHER DATA
+         ===================================================== */
+
+      formData.append(
+        "teachers",
+        JSON.stringify(
+          selectedTeachers
+        )
+      );
+
+
+
+      /* =====================================================
+         TEACHER SUMMARY
+         ===================================================== */
+
+      formData.append(
+        "teacherSummary",
+        teacherName.value
+      );
+
+
+
+      /* =====================================================
+         IMAGES
+         ===================================================== */
+
+      const profile =
+        document.getElementById(
+          "profileInput"
+        ).files[0];
+
+
+      const marksheet =
+        document.getElementById(
+          "marksheetInput"
+        ).files[0];
+
+
+      if (profile) {
+
+        formData.append(
+          "profileImage",
+          profile
+        );
+
+      }
+
+
+      if (marksheet) {
+
+        formData.append(
+          "marksheetImage",
+          marksheet
+        );
+
+      }
+
+
+
+      /* =====================================================
+         SEND TO NODE SERVER
+         ===================================================== */
+
+      try {
+
+        /*
+         * Disable submit button while sending.
+         */
+
+        const submitButton =
+          form.querySelector(
+            ".submit-btn"
+          );
+
+
+        if (submitButton) {
+
+          submitButton.disabled =
+            true;
+
+          submitButton.innerText =
+            "Submitting...";
+
+        }
+
+
+        const response =
+          await fetch(
+            `${API_BASE_URL}/api/students`,
+            {
+              method: "POST",
+              body: formData
+            }
+          );
+
+
+        const result =
+          await response.json()
+            .catch(() => ({
+              success: false,
+              message:
+                "Invalid server response"
+            }));
+
+
+        console.log(
+          "SERVER:",
+          result
+        );
+
+
+
+        /* ===================================================
+           SUCCESS
+           =================================================== */
+
+        if (
+          response.ok &&
+          result.success
+        ) {
+
+          alert(
+            result.message ||
+            "Student Registration Successful"
+          );
+
+
+          /*
+           * RESET FORM
+           */
+
+          form.reset();
+
+
+          selectedGrade =
+            "";
+
+          selectedSubjects =
+            [];
+
+          selectedTeachers =
+            {};
+
+
+          teacherName.value =
+            "";
+
+
+          subjectBtn.innerText =
+            "Select Subjects";
+
+
+          dropdown.innerHTML =
+            "";
+
+
+          scheduleBox.innerHTML =
+            "";
+
+
+          scheduleBox.style.display =
+            "none";
+
+
+          document
+            .getElementById(
+              "profilePreview"
+            )
+            .removeAttribute("src");
+
+
+          document
+            .getElementById(
+              "marksheetPreview"
+            )
+            .removeAttribute("src");
+
+
+          closeFeesPopup();
+
+
+
+        } else {
+
+          alert(
+            result.message ||
+            "Registration Failed"
+          );
+
+        }
+
+
+
+        /* ===================================================
+           RESTORE SUBMIT BUTTON
+           =================================================== */
+
+        if (submitButton) {
+
+          submitButton.disabled =
+            false;
+
+          submitButton.innerText =
+            "Submit Form";
+
+        }
+
+
+      } catch (error) {
+
+        console.error(
+          "SERVER ERROR:",
+          error
+        );
+
+
+        alert(
+          "Unable to connect to Node server."
+        );
+
+
+        /*
+         * Restore button
+         */
+
+        const submitButton =
+          form.querySelector(
+            ".submit-btn"
+          );
+
+
+        if (submitButton) {
+
+          submitButton.disabled =
+            false;
+
+          submitButton.innerText =
+            "Submit Form";
+
+        }
+
+      }
+
+    }
+  );
 
 }
+
 
 
 /* =========================================================
    CONFIRM & SUBMIT
-========================================================= */
+   ========================================================= */
 
-async function confirmFeesAndSubmit() {
+function confirmFeesAndSubmit() {
 
+  /*
+   * Make sure form exists.
+   */
 
-    /* =====================================================
-       FINAL VALIDATION
-    ===================================================== */
+  if (!form) {
 
-    if (!selectedGrade) {
+    console.error(
+      "registrationForm not found."
+    );
 
-        alert(
-            "Please select a grade."
-        );
+    return;
 
-        return;
+  }
 
-    }
 
+  /*
+   * User has confirmed the fees.
+   */
 
-    if (
-        selectedSubjects.length === 0
-    ) {
+  feesConfirmed =
+    true;
 
-        alert(
-            "Please select at least one subject."
-        );
 
-        return;
+  /*
+   * Close popup.
+   */
 
-    }
+  closeFeesPopup();
 
 
-    if (
-        Object.keys(selectedTeachers).length !==
-        selectedSubjects.length
-    ) {
+  /*
+   * Trigger the form submit event again.
+   *
+   * This time feesConfirmed = true,
+   * so the actual backend submission
+   * will happen.
+   */
 
-        alert(
-            "Please select a teacher for every subject."
-        );
-
-        return;
-
-    }
-
-
-    /* =====================================================
-       CLOSE POPUP
-    ===================================================== */
-
-    closeFeesPopup();
-
-
-    /* =====================================================
-       SUBMIT BUTTON
-    ===================================================== */
-
-    const submitBtn =
-        document.querySelector(
-            ".submit-btn"
-        );
-
-
-    if (submitBtn) {
-
-        submitBtn.disabled =
-            true;
-
-        submitBtn.innerText =
-            "Submitting...";
-
-    }
-
-
-    try {
-
-
-        /* =================================================
-           CREATE TEACHER SUMMARY
-        ================================================= */
-
-        const teacherSummary =
-            Object.entries(
-                selectedTeachers
-            )
-            .map(
-                ([subject, teacher]) => {
-
-                    return {
-
-                        subject: subject,
-
-                        teacher:
-                            teacher.name,
-
-                        grade:
-                            selectedGrade,
-
-                        photo:
-                            teacher.photo ||
-                            "",
-
-                        schedule:
-                            teacher.schedule ||
-                            []
-
-                    };
-
-                }
-            );
-
-
-        /* =================================================
-           TEACHER VALIDATION
-        ================================================= */
-
-        if (
-            teacherSummary.length !==
-            selectedSubjects.length
-        ) {
-
-            throw new Error(
-                "Teacher information is incomplete. Please select a teacher for every subject."
-            );
-
-        }
-
-
-        /* =================================================
-           CREATE FORM DATA
-        ================================================= */
-
-        const formData =
-            new FormData();
-
-
-        /* =================================================
-           EXAMINATION INFORMATION
-        ================================================= */
-
-        const examSeries =
-            document.querySelector(
-                'input[name="examSeries"]:checked'
-            );
-
-        const candidate =
-            document.querySelector(
-                'input[name="candidate"]:checked'
-            );
-
-
-        formData.append(
-            "examSeries",
-            examSeries.value
-        );
-
-
-        formData.append(
-            "candidateType",
-            candidate.value
-        );
-
-
-        /* =================================================
-           SCHOOL NAME
-        ================================================= */
-
-        const schoolName =
-            document.getElementById(
-                "schoolName"
-            );
-
-
-        if (schoolName) {
-
-            formData.append(
-                "schoolName",
-                schoolName.value.trim()
-            );
-
-        }
-
-
-        /* =================================================
-           STUDENT NAME
-        ================================================= */
-
-        formData.append(
-            "studentName",
-            document
-                .getElementById(
-                    "studentName"
-                )
-                .value
-                .trim()
-        );
-
-
-        /* =================================================
-           FATHER NAME
-        ================================================= */
-
-        formData.append(
-            "fatherName",
-            document
-                .getElementById(
-                    "fatherName"
-                )
-                .value
-                .trim()
-        );
-
-
-        /* =================================================
-           EMAIL
-        ================================================= */
-
-        const email =
-            document.getElementById(
-                "email"
-            );
-
-
-        if (email) {
-
-            formData.append(
-                "email",
-                email.value.trim()
-            );
-
-        }
-
-
-        /* =================================================
-           WHATSAPP
-        ================================================= */
-
-        formData.append(
-            "whatsapp",
-            document
-                .getElementById(
-                    "whatsapp"
-                )
-                .value
-                .trim()
-        );
-
-
-        /* =================================================
-           OCCUPATION
-        ================================================= */
-
-        const occupation =
-            document.getElementById(
-                "occupation"
-            );
-
-
-        if (occupation) {
-
-            formData.append(
-                "occupation",
-                occupation.value.trim()
-            );
-
-        }
-
-
-        /* =================================================
-           CONTACT NUMBER
-        ================================================= */
-
-        formData.append(
-            "contactNumber",
-            document
-                .getElementById(
-                    "contactNumber"
-                )
-                .value
-                .trim()
-        );
-
-
-        /* =================================================
-           ADDRESS
-        ================================================= */
-
-        formData.append(
-            "address",
-            document
-                .getElementById(
-                    "address"
-                )
-                .value
-                .trim()
-        );
-
-
-        /* =================================================
-           GRADE
-        ================================================= */
-
-        formData.append(
-            "grade",
-            selectedGrade
-        );
-
-
-        /* =================================================
-           SUBJECTS
-        ================================================= */
-
-        formData.append(
-            "subjects",
-            JSON.stringify(
-                selectedSubjects
-            )
-        );
-
-
-        /* =================================================
-           TEACHERS
-        ================================================= */
-
-        formData.append(
-            "teachers",
-            JSON.stringify(
-                selectedTeachers
-            )
-        );
-
-
-        /* =================================================
-           TEACHER SUMMARY
-        ================================================= */
-
-        formData.append(
-            "teacherSummary",
-            JSON.stringify(
-                teacherSummary
-            )
-        );
-
-
-        /* =================================================
-           PROFILE IMAGE
-        ================================================= */
-
-        const profile =
-            profileInput?.files?.[0];
-
-
-        if (profile) {
-
-            formData.append(
-                "profileImage",
-                profile
-            );
-
-        }
-
-
-        /* =================================================
-           MARKSHEET IMAGE
-        ================================================= */
-
-        const marksheet =
-            marksheetInput?.files?.[0];
-
-
-        if (marksheet) {
-
-            formData.append(
-                "marksheetImage",
-                marksheet
-            );
-
-        }
-
-
-        /* =================================================
-           CALCULATE FINAL FEE
-        ================================================= */
-
-        const feePerSubject =
-            Number(
-                feesStructure[selectedGrade] || 0
-            );
-
-
-        const totalFee =
-            selectedSubjects.length *
-            feePerSubject;
-
-
-        console.log(
-            "======================================"
-        );
-
-        console.log(
-            "CONFIRMED STUDENT SUBMISSION"
-        );
-
-        console.log(
-            "======================================"
-        );
-
-        console.log(
-            "Grade:",
-            selectedGrade
-        );
-
-        console.log(
-            "Subjects:",
-            selectedSubjects
-        );
-
-        console.log(
-            "Number of Subjects:",
-            selectedSubjects.length
-        );
-
-        console.log(
-            "Fee Per Subject:",
-            feePerSubject
-        );
-
-        console.log(
-            "Total Fee:",
-            totalFee
-        );
-
-        console.log(
-            "Teachers:",
-            selectedTeachers
-        );
-
-        console.log(
-            "Teacher Summary:",
-            teacherSummary
-        );
-
-
-        /* =================================================
-           ADD FEE INFORMATION TO FORM DATA
-        ================================================= */
-
-        formData.append(
-            "feePerSubject",
-            feePerSubject
-        );
-
-
-        formData.append(
-            "totalFee",
-            totalFee
-        );
-
-
-        /* =================================================
-           SEND TO BACKEND
-        ================================================= */
-
-        const response =
-            await fetch(
-                "https://cognitive-learning-backend.vercel.app/api/students",
-                {
-                    method: "POST",
-                    body: formData
-                }
-            );
-
-
-        /* =================================================
-           SERVER RESPONSE
-        ================================================= */
-
-        let result;
-
-
-        try {
-
-            result =
-                await response.json();
-
-        }
-
-        catch (jsonError) {
-
-            console.error(
-                "Invalid server response:",
-                jsonError
-            );
-
-            throw new Error(
-                "The server returned an invalid response."
-            );
-
-        }
-
-
-        /* =================================================
-           SERVER ERROR
-        ================================================= */
-
-        if (!response.ok) {
-
-            console.error(
-                "Backend Error:",
-                result
-            );
-
-
-            throw new Error(
-                result.message ||
-                "Student submission failed."
-            );
-
-        }
-
-
-        /* =================================================
-           SUCCESS
-        ================================================= */
-
-        if (result.success) {
-
-            console.log(
-                "Student saved successfully:",
-                result
-            );
-
-
-            alert(
-                result.message ||
-                "Student Registered Successfully."
-            );
-
-
-            /* =============================================
-               RESET FORM
-            ============================================= */
-
-            form.reset();
-
-
-            selectedSubjects =
-                [];
-
-            selectedTeachers =
-                {};
-
-            selectedGrade =
-                "";
-
-
-            if (teacherName) {
-
-                teacherName.value =
-                    "";
-
-            }
-
-
-            if (dropdown) {
-
-                dropdown.innerHTML = "";
-
-                dropdown.style.display =
-                    "none";
-
-            }
-
-
-            if (subjectBtn) {
-
-                subjectBtn.innerText =
-                    "Select Subjects";
-
-            }
-
-
-            if (scheduleBox) {
-
-                scheduleBox.innerHTML =
-                    "";
-
-                scheduleBox.style.display =
-                    "";
-
-            }
-
-
-            /* =============================================
-               RESET PROFILE PREVIEW
-            ============================================= */
-
-            if (profilePreview) {
-
-                profilePreview.src =
-                    "";
-
-            }
-
-
-            /* =============================================
-               RESET MARKSHEET PREVIEW
-            ============================================= */
-
-            if (marksheetPreview) {
-
-                marksheetPreview.src =
-                    "";
-
-            }
-
-
-            /* =============================================
-               RESET FILE INPUTS
-            ============================================= */
-
-            if (profileInput) {
-
-                profileInput.value =
-                    "";
-
-            }
-
-
-            if (marksheetInput) {
-
-                marksheetInput.value =
-                    "";
-
-            }
-
-
-            /* =============================================
-               RESET SCHOOL FIELD
-            ============================================= */
-
-            const schoolField =
-                document.getElementById(
-                    "schoolField"
-                );
-
-
-            if (schoolField) {
-
-                schoolField.style.display =
-                    "none";
-
-            }
-
-
-            console.log(
-                "Form reset successfully."
-            );
-
-        }
-
-        else {
-
-            throw new Error(
-                result.message ||
-                "Student registration failed."
-            );
-
-        }
-
-    }
-
-
-    catch (error) {
-
-        console.error(
-            "======================================"
-        );
-
-        console.error(
-            "STUDENT SUBMISSION ERROR"
-        );
-
-        console.error(
-            "======================================"
-        );
-
-        console.error(
-            error
-        );
-
-
-        alert(
-            error.message ||
-            "Unable to submit the student registration."
-        );
-
-    }
-
-
-    finally {
-
-        /* =================================================
-           ENABLE BUTTON AGAIN
-        ================================================= */
-
-        if (submitBtn) {
-
-            submitBtn.disabled =
-                false;
-
-            submitBtn.innerText =
-                "Submit Form";
-
-        }
-
-    }
+  form.requestSubmit();
 
 }
+
+
+
+/* =========================================================
+   CLICK OUTSIDE FEES POPUP
+   ========================================================= */
+
+if (feesModal) {
+
+  feesModal.addEventListener(
+    "click",
+    function (e) {
+
+      if (
+        e.target === feesModal
+      ) {
+
+        closeFeesPopup();
+
+      }
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   ESCAPE KEY
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function (e) {
+
+    if (
+      e.key === "Escape" &&
+      feesModal &&
+      feesModal.style.display !== "none"
+    ) {
+
+      closeFeesPopup();
+
+    }
+
+  }
+);
+
 </script>
 </body>
-
 </html>
