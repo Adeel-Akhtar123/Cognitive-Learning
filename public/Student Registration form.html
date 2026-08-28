@@ -1996,6 +1996,7 @@ textarea {
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+```html
 <script>
 
 const API_BASE_URL = "https://cognitive-learning-backend.vercel.app";
@@ -2384,41 +2385,39 @@ const gradeSubjects = {
 };
 
 
-
 /* =========================================================
    ELEMENTS
    ========================================================= */
 
 const dropdown =
-  document.getElementById("dropdown");
+    document.getElementById("dropdown");
 
 const subjectBtn =
-  document.getElementById("subjectBtn");
+    document.getElementById("subjectBtn");
 
 const teacherName =
-  document.getElementById("teacherName");
+    document.getElementById("teacherName");
 
 const scheduleBox =
-  document.getElementById("scheduleOutput");
+    document.getElementById("scheduleOutput");
 
 const form =
-  document.getElementById("registrationForm");
+    document.getElementById("registrationForm");
 
 const feesModal =
-  document.getElementById("feesModal");
+    document.getElementById("feesModal");
 
 const feesGradeTitle =
-  document.getElementById("feesGradeTitle");
+    document.getElementById("feesGradeTitle");
 
 const feesTableBody =
-  document.getElementById("feesTableBody");
+    document.getElementById("feesTableBody");
 
 const feesTotal =
-  document.getElementById("feesTotal");
+    document.getElementById("feesTotal");
 
 const feesPerSubjectText =
-  document.getElementById("feesPerSubjectText");
-
+    document.getElementById("feesPerSubjectText");
 
 
 /* =========================================================
@@ -2427,22 +2426,21 @@ const feesPerSubjectText =
 
 function showSchoolField() {
 
-  const type =
-    document.querySelector(
-      'input[name="candidate"]:checked'
-    )?.value;
+    const type =
+        document.querySelector(
+            'input[name="candidate"]:checked'
+        )?.value;
 
-  const schoolField =
-    document.getElementById("schoolField");
+    const schoolField =
+        document.getElementById("schoolField");
 
-  if (!schoolField) return;
+    if (!schoolField) return;
 
-  schoolField.style.display =
-    type === "regular"
-      ? "block"
-      : "none";
+    schoolField.style.display =
+        type === "regular"
+            ? "block"
+            : "none";
 }
-
 
 
 /* =========================================================
@@ -2450,21 +2448,24 @@ function showSchoolField() {
    ========================================================= */
 
 document
-  .querySelectorAll('input[name="grade"]')
-  .forEach(radio => {
+    .querySelectorAll('input[name="grade"]')
+    .forEach(radio => {
 
-    radio.addEventListener("change", e => {
+        radio.addEventListener(
+            "change",
+            e => {
 
-      selectedGrade = e.target.value;
+                selectedGrade =
+                    e.target.value;
 
-      resetSelection();
+                resetSelection();
 
-      buildSubjectList();
+                buildSubjectList();
+
+            }
+        );
 
     });
-
-  });
-
 
 
 /* =========================================================
@@ -2473,23 +2474,22 @@ document
 
 function resetSelection() {
 
-  selectedSubjects = [];
+    selectedSubjects = [];
 
-  selectedTeachers = {};
+    selectedTeachers = {};
 
-  subjectBtn.innerText =
-    "Select Subjects";
+    subjectBtn.innerText =
+        "Select Subjects";
 
-  teacherName.value = "";
+    teacherName.value = "";
 
-  dropdown.innerHTML = "";
+    dropdown.innerHTML = "";
 
-  scheduleBox.innerHTML = "";
+    scheduleBox.innerHTML = "";
 
-  scheduleBox.style.display = "";
+    scheduleBox.style.display = "";
 
 }
-
 
 
 /* =========================================================
@@ -2498,40 +2498,39 @@ function resetSelection() {
 
 function buildSubjectList() {
 
-  const subjects =
-    Object.keys(
-      gradeSubjects[selectedGrade] || {}
+    const subjects =
+        Object.keys(
+            gradeSubjects[selectedGrade] || {}
+        );
+
+    subjects.forEach(
+        subject => {
+
+            const label =
+                document.createElement("label");
+
+            label.innerHTML = `
+                <input
+                    type="checkbox"
+                    value="${subject}"
+                >
+                ${subject}
+            `;
+
+            const checkbox =
+                label.querySelector("input");
+
+            checkbox.addEventListener(
+                "change",
+                updateSubjects
+            );
+
+            dropdown.appendChild(label);
+
+        }
     );
-
-
-  subjects.forEach(subject => {
-
-    const label =
-      document.createElement("label");
-
-
-    label.innerHTML = `
-      <input type="checkbox" value="${subject}">
-      ${subject}
-    `;
-
-
-    const checkbox =
-      label.querySelector("input");
-
-
-    checkbox.addEventListener(
-      "change",
-      updateSubjects
-    );
-
-
-    dropdown.appendChild(label);
-
-  });
 
 }
-
 
 
 /* =========================================================
@@ -2540,13 +2539,12 @@ function buildSubjectList() {
 
 function toggleDropdown() {
 
-  dropdown.style.display =
-    dropdown.style.display === "block"
-      ? "none"
-      : "block";
+    dropdown.style.display =
+        dropdown.style.display === "block"
+            ? "none"
+            : "block";
 
 }
-
 
 
 /* =========================================================
@@ -2555,28 +2553,27 @@ function toggleDropdown() {
 
 function updateSubjects() {
 
-  selectedSubjects =
-    [
-      ...dropdown.querySelectorAll(
-        "input:checked"
-      )
-    ].map(el => el.value);
+    selectedSubjects =
+        [
+            ...dropdown.querySelectorAll(
+                "input:checked"
+            )
+        ].map(
+            el => el.value
+        );
 
+    subjectBtn.innerText =
+        selectedSubjects.length
+            ? selectedSubjects.join(", ")
+            : "Select Subjects";
 
-  subjectBtn.innerText =
-    selectedSubjects.length
-      ? selectedSubjects.join(", ")
-      : "Select Subjects";
+    selectedTeachers = {};
 
+    teacherName.value = "";
 
-  selectedTeachers = {};
-
-  teacherName.value = "";
-
-  scheduleBox.innerHTML = "";
+    scheduleBox.innerHTML = "";
 
 }
-
 
 
 /* =========================================================
@@ -2585,126 +2582,122 @@ function updateSubjects() {
 
 function showSchedule() {
 
-  if (
-    !selectedGrade ||
-    selectedSubjects.length === 0
-  ) {
+    if (
+        !selectedGrade ||
+        selectedSubjects.length === 0
+    ) {
 
-    alert(
-      "Please select Grade and Subject first."
-    );
+        alert(
+            "Please select Grade and Subject first."
+        );
 
-    return;
+        return;
 
-  }
+    }
 
+    scheduleBox.innerHTML = "";
 
-  scheduleBox.innerHTML = "";
+    scheduleBox.style.display =
+        "grid";
 
-  scheduleBox.style.display = "grid";
+    selectedSubjects.forEach(
+        subject => {
 
+            const subjectData =
+                gradeSubjects[selectedGrade]?.[subject];
 
-  selectedSubjects.forEach(subject => {
+            if (!subjectData) return;
 
-    const subjectData =
-      gradeSubjects[selectedGrade]?.[subject];
+            const subjectSection =
+                document.createElement("div");
 
+            subjectSection.className =
+                "subject-section";
 
-    if (!subjectData) return;
+            subjectSection.innerHTML = `
+                <div class="subject-title">
+                    ${subject}
+                </div>
+            `;
 
+            subjectData.teachers.forEach(
+                teacher => {
 
-    const subjectSection =
-      document.createElement("div");
+                    const card =
+                        document.createElement("div");
 
-    subjectSection.className =
-      "subject-section";
+                    card.className =
+                        "teacher-card-mini";
 
+                    const scheduleHTML =
+                        teacher.schedule
+                            .map(
+                                s =>
+                                    `<span class="schedule-badge">
+                                        ${s[0]}: ${s[1]}
+                                    </span>`
+                            )
+                            .join("");
 
-    subjectSection.innerHTML = `
-      <div class="subject-title">
-        ${subject}
-      </div>
-    `;
+                    card.innerHTML = `
+                        <img
+                            src="${teacher.photo}"
+                            alt="Teacher"
+                        >
 
+                        <div class="teacher-name">
+                            ${teacher.name}
+                        </div>
 
-    subjectData.teachers.forEach(teacher => {
+                        <div class="schedule-list">
+                            ${scheduleHTML}
+                        </div>
 
-      const card =
-        document.createElement("div");
+                        <button
+                            type="button"
+                            class="select-btn"
+                        >
+                            Select Teacher
+                        </button>
+                    `;
 
-      card.className =
-        "teacher-card-mini";
+                    const btn =
+                        card.querySelector(
+                            ".select-btn"
+                        );
 
+                    btn.addEventListener(
+                        "click",
+                        e => {
 
-      const scheduleHTML =
-        teacher.schedule
-          .map(
-            s =>
-              `<span class="schedule-badge">
-                ${s[0]}: ${s[1]}
-              </span>`
-          )
-          .join("");
+                            e.preventDefault();
 
+                            e.stopPropagation();
 
-      card.innerHTML = `
-        <img
-          src="${teacher.photo}"
-          alt="Teacher"
-        >
+                            selectTeacher(
+                                subject,
+                                teacher,
+                                btn
+                            );
 
-        <div class="teacher-name">
-          ${teacher.name}
-        </div>
+                        }
+                    );
 
-        <div class="schedule-list">
-          ${scheduleHTML}
-        </div>
+                    subjectSection.appendChild(
+                        card
+                    );
 
-        <button
-          type="button"
-          class="select-btn"
-        >
-          Select Teacher
-        </button>
-      `;
+                }
+            );
 
-
-      const btn =
-        card.querySelector(".select-btn");
-
-
-      btn.addEventListener(
-        "click",
-        e => {
-
-          e.preventDefault();
-
-          e.stopPropagation();
-
-          selectTeacher(
-            subject,
-            teacher,
-            btn
-          );
+            scheduleBox.appendChild(
+                subjectSection
+            );
 
         }
-      );
-
-
-      subjectSection.appendChild(card);
-
-    });
-
-
-    scheduleBox.appendChild(
-      subjectSection
     );
 
-  });
-
 }
-
 
 
 /* =========================================================
@@ -2712,72 +2705,83 @@ function showSchedule() {
    ========================================================= */
 
 function selectTeacher(
-  subject,
-  teacher,
-  btn
+    subject,
+    teacher,
+    btn
 ) {
 
-  const section =
-    btn.closest(".subject-section");
+    const section =
+        btn.closest(
+            ".subject-section"
+        );
 
+    if (
+        selectedTeachers[subject]?.name ===
+        teacher.name
+    ) {
 
-  if (
-    selectedTeachers[subject]?.name ===
-    teacher.name
-  ) {
+        delete selectedTeachers[subject];
 
-    delete selectedTeachers[subject];
+        btn.classList.remove(
+            "active"
+        );
 
-    btn.classList.remove("active");
+        btn.innerText =
+            "Select Teacher";
 
-    btn.innerText =
-      "Select Teacher";
+    } else {
 
-  } else {
+        selectedTeachers[subject] =
+            teacher;
 
-    selectedTeachers[subject] =
-      teacher;
+        section
+            .querySelectorAll(
+                ".select-btn"
+            )
+            .forEach(
+                b => {
 
+                    b.classList.remove(
+                        "active"
+                    );
 
-    section
-      .querySelectorAll(".select-btn")
-      .forEach(b => {
+                    b.innerText =
+                        "Select Teacher";
 
-        b.classList.remove("active");
+                }
+            );
 
-        b.innerText =
-          "Select Teacher";
+        btn.classList.add(
+            "active"
+        );
 
-      });
+        btn.innerText =
+            "Selected ✓";
 
+    }
 
-    btn.classList.add("active");
+    updateTeacherSummary();
 
-    btn.innerText =
-      "Selected ✓";
+    if (
+        Object.keys(
+            selectedTeachers
+        ).length ===
+        selectedSubjects.length
+    ) {
 
-  }
+        setTimeout(
+            () => {
 
+                scheduleBox.style.display =
+                    "none";
 
-  updateTeacherSummary();
+            },
+            500
+        );
 
-
-  if (
-    Object.keys(selectedTeachers).length ===
-    selectedSubjects.length
-  ) {
-
-    setTimeout(() => {
-
-      scheduleBox.style.display =
-        "none";
-
-    }, 500);
-
-  }
+    }
 
 }
-
 
 
 /* =========================================================
@@ -2786,66 +2790,81 @@ function selectTeacher(
 
 function updateTeacherSummary() {
 
-  teacherName.value =
-    Object.entries(selectedTeachers)
-      .map(
-        ([sub, teacher]) =>
-          `${sub}: ${teacher.name}`
-      )
-      .join(" | ");
+    /*
+     * This field is only used for displaying
+     * the selected teachers to the user.
+     *
+     * The actual database data is created
+     * separately during form submission.
+     */
+
+    teacherName.value =
+        Object.entries(
+            selectedTeachers
+        )
+        .map(
+            ([sub, teacher]) =>
+                `${sub}: ${teacher.name}`
+        )
+        .join(" | ");
 
 }
 
 
-
 /* =========================================================
-   IMAGE PREVIEW
+   IMAGE PREVIEW - PROFILE
    ========================================================= */
 
 document
-  .getElementById("profileInput")
-  ?.addEventListener(
-    "change",
-    e => {
+    .getElementById("profileInput")
+    ?.addEventListener(
+        "change",
+        e => {
 
-      const file =
-        e.target.files[0];
+            const file =
+                e.target.files[0];
 
-      if (file) {
+            if (file) {
 
-        document.getElementById(
-          "profilePreview"
-        ).src =
-          URL.createObjectURL(file);
+                document.getElementById(
+                    "profilePreview"
+                ).src =
+                    URL.createObjectURL(
+                        file
+                    );
 
-      }
+            }
 
-    }
-  );
+        }
+    );
 
 
+/* =========================================================
+   IMAGE PREVIEW - MARKSHEET
+   ========================================================= */
 
 document
-  .getElementById("marksheetInput")
-  ?.addEventListener(
-    "change",
-    e => {
+    .getElementById("marksheetInput")
+    ?.addEventListener(
+        "change",
+        e => {
 
-      const file =
-        e.target.files[0];
+            const file =
+                e.target.files[0];
 
-      if (file) {
+            if (file) {
 
-        document.getElementById(
-          "marksheetPreview"
-        ).src =
-          URL.createObjectURL(file);
+                document.getElementById(
+                    "marksheetPreview"
+                ).src =
+                    URL.createObjectURL(
+                        file
+                    );
 
-      }
+            }
 
-    }
-  );
-
+        }
+    );
 
 
 /* =========================================================
@@ -2853,18 +2872,21 @@ document
    ========================================================= */
 
 document
-  .getElementById("menuBtn")
-  ?.addEventListener(
-    "click",
-    () => {
+    .getElementById("menuBtn")
+    ?.addEventListener(
+        "click",
+        () => {
 
-      document
-        .getElementById("mobileMenu")
-        .classList.toggle("hidden");
+            document
+                .getElementById(
+                    "mobileMenu"
+                )
+                .classList.toggle(
+                    "hidden"
+                );
 
-    }
-  );
-
+        }
+    );
 
 
 /* =========================================================
@@ -2872,18 +2894,17 @@ document
    ========================================================= */
 
 document
-  .getElementById("teacherBtn")
-  ?.addEventListener(
-    "click",
-    e => {
+    .getElementById("teacherBtn")
+    ?.addEventListener(
+        "click",
+        e => {
 
-      e.preventDefault();
+            e.preventDefault();
 
-      showSchedule();
+            showSchedule();
 
-    }
-  );
-
+        }
+    );
 
 
 /* =========================================================
@@ -2892,110 +2913,83 @@ document
 
 function updateFeesPopup() {
 
-  if (!feesModal) {
-    console.error("feesModal not found.");
-    return;
-  }
+    if (!feesModal) {
 
-  /* =======================================================
-     FEE PER SUBJECT
-     ======================================================= */
+        console.error(
+            "feesModal not found."
+        );
 
-  const feePerSubject =
-    feesStructure[selectedGrade] || 0;
-
-
-  /* =======================================================
-     GRADE TITLE
-     ======================================================= */
-
-  if (feesGradeTitle) {
-
-    feesGradeTitle.innerText =
-      selectedGrade;
-
-  }
-
-
-  /* =======================================================
-     CLEAR OLD TABLE
-     ======================================================= */
-
-  if (feesTableBody) {
-
-    feesTableBody.innerHTML = "";
-
-  }
-
-
-  /* =======================================================
-     TOTAL FEE
-     ======================================================= */
-
-  const totalFee =
-    selectedSubjects.length * feePerSubject;
-
-
-  /* =======================================================
-     DISPLAY EACH SUBJECT + ITS FEE
-     ======================================================= */
-
-  selectedSubjects.forEach(
-    (subject, index) => {
-
-      const row =
-        document.createElement("tr");
-
-
-      row.innerHTML = `
-
-        <td>
-          ${index + 1}
-        </td>
-
-        <td>
-          ${subject}
-        </td>
-
-        <td>
-          Rs. ${feePerSubject.toLocaleString()}
-        </td>
-
-      `;
-
-
-      feesTableBody.appendChild(row);
+        return;
 
     }
-  );
 
+    const feePerSubject =
+        feesStructure[selectedGrade] || 0;
 
-  /* =======================================================
-     DISPLAY TOTAL
-     ======================================================= */
+    if (feesGradeTitle) {
 
-  if (feesTotal) {
+        feesGradeTitle.innerText =
+            selectedGrade;
 
-    feesTotal.innerText =
-      "Rs. " +
-      totalFee.toLocaleString();
+    }
 
-  }
+    if (feesTableBody) {
 
+        feesTableBody.innerHTML =
+            "";
 
-  /* =======================================================
-     FEE INFORMATION
-     ======================================================= */
+    }
 
-  if (feesPerSubjectText) {
+    const totalFee =
+        selectedSubjects.length *
+        feePerSubject;
 
-    feesPerSubjectText.innerText =
-      `Fee per subject: Rs. ${feePerSubject.toLocaleString()}. ` +
-      `You have selected ${selectedSubjects.length} subject` +
-      `${selectedSubjects.length !== 1 ? "s" : ""}. ` +
-      `Total fee: Rs. ${totalFee.toLocaleString()}.`;
+    selectedSubjects.forEach(
+        (subject, index) => {
 
-  }
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${subject}
+                </td>
+
+                <td>
+                    Rs. ${feePerSubject.toLocaleString()}
+                </td>
+
+            `;
+
+            feesTableBody.appendChild(
+                row
+            );
+
+        }
+    );
+
+    if (feesTotal) {
+
+        feesTotal.innerText =
+            "Rs. " +
+            totalFee.toLocaleString();
+
+    }
+
+    if (feesPerSubjectText) {
+
+        feesPerSubjectText.innerText =
+            `Fee per subject: Rs. ${feePerSubject.toLocaleString()}. ` +
+            `You have selected ${selectedSubjects.length} subject` +
+            `${selectedSubjects.length !== 1 ? "s" : ""}. ` +
+            `Total fee: Rs. ${totalFee.toLocaleString()}.`;
+
+    }
 
 }
 
@@ -3006,29 +3000,25 @@ function updateFeesPopup() {
 
 function openFeesPopup() {
 
-  if (!feesModal) {
+    if (!feesModal) {
 
-    console.error(
-      "feesModal not found."
-    );
+        console.error(
+            "feesModal not found."
+        );
 
-    return;
+        return;
 
-  }
+    }
 
+    updateFeesPopup();
 
-  updateFeesPopup();
+    feesModal.style.display =
+        "flex";
 
-
-  feesModal.style.display =
-    "flex";
-
-
-  document.body.style.overflow =
-    "hidden";
+    document.body.style.overflow =
+        "hidden";
 
 }
-
 
 
 /* =========================================================
@@ -3037,18 +3027,15 @@ function openFeesPopup() {
 
 function closeFeesPopup() {
 
-  if (!feesModal) return;
+    if (!feesModal) return;
 
+    feesModal.style.display =
+        "none";
 
-  feesModal.style.display =
-    "none";
-
-
-  document.body.style.overflow =
-    "";
+    document.body.style.overflow =
+        "";
 
 }
-
 
 
 /* =========================================================
@@ -3057,127 +3044,122 @@ function closeFeesPopup() {
 
 function validateForm() {
 
-  const examSeries =
-    document.querySelector(
-      'input[name="examSeries"]:checked'
-    )?.value || "";
+    const examSeries =
+        document.querySelector(
+            'input[name="examSeries"]:checked'
+        )?.value || "";
 
+    const candidateType =
+        document.querySelector(
+            'input[name="candidate"]:checked'
+        )?.value || "";
 
-  const candidateType =
-    document.querySelector(
-      'input[name="candidate"]:checked'
-    )?.value || "";
+    if (!examSeries) {
 
+        alert(
+            "Please select Examination Series."
+        );
 
-  if (!examSeries) {
-
-    alert(
-      "Please select Examination Series."
-    );
-
-    return false;
-
-  }
-
-
-  if (!candidateType) {
-
-    alert(
-      "Please select Candidate Type."
-    );
-
-    return false;
-
-  }
-
-
-  if (!selectedGrade) {
-
-    alert(
-      "Please select Grade."
-    );
-
-    return false;
-
-  }
-
-
-  if (selectedSubjects.length === 0) {
-
-    alert(
-      "Please select Subject."
-    );
-
-    return false;
-
-  }
-
-
-  if (
-    Object.keys(selectedTeachers).length !==
-    selectedSubjects.length
-  ) {
-
-    alert(
-      "Please select teacher for every subject."
-    );
-
-    return false;
-
-  }
-
-
-  const requiredFields = [
-
-    "studentName",
-
-    "fatherName",
-
-    "email",
-
-    "whatsapp",
-
-    "contactNumber",
-
-    "address"
-
-  ];
-
-
-  for (
-    const field of requiredFields
-  ) {
-
-    const element =
-      document.getElementById(field);
-
-
-    if (
-      !element ||
-      !element.value.trim()
-    ) {
-
-      alert(
-        "Please fill " +
-        field.replace(
-          /([A-Z])/g,
-          " $1"
-        )
-      );
-
-      element?.focus();
-
-      return false;
+        return false;
 
     }
 
-  }
+    if (!candidateType) {
 
+        alert(
+            "Please select Candidate Type."
+        );
 
-  return true;
+        return false;
+
+    }
+
+    if (!selectedGrade) {
+
+        alert(
+            "Please select Grade."
+        );
+
+        return false;
+
+    }
+
+    if (
+        selectedSubjects.length === 0
+    ) {
+
+        alert(
+            "Please select Subject."
+        );
+
+        return false;
+
+    }
+
+    if (
+        Object.keys(
+            selectedTeachers
+        ).length !==
+        selectedSubjects.length
+    ) {
+
+        alert(
+            "Please select teacher for every subject."
+        );
+
+        return false;
+
+    }
+
+    const requiredFields = [
+
+        "studentName",
+
+        "fatherName",
+
+        "email",
+
+        "whatsapp",
+
+        "contactNumber",
+
+        "address"
+
+    ];
+
+    for (
+        const field of requiredFields
+    ) {
+
+        const element =
+            document.getElementById(
+                field
+            );
+
+        if (
+            !element ||
+            !element.value.trim()
+        ) {
+
+            alert(
+                "Please fill " +
+                field.replace(
+                    /([A-Z])/g,
+                    " $1"
+                )
+            );
+
+            element?.focus();
+
+            return false;
+
+        }
+
+    }
+
+    return true;
 
 }
-
 
 
 /* =========================================================
@@ -3186,438 +3168,539 @@ function validateForm() {
 
 if (form) {
 
-  form.addEventListener(
-    "submit",
-    async function (e) {
+    form.addEventListener(
+        "submit",
+        async function (e) {
 
-      /*
-       * ALWAYS STOP DEFAULT HTML SUBMISSION
-       */
+            /*
+             * ALWAYS STOP DEFAULT HTML SUBMISSION
+             */
 
-      e.preventDefault();
+            e.preventDefault();
 
 
-      /* =====================================================
-         STEP 1
-         NORMAL SUBMIT CLICK
-         ===================================================== */
+            /* =================================================
+               STEP 1 - VALIDATE AND SHOW FEES
+               ================================================= */
 
-      if (!feesConfirmed) {
+            if (!feesConfirmed) {
 
-        /*
-         * Validate everything first.
-         */
+                const valid =
+                    validateForm();
 
-        const valid =
-          validateForm();
+                if (!valid) {
 
+                    return;
 
-        if (!valid) {
+                }
 
-          return;
+                openFeesPopup();
 
-        }
+                return;
 
-
-        /*
-         * Form is valid.
-         *
-         * NOW show fees popup.
-         */
-
-        openFeesPopup();
-
-
-        return;
-
-      }
-
-
-
-      /* =====================================================
-         STEP 2
-         CONFIRMED FEES
-         ===================================================== */
-
-      feesConfirmed = false;
-
-
-      /*
-       * At this point the user has already
-       * seen the fees and clicked
-       * "Confirm & Submit".
-       *
-       * Now create FormData and send it.
-       */
-
-
-      const examSeries =
-        document.querySelector(
-          'input[name="examSeries"]:checked'
-        )?.value || "";
-
-
-      const candidateType =
-        document.querySelector(
-          'input[name="candidate"]:checked'
-        )?.value || "";
-
-
-
-      /* =====================================================
-         CREATE FORM DATA
-         ===================================================== */
-
-      const formData =
-        new FormData();
-
-
-      formData.append(
-        "examSeries",
-        examSeries
-      );
-
-
-      formData.append(
-        "candidateType",
-        candidateType
-      );
-
-
-      formData.append(
-        "grade",
-        selectedGrade
-      );
-
-
-      formData.append(
-        "schoolName",
-        document.getElementById(
-          "schoolName"
-        ).value
-      );
-
-
-      formData.append(
-        "studentName",
-        document.getElementById(
-          "studentName"
-        ).value
-      );
-
-
-      formData.append(
-        "fatherName",
-        document.getElementById(
-          "fatherName"
-        ).value
-      );
-
-
-      formData.append(
-        "email",
-        document.getElementById(
-          "email"
-        ).value
-      );
-
-
-      formData.append(
-        "whatsapp",
-        document.getElementById(
-          "whatsapp"
-        ).value
-      );
-
-
-      formData.append(
-        "occupation",
-        document.getElementById(
-          "occupation"
-        ).value
-      );
-
-
-      formData.append(
-        "contactNumber",
-        document.getElementById(
-          "contactNumber"
-        ).value
-      );
-
-
-      formData.append(
-        "address",
-        document.getElementById(
-          "address"
-        ).value
-      );
-
-
-
-      /* =====================================================
-         SUBJECT DATA
-         ===================================================== */
-
-      formData.append(
-        "subjects",
-        JSON.stringify(
-          selectedSubjects
-        )
-      );
-
-
-
-      /* =====================================================
-         TEACHER DATA
-         ===================================================== */
-
-      formData.append(
-        "teachers",
-        JSON.stringify(
-          selectedTeachers
-        )
-      );
-
-
-
-      /* =====================================================
-         TEACHER SUMMARY
-         ===================================================== */
-
-      formData.append(
-        "teacherSummary",
-        teacherName.value
-      );
-
-
-
-      /* =====================================================
-         IMAGES
-         ===================================================== */
-
-      const profile =
-        document.getElementById(
-          "profileInput"
-        ).files[0];
-
-
-      const marksheet =
-        document.getElementById(
-          "marksheetInput"
-        ).files[0];
-
-
-      if (profile) {
-
-        formData.append(
-          "profileImage",
-          profile
-        );
-
-      }
-
-
-      if (marksheet) {
-
-        formData.append(
-          "marksheetImage",
-          marksheet
-        );
-
-      }
-
-
-
-      /* =====================================================
-         SEND TO NODE SERVER
-         ===================================================== */
-
-      try {
-
-        /*
-         * Disable submit button while sending.
-         */
-
-        const submitButton =
-          form.querySelector(
-            ".submit-btn"
-          );
-
-
-        if (submitButton) {
-
-          submitButton.disabled =
-            true;
-
-          submitButton.innerText =
-            "Submitting...";
-
-        }
-
-
-        const response =
-          await fetch(
-            `${API_BASE_URL}/api/students`,
-            {
-              method: "POST",
-              body: formData
             }
-          );
 
 
-        const result =
-          await response.json()
-            .catch(() => ({
-              success: false,
-              message:
-                "Invalid server response"
-            }));
+            /* =================================================
+               STEP 2 - FEES CONFIRMED
+               ================================================= */
+
+            feesConfirmed = false;
 
 
-        console.log(
-          "SERVER:",
-          result
-        );
+            /* =================================================
+               GET BASIC FORM DATA
+               ================================================= */
+
+            const examSeries =
+                document.querySelector(
+                    'input[name="examSeries"]:checked'
+                )?.value || "";
+
+            const candidateType =
+                document.querySelector(
+                    'input[name="candidate"]:checked'
+                )?.value || "";
 
 
+            /* =================================================
+               CREATE FORM DATA
+               ================================================= */
 
-        /* ===================================================
-           SUCCESS
-           =================================================== */
-
-        if (
-          response.ok &&
-          result.success
-        ) {
-
-          alert(
-            result.message ||
-            "Student Registration Successful"
-          );
+            const formData =
+                new FormData();
 
 
-          /*
-           * RESET FORM
-           */
+            /* =================================================
+               BASIC STUDENT INFORMATION
+               ================================================= */
 
-          form.reset();
+            formData.append(
+                "examSeries",
+                examSeries
+            );
 
+            formData.append(
+                "candidateType",
+                candidateType
+            );
 
-          selectedGrade =
-            "";
-
-          selectedSubjects =
-            [];
-
-          selectedTeachers =
-            {};
-
-
-          teacherName.value =
-            "";
-
-
-          subjectBtn.innerText =
-            "Select Subjects";
+            formData.append(
+                "grade",
+                selectedGrade
+            );
 
 
-          dropdown.innerHTML =
-            "";
+            const schoolNameElement =
+                document.getElementById(
+                    "schoolName"
+                );
+
+            formData.append(
+                "schoolName",
+                schoolNameElement
+                    ? schoolNameElement.value
+                    : ""
+            );
 
 
-          scheduleBox.innerHTML =
-            "";
+            formData.append(
+                "studentName",
+                document.getElementById(
+                    "studentName"
+                ).value
+            );
+
+            formData.append(
+                "fatherName",
+                document.getElementById(
+                    "fatherName"
+                ).value
+            );
+
+            formData.append(
+                "email",
+                document.getElementById(
+                    "email"
+                ).value
+            );
+
+            formData.append(
+                "whatsapp",
+                document.getElementById(
+                    "whatsapp"
+                ).value
+            );
+
+            formData.append(
+                "occupation",
+                document.getElementById(
+                    "occupation"
+                ).value
+            );
+
+            formData.append(
+                "contactNumber",
+                document.getElementById(
+                    "contactNumber"
+                ).value
+            );
+
+            formData.append(
+                "address",
+                document.getElementById(
+                    "address"
+                ).value
+            );
 
 
-          scheduleBox.style.display =
-            "none";
+            /* =================================================
+               SUBJECT DATA
+               ================================================= */
+
+            formData.append(
+                "subjects",
+                JSON.stringify(
+                    selectedSubjects
+                )
+            );
 
 
-          document
-            .getElementById(
-              "profilePreview"
-            )
-            .removeAttribute("src");
+            /* =================================================
+               TEACHER DATA
+               ================================================= */
+
+            formData.append(
+                "teachers",
+                JSON.stringify(
+                    selectedTeachers
+                )
+            );
 
 
-          document
-            .getElementById(
-              "marksheetPreview"
-            )
-            .removeAttribute("src");
+            /* =================================================
+               TEACHER SUMMARY - FIXED
+               ================================================= */
+
+            /*
+             * IMPORTANT:
+             *
+             * Do NOT send teacherName.value here.
+             *
+             * teacherName.value is only a human-readable
+             * display string such as:
+             *
+             * Mathematics: Sir Ahemad Javed | Physics: Sir Shariq Rafiq
+             *
+             * The backend expects JSON.
+             *
+             * We therefore create a proper teacherSummary
+             * array from selectedTeachers.
+             */
+
+            const teacherSummary =
+                selectedSubjects.map(
+                    subject => {
+
+                        const teacher =
+                            selectedTeachers[
+                                subject
+                            ];
+
+                        if (!teacher) {
+
+                            return {
+
+                                subject:
+                                    subject,
+
+                                teacher:
+                                    "",
+
+                                photo:
+                                    "",
+
+                                schedule:
+                                    []
+
+                            };
+
+                        }
+
+                        return {
+
+                            subject:
+                                subject,
+
+                            teacher:
+                                teacher.name || "",
+
+                            photo:
+                                teacher.photo || "",
+
+                            schedule:
+                                teacher.schedule || []
+
+                        };
+
+                    }
+                );
 
 
-          closeFeesPopup();
+            /*
+             * Send teacherSummary as JSON.
+             */
+
+            formData.append(
+                "teacherSummary",
+                JSON.stringify(
+                    teacherSummary
+                )
+            );
 
 
+            /* =================================================
+               DEBUG - TEACHER SUMMARY
+               ================================================= */
 
-        } else {
+            console.log(
+                "Teacher Summary being sent to backend:",
+                teacherSummary
+            );
 
-          alert(
-            result.message ||
-            "Registration Failed"
-          );
+            console.log(
+                "Teacher Summary JSON:",
+                JSON.stringify(
+                    teacherSummary
+                )
+            );
+
+
+            /* =================================================
+               IMAGES
+               ================================================= */
+
+            const profileInput =
+                document.getElementById(
+                    "profileInput"
+                );
+
+            const marksheetInput =
+                document.getElementById(
+                    "marksheetInput"
+                );
+
+
+            const profile =
+                profileInput?.files?.[0];
+
+            const marksheet =
+                marksheetInput?.files?.[0];
+
+
+            if (profile) {
+
+                formData.append(
+                    "profileImage",
+                    profile
+                );
+
+            }
+
+
+            if (marksheet) {
+
+                formData.append(
+                    "marksheetImage",
+                    marksheet
+                );
+
+            }
+
+
+            /* =================================================
+               DEBUG - SHOW FORMDATA
+               ================================================= */
+
+            console.log(
+                "========== FORMDATA =========="
+            );
+
+            for (
+                const [
+                    key,
+                    value
+                ]
+                of formData.entries()
+            ) {
+
+                if (
+                    value instanceof File
+                ) {
+
+                    console.log(
+                        key,
+                        "FILE:",
+                        value.name
+                    );
+
+                } else {
+
+                    console.log(
+                        key,
+                        value
+                    );
+
+                }
+
+            }
+
+            console.log(
+                "=============================="
+            );
+
+
+            /* =================================================
+               SEND TO NODE SERVER
+               ================================================= */
+
+            try {
+
+                const submitButton =
+                    form.querySelector(
+                        ".submit-btn"
+                    );
+
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        true;
+
+                    submitButton.innerText =
+                        "Submitting...";
+
+                }
+
+
+                const response =
+                    await fetch(
+                        `${API_BASE_URL}/api/students`,
+                        {
+                            method: "POST",
+                            body: formData
+                        }
+                    );
+
+
+                const result =
+                    await response.json()
+                        .catch(
+                            () => ({
+
+                                success:
+                                    false,
+
+                                message:
+                                    "Invalid server response"
+
+                            })
+                        );
+
+
+                console.log(
+                    "SERVER:",
+                    result
+                );
+
+
+                /* =================================================
+                   SUCCESS
+                   ================================================= */
+
+                if (
+                    response.ok &&
+                    result.success
+                ) {
+
+                    alert(
+                        result.message ||
+                        "Student Registration Successful"
+                    );
+
+
+                    /* =============================================
+                       RESET FORM
+                       ============================================= */
+
+                    form.reset();
+
+                    selectedGrade =
+                        "";
+
+                    selectedSubjects =
+                        [];
+
+                    selectedTeachers =
+                        {};
+
+                    teacherName.value =
+                        "";
+
+                    subjectBtn.innerText =
+                        "Select Subjects";
+
+                    dropdown.innerHTML =
+                        "";
+
+                    scheduleBox.innerHTML =
+                        "";
+
+                    scheduleBox.style.display =
+                        "none";
+
+
+                    document
+                        .getElementById(
+                            "profilePreview"
+                        )
+                        ?.removeAttribute(
+                            "src"
+                        );
+
+
+                    document
+                        .getElementById(
+                            "marksheetPreview"
+                        )
+                        ?.removeAttribute(
+                            "src"
+                        );
+
+
+                    closeFeesPopup();
+
+
+                } else {
+
+                    alert(
+                        result.message ||
+                        "Registration Failed"
+                    );
+
+                }
+
+
+                /* =================================================
+                   RESTORE SUBMIT BUTTON
+                   ================================================= */
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.innerText =
+                        "Submit Form";
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "SERVER ERROR:",
+                    error
+                );
+
+
+                alert(
+                    "Unable to connect to Node server."
+                );
+
+
+                const submitButton =
+                    form.querySelector(
+                        ".submit-btn"
+                    );
+
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.innerText =
+                        "Submit Form";
+
+                }
+
+            }
 
         }
-
-
-
-        /* ===================================================
-           RESTORE SUBMIT BUTTON
-           =================================================== */
-
-        if (submitButton) {
-
-          submitButton.disabled =
-            false;
-
-          submitButton.innerText =
-            "Submit Form";
-
-        }
-
-
-      } catch (error) {
-
-        console.error(
-          "SERVER ERROR:",
-          error
-        );
-
-
-        alert(
-          "Unable to connect to Node server."
-        );
-
-
-        /*
-         * Restore button
-         */
-
-        const submitButton =
-          form.querySelector(
-            ".submit-btn"
-          );
-
-
-        if (submitButton) {
-
-          submitButton.disabled =
-            false;
-
-          submitButton.innerText =
-            "Submit Form";
-
-        }
-
-      }
-
-    }
-  );
+    );
 
 }
-
 
 
 /* =========================================================
@@ -3626,48 +3709,39 @@ if (form) {
 
 function confirmFeesAndSubmit() {
 
-  /*
-   * Make sure form exists.
-   */
+    if (!form) {
 
-  if (!form) {
+        console.error(
+            "registrationForm not found."
+        );
 
-    console.error(
-      "registrationForm not found."
-    );
+        return;
 
-    return;
-
-  }
+    }
 
 
-  /*
-   * User has confirmed the fees.
-   */
+    /*
+     * User confirmed fees.
+     */
 
-  feesConfirmed =
-    true;
-
-
-  /*
-   * Close popup.
-   */
-
-  closeFeesPopup();
+    feesConfirmed =
+        true;
 
 
-  /*
-   * Trigger the form submit event again.
-   *
-   * This time feesConfirmed = true,
-   * so the actual backend submission
-   * will happen.
-   */
+    /*
+     * Close popup.
+     */
 
-  form.requestSubmit();
+    closeFeesPopup();
+
+
+    /*
+     * Trigger submit again.
+     */
+
+    form.requestSubmit();
 
 }
-
 
 
 /* =========================================================
@@ -3676,23 +3750,22 @@ function confirmFeesAndSubmit() {
 
 if (feesModal) {
 
-  feesModal.addEventListener(
-    "click",
-    function (e) {
+    feesModal.addEventListener(
+        "click",
+        function (e) {
 
-      if (
-        e.target === feesModal
-      ) {
+            if (
+                e.target === feesModal
+            ) {
 
-        closeFeesPopup();
+                closeFeesPopup();
 
-      }
+            }
 
-    }
-  );
+        }
+    );
 
 }
-
 
 
 /* =========================================================
@@ -3700,20 +3773,20 @@ if (feesModal) {
    ========================================================= */
 
 document.addEventListener(
-  "keydown",
-  function (e) {
+    "keydown",
+    function (e) {
 
-    if (
-      e.key === "Escape" &&
-      feesModal &&
-      feesModal.style.display !== "none"
-    ) {
+        if (
+            e.key === "Escape" &&
+            feesModal &&
+            feesModal.style.display !== "none"
+        ) {
 
-      closeFeesPopup();
+            closeFeesPopup();
+
+        }
 
     }
-
-  }
 );
 
 </script>
