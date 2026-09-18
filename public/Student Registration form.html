@@ -563,6 +563,7 @@ textarea {
 .download-btn:hover{
     background:#1d4ed8;
 }
+```css
 /* =========================================================
    FEES POPUP - FULLY RESPONSIVE
    ========================================================= */
@@ -583,7 +584,6 @@ textarea {
     align-items: center;
     justify-content: center;
 
-    /* Safe spacing for mobile devices */
     padding: 16px;
 
     box-sizing: border-box;
@@ -623,7 +623,6 @@ textarea {
 
     animation: feesPopupOpen 0.25s ease;
 
-    /* Prevent content from touching screen edges */
     margin: auto;
 }
 
@@ -661,6 +660,7 @@ textarea {
     height: 42px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -685,26 +685,123 @@ textarea {
 
 .fees-close-btn:hover {
     color: #000;
+
     background: #f2f2f2;
 }
 
 
 .fees-close-btn:focus-visible {
     outline: 2px solid #111;
+
     outline-offset: 2px;
 }
 
 
 /* =========================================================
-   HEADER
+   TOP HEADER
+   LOGO + BRAND LEFT
+   SUMMARY RIGHT
    ========================================================= */
 
-.fees-header {
-    text-align: center;
+.fees-top-header {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
 
     margin-bottom: 25px;
 
-    padding-right: 25px;
+    padding-right: 40px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LOGO + COGNITIVE LEARNING
+   ========================================================= */
+
+.fees-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.fees-brand .fees-logo {
+    width: 65px;
+    height: 65px;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   COGNITIVE + LEARNING
+   ========================================================= */
+
+.fees-brand-name {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    line-height: 1.15;
+
+    color: #1f2937;
+
+    white-space: nowrap;
+}
+
+
+.fees-brand-name span {
+    display: block;
+}
+
+
+/* =========================================================
+   FEES HEADER
+   ========================================================= */
+
+.fees-header {
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    margin: 0;
+
+    padding: 0;
 }
 
 
@@ -722,7 +819,7 @@ textarea {
 
 
 .fees-header p {
-    margin: 8px 0 0;
+    margin: 6px 0 0;
 
     font-size: clamp(14px, 2.5vw, 16px);
 
@@ -740,6 +837,7 @@ textarea {
     width: 100%;
 
     overflow-x: auto;
+
     overflow-y: hidden;
 
     -webkit-overflow-scrolling: touch;
@@ -863,13 +961,32 @@ textarea {
 
 
 /* =========================================================
-   DONE BUTTON
+   EDIT + CONFIRM BUTTON CONTAINER
    ========================================================= */
 
-.fees-done-btn {
+.fees-actions {
     width: 100%;
 
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
     margin-top: 20px;
+}
+
+
+/* =========================================================
+   BOTH BUTTONS
+   ========================================================= */
+
+.fees-actions .fees-done-btn {
+    flex: 1;
+
+    width: 50%;
+
+    margin-top: 0;
 
     min-height: 48px;
 
@@ -885,12 +1002,11 @@ textarea {
 
     font-weight: 600;
 
-     background:linear-gradient(
+    background: linear-gradient(
         135deg,
         #06184b,
         #0d47a1
     );
-       
 
     color: #fff;
 
@@ -900,18 +1016,19 @@ textarea {
 }
 
 
-.fees-done-btn:hover {
+.fees-actions .fees-done-btn:hover {
     opacity: 0.9;
 }
 
 
-.fees-done-btn:active {
+.fees-actions .fees-done-btn:active {
     transform: scale(0.98);
 }
 
 
-.fees-done-btn:focus-visible {
+.fees-actions .fees-done-btn:focus-visible {
     outline: 2px solid #111;
+
     outline-offset: 3px;
 }
 
@@ -926,6 +1043,7 @@ textarea {
         padding: 14px;
     }
 
+
     .fees-modal-content {
         width: 100%;
 
@@ -936,13 +1054,34 @@ textarea {
         border-radius: 16px;
     }
 
-    .fees-header {
-        margin-bottom: 20px;
+
+    .fees-top-header {
+        gap: 12px;
+
+        padding-right: 35px;
     }
+
+
+    .fees-brand .fees-logo {
+        width: 58px;
+        height: 58px;
+    }
+
+
+    .fees-brand-name {
+        font-size: 16px;
+    }
+
+
+    .fees-header h2 {
+        font-size: 23px;
+    }
+
 
     .fees-table {
         font-size: 14px;
     }
+
 
     .fees-table th,
     .fees-table td {
@@ -962,6 +1101,7 @@ textarea {
         padding: 10px;
     }
 
+
     .fees-modal-content {
         width: 100%;
 
@@ -972,8 +1112,10 @@ textarea {
         border-radius: 14px;
     }
 
+
     .fees-close-btn {
         top: 7px;
+
         right: 7px;
 
         width: 38px;
@@ -982,24 +1124,57 @@ textarea {
         font-size: 27px;
     }
 
-    .fees-header {
-        margin-bottom: 18px;
+
+    /* TOP HEADER */
+
+    .fees-top-header {
+        gap: 8px;
 
         padding-right: 25px;
+
+        margin-bottom: 18px;
     }
+
+
+    /* LOGO */
+
+    .fees-brand .fees-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+
+    /* BRAND NAME */
+
+    .fees-brand-name {
+        font-size: 14px;
+
+        line-height: 1.15;
+    }
+
+
+    /* SUMMARY */
 
     .fees-header h2 {
-        font-size: 22px;
+        font-size: 20px;
     }
 
+
     .fees-header p {
-        font-size: 14px;
+        font-size: 13px;
+
+        margin-top: 4px;
     }
+
+
+    /* TABLE */
 
     .fees-table-container {
         margin-left: 0;
+
         margin-right: 0;
     }
+
 
     .fees-table {
         min-width: 400px;
@@ -1007,39 +1182,40 @@ textarea {
         font-size: 13px;
     }
 
+
     .fees-table th,
     .fees-table td {
         padding: 10px 8px;
     }
 
+
+    /* TOTAL */
+
     .fees-total-label {
         font-size: 15px;
     }
+
 
     .fees-total {
         font-size: 16px;
     }
 
-    .fees-note {
+
+    /* ACTION BUTTONS */
+
+    .fees-actions {
+        gap: 8px;
+
         margin-top: 16px;
-
-        padding: 13px;
     }
 
-    .fees-note strong {
-        font-size: 14px;
-    }
 
-    .fees-note p {
-        font-size: 13px;
-    }
-
-    .fees-done-btn {
-        margin-top: 16px;
-
+    .fees-actions .fees-done-btn {
         min-height: 46px;
 
-        font-size: 15px;
+        padding: 10px 8px;
+
+        font-size: 14px;
     }
 
 }
@@ -1055,6 +1231,7 @@ textarea {
         padding: 7px;
     }
 
+
     .fees-modal-content {
         max-height: calc(100vh - 14px);
 
@@ -1063,13 +1240,34 @@ textarea {
         border-radius: 12px;
     }
 
-    .fees-header h2 {
-        font-size: 20px;
+
+    .fees-top-header {
+        gap: 5px;
+
+        padding-right: 22px;
     }
 
-    .fees-header p {
+
+    .fees-brand .fees-logo {
+        width: 43px;
+        height: 43px;
+    }
+
+
+    .fees-brand-name {
         font-size: 13px;
     }
+
+
+    .fees-header h2 {
+        font-size: 18px;
+    }
+
+
+    .fees-header p {
+        font-size: 12px;
+    }
+
 
     .fees-table {
         min-width: 360px;
@@ -1077,17 +1275,32 @@ textarea {
         font-size: 12px;
     }
 
+
     .fees-table th,
     .fees-table td {
         padding: 9px 7px;
     }
 
-    .fees-note {
-        padding: 11px;
+
+    .fees-total-label {
+        font-size: 14px;
     }
 
-    .fees-note p {
-        font-size: 12px;
+
+    .fees-total {
+        font-size: 15px;
+    }
+
+
+    .fees-actions {
+        gap: 6px;
+    }
+
+
+    .fees-actions .fees-done-btn {
+        padding: 9px 5px;
+
+        font-size: 13px;
     }
 
 }
@@ -1103,17 +1316,50 @@ textarea {
         padding: 18px 9px;
     }
 
-    .fees-header h2 {
-        font-size: 19px;
+
+    .fees-top-header {
+        gap: 4px;
+
+        padding-right: 20px;
     }
+
+
+    .fees-brand .fees-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .fees-brand-name {
+        font-size: 12px;
+    }
+
+
+    .fees-header h2 {
+        font-size: 17px;
+    }
+
+
+    .fees-header p {
+        font-size: 11px;
+    }
+
 
     .fees-table {
         min-width: 340px;
     }
 
+
     .fees-table th,
     .fees-table td {
         padding: 8px 6px;
+    }
+
+
+    .fees-actions .fees-done-btn {
+        min-height: 44px;
+
+        font-size: 12px;
     }
 
 }
@@ -1129,71 +1375,13 @@ textarea {
         animation: none;
     }
 
+
     .fees-close-btn,
     .fees-done-btn,
     .fees-table tbody tr {
         transition: none;
     }
 
-}
-   /* =========================================================
-FEES MODAL LOGO
-========================================================= */
-
-.fees-logo {
-display: flex;
-justify-content: center;
-align-items: center;
-margin-bottom: 10px;
-padding-top: 5px;
-}
-
-.fees-logo img {
-width: 120px;
-height: auto;
-max-height: 70px;
-object-fit: contain;
-}
-   
-/* =========================================================
-FEES POPUP BRAND
-========================================================= */
-
-.fees-brand {
-position: absolute;
-top: 18px;
-left: 22px;
-
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-/* Logo */
-
-.fees-brand .fees-logo {
-width: 45px;
-height: 45px;
-
-object-fit: contain;
-display: block;
-}
-
-/* Company / Institute Name */
-
-.fees-brand-name {
-font-size: 17px;
-font-weight: 700;
-color: #1f2937;
-white-space: nowrap;
-}
-
-/* =========================================================
-MAKE SURE POPUP CAN POSITION THE BRAND
-========================================================= */
-
-.fees-modal-content {
-position: relative;
 }
 
  </style>
@@ -1894,6 +2082,7 @@ position: relative;
 
 </div>
 
+
 <!-- =========================================================
      FEES STRUCTURE POPUP
      ========================================================= -->
@@ -1905,22 +2094,51 @@ position: relative;
 
   <div class="fees-modal-content">
 
-    <!-- LOGO -->
-    <div class="fees-brand">
 
-      <img
-        src="Image/logo_CLC-removebg-preview.png"
-        alt="Cognitive Learning Logo"
-        class="fees-logo"
-      >
+    <!-- =====================================================
+         TOP HEADER
+         ===================================================== -->
 
-      <span class="fees-brand-name">
-        Cognitive
-      </span>
+    <div class="fees-top-header">
 
-      <span class="fees-brand-name">
-        learning
-      </span>
+
+      <!-- LOGO + BRAND -->
+      <div class="fees-brand">
+
+        <img
+          src="Image/logo_CLC-removebg-preview.png"
+          alt="Cognitive Learning Logo"
+          class="fees-logo"
+        >
+
+        <div class="fees-brand-name">
+
+          <span>
+            Cognitive
+          </span>
+
+          <span>
+            learning
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- HEADER -->
+      <div class="fees-header">
+
+        <h2>
+          Summary
+        </h2>
+
+        <p id="feesGradeTitle">
+          Select Grade
+        </p>
+
+      </div>
+
 
     </div>
 
@@ -1935,37 +2153,31 @@ position: relative;
     </button>
 
 
-    <!-- HEADER -->
-    <div class="fees-header">
+    <!-- =====================================================
+         FEES TABLE
+         ===================================================== -->
 
-      <h2>
-        Summary
-      </h2>
-
-      <p id="feesGradeTitle">
-        Select Grade
-      </p>
-
-    </div>
-
-
-    <!-- FEES TABLE -->
     <div class="fees-table-container">
 
       <table class="fees-table">
 
         <thead>
+
           <tr>
             <th>#</th>
             <th>Subject</th>
             <th>Fee</th>
           </tr>
+
         </thead>
+
 
         <tbody id="feesTableBody">
         </tbody>
 
+
         <tfoot>
+
           <tr>
 
             <td
@@ -1983,6 +2195,7 @@ position: relative;
             </td>
 
           </tr>
+
         </tfoot>
 
       </table>
@@ -1995,6 +2208,7 @@ position: relative;
          ===================================================== -->
 
     <div class="fees-actions">
+
 
       <!-- EDIT FORM -->
       <button
@@ -2015,7 +2229,9 @@ position: relative;
         Confirm & Submit
       </button>
 
+
     </div>
+
 
   </div>
 
