@@ -4948,6 +4948,36 @@ document.addEventListener(
 
     }
 );
+  
+function editRegistrationForm() {
+
+  // Close confirmation popup
+  const feesModal = document.getElementById("feesModal");
+
+  if (feesModal) {
+    feesModal.style.display = "none";
+  }
+
+  // Open registration form popup
+  const registrationModal =
+    document.getElementById("registrationModal");
+
+  if (registrationModal) {
+    registrationModal.style.display = "flex";
+  }
+
+  // Scroll to the form
+  const registrationForm =
+    document.getElementById("registrationForm");
+
+  if (registrationForm) {
+    registrationForm.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+}
+
 
 </script>
 
