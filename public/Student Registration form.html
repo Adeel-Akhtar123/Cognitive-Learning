@@ -1254,48 +1254,76 @@ textarea {
       scale(1);
   }
 }
+
+
 /* =========================================================
    TABLET
    ========================================================= */
 
 @media (max-width: 768px) {
 
-  /* -------------------------------------------------------
-     LEFT — LOGO + BRAND
-     ------------------------------------------------------- */
+  .fees-modal {
 
-  .fees-brand {
-    gap: 8px;
+    padding: 15px;
   }
+
+
+  .fees-modal-content {
+
+    max-width: 600px;
+
+    padding:
+      100px
+      25px
+      28px;
+  }
+
 
   .fees-logo {
-    width: 55px;
-    height: 55px;
-  }
 
-  .fees-brand-text {
-    gap: 4px;
-  }
-
-  .fees-brand-name {
-    font-size: 17px;
+    width: 60px;
+    height: 60px;
   }
 
 
-  /* -------------------------------------------------------
-     RIGHT — HEADING + GRADE
-     ------------------------------------------------------- */
+  .fees-brand {
+
+    left: 20px;
+  }
+
+
+  .fees-brand-text span {
+
+    font-size: 14px;
+  }
+
 
   .fees-header {
-    gap: 4px;
+
+    width: 190px;
+
+    top: 22px;
   }
 
+
   .fees-header h2 {
+
     font-size: 24px;
   }
 
+
   .fees-header p {
+
     font-size: 13px;
+  }
+
+
+  .fees-close-btn {
+
+    right: 15px;
+
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -1306,46 +1334,205 @@ textarea {
 
 @media (max-width: 520px) {
 
+  .fees-modal {
+
+    align-items: flex-start;
+
+    padding: 10px;
+  }
+
+
+  .fees-modal-content {
+
+    width: 100%;
+
+    max-height:
+      calc(100vh - 20px);
+
+    padding:
+      105px
+      16px
+      20px;
+
+    border-radius: 18px;
+  }
+
+
+
+/* =========================================================
+   FEES POPUP BRAND
+   ========================================================= */
+
+.fees-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Text container */
+.fees-brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+/* Cognitive + Learning */
+.fees-brand-name {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Learning directly underneath Cognitive */
+.fees-brand-name + .fees-brand-name {
+  margin-top: 3px;
+}
+
+
   /* -------------------------------------------------------
-     LEFT — LOGO + BRAND
-     ------------------------------------------------------- */
-
-  .fees-brand {
-    gap: 6px;
-    white-space: nowrap;
-  }
-
-  .fees-logo {
-    width: 48px;
-    height: 48px;
-  }
-
-  .fees-brand-text {
-    flex-direction: column;
-    gap: 3px;
-    white-space: nowrap;
-  }
-
-  .fees-brand-name {
-    font-size: 15px;
-  }
-
-
-  /* -------------------------------------------------------
-     RIGHT — HEADING + GRADE
+     CENTER HEADER
      ------------------------------------------------------- */
 
   .fees-header {
-    gap: 3px;
-    white-space: nowrap;
+
+    top: 18px;
+
+    left: 50%;
+
+    width: 150px;
+
+    transform:
+      translateX(-50%);
   }
 
+
   .fees-header h2 {
+
     font-size: 21px;
   }
 
+
   .fees-header p {
+
+    margin-top: 4px;
+
     font-size: 11px;
+  }
+
+
+  /* -------------------------------------------------------
+     CLOSE
+     ------------------------------------------------------- */
+
+  .fees-close-btn {
+
+    top: 13px;
+
+    right: 12px;
+
+    width: 36px;
+    height: 36px;
+
+    font-size: 25px;
+  }
+
+
+  /* -------------------------------------------------------
+     TABLE
+     ------------------------------------------------------- */
+
+  .fees-table-container {
+
+    border-radius: 12px;
+  }
+
+
+  .fees-table thead th {
+
+    padding:
+      11px 8px;
+
+    font-size: 12px;
+  }
+
+
+  .fees-table tbody td {
+
+    padding:
+      11px 8px;
+
+    font-size: 12px;
+  }
+
+
+  .fees-table thead th:first-child {
+
+    width: 42px;
+  }
+
+
+  .fees-table thead th:last-child {
+
+    width: 105px;
+  }
+
+
+  /* -------------------------------------------------------
+     TOTAL
+     ------------------------------------------------------- */
+
+  .fees-total-label {
+
+    padding:
+      15px 8px !important;
+
+    text-align: left !important;
+
+    font-size: 13px !important;
+  }
+
+
+  .fees-total {
+
+    padding:
+      15px 8px !important;
+
+    text-align: right !important;
+
+    font-size: 15px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     BUTTONS
+     ------------------------------------------------------- */
+
+  .fees-actions {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 20px;
+  }
+
+
+  .fees-edit-btn,
+  .fees-done-btn {
+
+    width: 100%;
+
+    flex: none;
+
+    min-height: 48px;
+  }
+
+
+  .fees-done-btn {
+
+    order: -1;
   }
 }
 
@@ -1356,44 +1543,71 @@ textarea {
 
 @media (max-width: 360px) {
 
-  /* -------------------------------------------------------
-     LEFT — LOGO + BRAND
-     ------------------------------------------------------- */
+  .fees-modal-content {
+
+    padding:
+      100px
+      12px
+      16px;
+  }
+
 
   .fees-brand {
-    gap: 5px;
+
+    left: 10px;
   }
+
 
   .fees-logo {
-    width: 42px;
-    height: 42px;
-  }
 
-  .fees-brand-text {
-    gap: 2px;
-  }
-
-  .fees-brand-name {
-    font-size: 12px;
+    width: 60px;
+    height: 60px;
   }
 
 
-  /* -------------------------------------------------------
-     RIGHT — HEADING + GRADE
-     ------------------------------------------------------- */
+  .fees-brand-text span {
+
+    font-size: 11px;
+  }
+
 
   .fees-header {
-    gap: 2px;
+
+    width: 135px;
   }
+
 
   .fees-header h2 {
-    font-size: 18px;
+
+    font-size: 19px;
   }
 
+
   .fees-header p {
-    font-size: 9px;
+
+    font-size: 10px;
+  }
+
+
+  .fees-close-btn {
+
+    right: 8px;
+
+    width: 34px;
+    height: 34px;
+  }
+
+
+  .fees-table thead th,
+  .fees-table tbody td {
+
+    padding:
+      9px 6px;
+
+    font-size: 11px;
   }
 }
+
 </style>
 </head>
 
