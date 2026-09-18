@@ -1501,6 +1501,133 @@ textarea {
   }
 
 }
+   /* =========================================================
+   FEES ACTION BUTTONS
+   ========================================================= */
+
+.fees-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-top: 25px;
+}
+
+
+/* =========================================================
+   EDIT FORM BUTTON
+   ========================================================= */
+
+.fees-edit-btn {
+  min-width: 150px;
+  padding: 13px 24px;
+
+  border: 2px solid #0891b2;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #0891b2;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* EDIT HOVER */
+
+.fees-edit-btn:hover {
+  background: #0891b2;
+  color: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 15px rgba(8, 145, 178, 0.20);
+}
+
+
+/* EDIT ACTIVE */
+
+.fees-edit-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   CONFIRM & SUBMIT BUTTON
+   ========================================================= */
+
+.fees-done-btn {
+  min-width: 180px;
+  padding: 13px 24px;
+
+  border: none;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #06b6d4,
+      #0891b2
+    );
+
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* CONFIRM HOVER */
+
+.fees-done-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 18px rgba(8, 145, 178, 0.30);
+}
+
+
+/* CONFIRM ACTIVE */
+
+.fees-done-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+  .fees-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fees-edit-btn,
+  .fees-done-btn {
+    width: 100%;
+    min-width: unset;
+  }
+
+}
  </style>
 </head>
 
